@@ -10,5 +10,5 @@ You can click the Preview link to take a look at your changes.
 --->
 
 public static void main(String[]args){
-
+  System.out.println("Hello World");
 }
