@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/search_item"
+        android:title="Search"
+        tools:ignore="HardcodedText" />
+    <item android:id="@+id/upload_item"
+        android:title="Upload"
+        tools:ignore="HardcodedText" />
+    <item android:id="@+id/copy_item"
+        android:title="Copy"
+        tools:ignore="HardcodedText" />
+    <item android:id="@+id/print_item"
+        android:title="Print"
+        tools:ignore="HardcodedText" />
+    <item android:id="@+id/share_item"
+        android:title="Share"
+        tools:ignore="HardcodedText" />
+    <item android:id="@+id/bookmark_item"
+        android:title="BookMark"
+        tools:ignore="HardcodedText" />
+</menu>
