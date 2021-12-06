@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setSmallIcon(R.drawable.ic_notification);
         builder.setContentTitle("Small Icon Notification Activity");
         builder.setContentText("Hi, We are Group 5");
-        //builder.setDefaults(NotificationCompat.DEFAULT_ALL);
+        builder.setDefaults(NotificationCompat.DEFAULT_ALL);
         builder.setContentIntent(pendingIntent);
         builder.setAutoCancel(true);
         builder.setPriority(NotificationCompat.PRIORITY_MAX);
