@@ -1,8 +1,6 @@
 package com.tutlane.notificationexample;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -12,8 +10,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import java.util.Random;
 
@@ -28,42 +28,30 @@ public class MainActivity extends AppCompatActivity {
 
         //Button for small icon notification
         Button btnSmallIcon = (Button)findViewById(R.id.btnSmallIcon);
-        btnSmallIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Method of Small Icon here
-                showSmallIcon();
-            }
+        btnSmallIcon.setOnClickListener(v -> {
+            //Method of Small Icon here
+            showSmallIcon();
         });
 
         //Button for big text notification
         Button btnBigText = (Button)findViewById(R.id.btnBigText);
-        btnBigText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Method of Big Text Notification here
-                showBigText();
-            }
+        btnBigText.setOnClickListener(v -> {
+            //Method of Big Text Notification here
+            showBigText();
         });
 
         //Button for inbox style notification
         Button btnInboxStyle = (Button)findViewById(R.id.btnInboxStyle);
-        btnInboxStyle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Method of Inbox Style Notification here
-                showInboxNotif();
-            }
+        btnInboxStyle.setOnClickListener(v -> {
+            //Method of Inbox Style Notification here
+            showInboxNotif();
         });
 
         //Button for picture style notification
         Button btnPictureStyle = (Button)findViewById(R.id.btnBigPicture);
-        btnPictureStyle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Method of Big Picture Style Notification here
-                showPictureNotif();
-            }
+        btnPictureStyle.setOnClickListener(v -> {
+            //Method of Big Picture Style Notification here
+            showPictureNotif();
         });
     }
 
@@ -75,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         Intent intent = new Intent(MainActivity.this,MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
 
         //Here we set everything now
         NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this,channelId);
@@ -117,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         Intent intent = new Intent(MainActivity.this,MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
 
         //And then add bitmap here for the large icon
         Bitmap largeicon = BitmapFactory.decodeResource(getResources(),R.drawable.ic_notification);
@@ -165,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         Intent intent = new Intent(MainActivity.this,MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
 
         //Then we create the inbox style notification here
         NotificationCompat.InboxStyle iStyle = new NotificationCompat.InboxStyle();
@@ -215,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         Intent intent = new Intent(MainActivity.this,MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
 
         //We start to assign the big picture notification here
         NotificationCompat.BigPictureStyle bpStyle = new NotificationCompat.BigPictureStyle();

@@ -20,15 +20,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-// CODE FOR NOTIFICATION HERE!
-        Button btnNotify = findViewById(R.id.btnShow);
-        btnNotify.setOnClickListener(v -> {
+// CODE FOR NORMAL NOTIFICATION HERE!
+        Button btnNotify1 = findViewById(R.id.btnNormal);
+        btnNotify1.setOnClickListener(v -> {
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(MainActivity.this)
                     .setSmallIcon(R.drawable.ic_notify)
-                    .setContentTitle("Tutlane Send New Message")
-                    .setContentText("Hi, Welcome to tutlane tutorial site");
+                    .setContentTitle("Normal Notification")
+                    .setContentText("Hi, We are Group 5 from E2019")
+                    .setDefaults(NotificationCompat.DEFAULT_ALL)
+                    .setAutoCancel(true)
+                    .setPriority(NotificationCompat.PRIORITY_MAX);
 
-// Set the intent to fire when the user taps onnotification.
+// Set the intent to fire when the user taps on-notification.
             Intent resultIntent = new Intent(MainActivity.this, MainActivity.class);
             @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, resultIntent, 0);
             mBuilder.setContentIntent(pendingIntent);
@@ -37,25 +40,28 @@ public class MainActivity extends AppCompatActivity {
             NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 // It will display the notification in notification bar
             notificationManager.notify(mNotificationId, mBuilder.build());
-        });
+        });     // END OF CODE FOR NORMAL NOTIFICATION HERE!
 
 
-// CODE FOR BIGTEXT NOTIFICATION HERE!
-        Button btnNotif = findViewById(R.id.btnShow2);
-        btnNotif.setOnClickListener(v -> {
+// CODE FOR BIG-TEXT NOTIFICATION HERE!
+        Button btnNotify2 = findViewById(R.id.btnBigtext);
+        btnNotify2.setOnClickListener(v -> {
 //To set large icon in notification
-            Bitmap licon = BitmapFactory.decodeResource(getResources(),
+            Bitmap smallIcon = BitmapFactory.decodeResource(getResources(),
                     R.mipmap.ic_nasa);
             NotificationCompat.BigTextStyle bigText = new NotificationCompat.BigTextStyle();
-            bigText.bigText("Welcome to tutlane, it provides a tutorials related to all technologies in software industry. Here we covered complete tutorials from basic to adavanced topics from all technologies");
-            bigText.setSummaryText("By: Tutlane");
+            bigText.bigText("This is the sample of Big text Notification that we created");
+            bigText.setSummaryText("By: Group 5");
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(MainActivity.this)
                     .setSmallIcon(R.drawable.ic_bigtxt)
-                    .setContentTitle("Big Text Notification Example")
-
-                    .setLargeIcon(licon)
+                    .setContentTitle("Big Text Notification")
+                    .setLargeIcon(smallIcon)
+                    .setPriority(NotificationCompat.PRIORITY_MAX)
+                    .setDefaults(NotificationCompat.DEFAULT_ALL)
+                    .setAutoCancel(true)
                     .setStyle(bigText);
-// Set the intent to fire when the user taps onnotification.
+
+// Set the intent to fire when the user taps on-notification.
             Intent resultIntent = new Intent(MainActivity.this, MainActivity.class);
             @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, resultIntent, 0);
             mBuilder.setContentIntent(pendingIntent);
@@ -65,24 +71,29 @@ public class MainActivity extends AppCompatActivity {
 // It will display the notification in notification bar
             notificationManager.notify(mNotificationId,
                     mBuilder.build());
-            });
+            });     // END OF CODE FOR BIG-TEXT NOTIFICATION HERE!
 
 
 //  CODE FOR INBOX NOTIFICATION HERE!
-        Button btnNotify3 = findViewById(R.id.btnShow3);
+        Button btnNotify3 = findViewById(R.id.btnInbox);
         btnNotify3.setOnClickListener(v -> {
 //Implement inbox style notification
             NotificationCompat.InboxStyle iStyle = new NotificationCompat.InboxStyle();
-            iStyle.addLine("Message 1.");
-            iStyle.addLine("Message 2.");
-            iStyle.addLine("Message 3.");
-            iStyle.addLine("Message 4.");
-            iStyle.addLine("Message 5.");
+            iStyle.addLine("Charlie Ochada");
+            iStyle.addLine("Jerome Pasag");
+            iStyle.addLine("Mark Morales");
+            iStyle.addLine("Veronica Calising");
+            iStyle.addLine("Maricar Ledesma");
             iStyle.setSummaryText("+2 more");
+
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(MainActivity.this)
                     .setSmallIcon(R.drawable.ic_message)
-                    .setContentTitle("Inbox Style Notification Example")
-                    .setStyle(iStyle);
+                    .setContentTitle("Inbox Style Notification")
+                    .setStyle(iStyle)
+                    .setPriority(NotificationCompat.PRIORITY_MAX)
+                    .setDefaults(NotificationCompat.DEFAULT_ALL)
+                    .setAutoCancel(true);
+
 // Set the intent to fire when the user taps on-notification.
             Intent resultIntent = new Intent(MainActivity.this, MainActivity.class);
             @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, resultIntent, 0);
@@ -93,11 +104,11 @@ public class MainActivity extends AppCompatActivity {
 // It will display the notification in notification bar
             notificationManager.notify(mNotificationId,
                     mBuilder.build());
-        });
+        });     // END OF CODE FOR INBOX NOTIFICATION HERE!
 
 
 //  CODE FOR BIG PICTURE NOTIFICATION HERE!
-        Button btnNotify4 = findViewById(R.id.btnShow4);
+        Button btnNotify4 = findViewById(R.id.btnBigPicture);
         btnNotify4.setOnClickListener(v -> {
 // Assign big picture notification
             NotificationCompat.BigPictureStyle bpStyle = new NotificationCompat.BigPictureStyle();
@@ -105,13 +116,17 @@ public class MainActivity extends AppCompatActivity {
                     R.mipmap.ic_nasa)).build();
 // Set the intent to fire when the user taps on-notification.
                     Intent rIntent = new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("http://tutlane.com/"));
+                    Uri.parse("https://github.com/MoralesMark1/E2019_Group5"));
             @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, rIntent, 0);
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(MainActivity.this)
                     .setSmallIcon(R.drawable.ic_android)
-                    .setContentTitle("Big Picture Notification Example")
-                    .addAction(R.drawable.ic_share, "Share", pendingIntent)
-                    .setStyle(bpStyle);
+                    .setContentTitle("Big Picture Notification")
+                    .addAction(R.drawable.ic_visit_site, "Visit Site", pendingIntent)
+                    .setStyle(bpStyle)
+                    .setPriority(NotificationCompat.PRIORITY_MAX)
+                    .setDefaults(NotificationCompat.DEFAULT_ALL)
+                    .setAutoCancel(true);
+
             mBuilder.setContentIntent(pendingIntent);
 // Sets an ID for the notification
             int mNotificationId = 4;
@@ -119,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
 // It will display the notification in notification bar
             notificationManager.notify(mNotificationId,
                     mBuilder.build());
-        });
+        });     // END OF CODE FOR BIG PICTURE NOTIFICATION HERE!
 
     }
 }

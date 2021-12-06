@@ -8,37 +8,37 @@
     android:orientation="vertical" >
 
     <Button
-        android:id="@+id/btnShow"
-        android:layout_width="wrap_content"
+        android:id="@+id/btnNormal"
+        android:layout_width="257dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="80dp"
         android:layout_marginTop="100dp"
-        android:text="Show Notification"
+        android:text="Show Normal Notification"
         tools:ignore="HardcodedText,DuplicateSpeakableTextCheck" />
 
     <Button
-        android:id="@+id/btnShow2"
-        android:layout_width="241dp"
+        android:id="@+id/btnBigtext"
+        android:layout_width="257dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
+        android:layout_marginStart="80dp"
         android:layout_marginTop="50dp"
         android:text="Show bigText Notification"
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/btnShow3"
-        android:layout_width="253dp"
+        android:id="@+id/btnInbox"
+        android:layout_width="257dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
+        android:layout_marginStart="80dp"
         android:layout_marginTop="50dp"
         android:text="Show Inbox Notification"
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/btnShow4"
+        android:id="@+id/btnBigPicture"
         android:layout_width="258dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
+        android:layout_marginStart="80dp"
         android:layout_marginTop="50dp"
         android:text="Show big Picture Notification"
         tools:ignore="HardcodedText" />
