@@ -115,8 +115,7 @@ public class MainActivity extends AppCompatActivity {
             bpStyle.bigPicture(BitmapFactory.decodeResource(getResources(),
                     R.mipmap.ic_nasa)).build();
 // Set the intent to fire when the user taps on-notification.
-                    Intent rIntent = new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("https://github.com/MoralesMark1/E2019_Group5"));
+                    Intent rIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/MoralesMark1/E2019_Group5"));
             @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, rIntent, 0);
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(MainActivity.this)
                     .setSmallIcon(R.drawable.ic_android)

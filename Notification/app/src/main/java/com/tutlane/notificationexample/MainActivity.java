@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
@@ -201,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
         int notificationId = new Random().nextInt(100);
         String channelId = "notification_channel_3";
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        Intent intent = new Intent(MainActivity.this,MainActivity.class);
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/MoralesMark1/E2019_Group5"));
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -212,6 +213,7 @@ public class MainActivity extends AppCompatActivity {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this,channelId);
         builder.setSmallIcon(R.drawable.ic_notification);
         builder.setContentTitle("Big Picture Notification Activity");
+        builder.addAction(R.drawable.ic_notification, "Visit Site", pendingIntent);
         builder.setStyle(bpStyle);
         builder.setDefaults(NotificationCompat.DEFAULT_ALL);
         builder.setContentIntent(pendingIntent);

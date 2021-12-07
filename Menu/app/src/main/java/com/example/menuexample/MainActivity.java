@@ -19,6 +19,10 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // NOTE:
+        // We only created 2 buttons since OPTION MENU doesn't need it.
+        //
+
 // CODE FOR BUTTON IN CONTEXT MENU HERE!
         Button btn = findViewById(R.id.btnShow);
         registerForContextMenu(btn);
@@ -50,24 +54,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
 
-// CODE FOR CONTEXT MENU HERE!
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        menu.setHeaderTitle("Context Menu");
-        menu.add(0, v.getId(), 0, "Upload");
-        menu.add(0, v.getId(), 0, "Search");
-        menu.add(0, v.getId(), 0, "Share");
-        menu.add(0, v.getId(), 0, "Bookmark");
-    }
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        Toast.makeText(this, "Selected Item: " +item.getTitle(),
-                Toast.LENGTH_SHORT).show();
-        return true;
-    }
-
-
 // CODE FOR POP-UP MENU HERE!
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -77,4 +63,24 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         return true;
     }
 
+
+// CODE FOR CONTEXT MENU HERE!
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.setHeaderTitle("Group 5 Members");
+        // Items inside the Context Menu
+        menu.add(0, v.getId(), 0, "Ochada");
+        menu.add(0, v.getId(), 0, "Pasag");
+        menu.add(0, v.getId(), 0, "Morales");
+        menu.add(0, v.getId(), 0, "Calising");
+        menu.add(0, v.getId(), 0, "Ledesma");
+    }
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        // toast will display the selected item here!
+        Toast.makeText(this, "Selected Item: " +item.getTitle(),
+                Toast.LENGTH_SHORT).show();
+        return true;
+    }
 }

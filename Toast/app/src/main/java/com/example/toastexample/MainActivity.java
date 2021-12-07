@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,12 +22,13 @@ public class MainActivity extends AppCompatActivity {
         Button btn = findViewById(R.id.btnShow);
         btn.setOnClickListener(v -> {
             LayoutInflater inflater = getLayoutInflater();
-            View layout = inflater.inflate(R.layout.custom_toast,
-                    findViewById(R.id.custom_toast_layout));
-            TextView tv = layout.findViewById(R.id.txtvw);
-            tv.setText("Custom Toast Notification");
+            // here, we call the customized layout that we created!
+            View layout = inflater.inflate(R.layout.custom_toast, findViewById(R.id.custom_toast_layout));
+            TextView tv = layout.findViewById(R.id.txt_view);
+            tv.setText("Customized Toast by: Group 5");
+
             Toast toast = new Toast(getApplicationContext());
-            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 100);
+            //toast.setGravity(Gravity.CENTER_VERTICAL, 0, 100); // to make it centered!
             toast.setDuration(Toast.LENGTH_LONG);
             toast.setView(layout);
             toast.show();
