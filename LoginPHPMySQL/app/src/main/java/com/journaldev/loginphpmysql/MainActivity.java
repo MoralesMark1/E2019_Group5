@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     EditText editEmail, editPassword, editName;
     Button btnSignIn, btnRegister;
 
-    String URL= "https://e2019cc107group5.000webhostapp.com/index.php";
+    String URL= "http://e2019cc107group5.000webhostapp.com/index.php";
 
     JSONParser jsonParser=new JSONParser();
 
@@ -93,8 +93,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
 
         protected JSONObject doInBackground(String... args) {
-
-
 
             String email = args[2];
             String password = args[1];
