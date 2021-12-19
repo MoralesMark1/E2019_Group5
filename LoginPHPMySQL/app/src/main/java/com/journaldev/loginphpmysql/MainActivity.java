@@ -25,6 +25,11 @@ public class MainActivity extends AppCompatActivity {
     EditText editEmail, editPassword, editName;
     Button btnSignIn, btnRegister;
 
+    //Here I created a folder in order to separate the two databases in my webhost
+    //This is because I'll be adding another php files in the public_html folder
+    //Also for the final project we will be doing
+    //The folder is named test_android here for the testing of the php and json that we will use
+
     String URL= "http://e2019cc107group5.000webhostapp.com/test_android/index.php";
 
     JSONParser jsonParser=new JSONParser();
