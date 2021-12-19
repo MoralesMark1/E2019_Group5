@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     EditText editEmail, editPassword, editName;
     Button btnSignIn, btnRegister;
 
-    String URL= "http://e2019cc107group5.000webhostapp.com/index.php";
+    String URL= "http://e2019cc107group5.000webhostapp.com/test_android/index.php";
 
     JSONParser jsonParser=new JSONParser();
 
