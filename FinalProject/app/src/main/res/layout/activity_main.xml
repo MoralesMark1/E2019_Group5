@@ -15,10 +15,10 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerInParent="true"
             android:orientation="vertical"
             android:paddingLeft="0dp"
-            android:paddingRight="0dp">
+            android:paddingRight="0dp"
+            tools:ignore="UselessParent">
 
             <!-- icon -->
             <View
@@ -33,7 +33,7 @@
             <View
                 android:id="@+id/rectangle_9"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="493dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="170dp"
                 android:background="@drawable/rectangle_9" />

@@ -3,6 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+        <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/layout/activity_main.xml" value="0.12771739130434784" />
+=======
+>>>>>>> Stashed changes
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/drawable/ic_icon.xml" value="0.19583333333333333" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/drawable/ic_light_theme_start_login.xml" value="0.22" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/drawable/light_theme.xml" value="0.19583333333333333" />
@@ -16,6 +22,10 @@
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout-v31/activity_main.xml" value="0.1796875" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/light_theme_start_login.xml" value="0.12" />
+<<<<<<< Updated upstream
+=======
+>>>>>>> 2f7f3257a1d988a403bea81c496831349767b2eb
+>>>>>>> Stashed changes
       </map>
     </option>
   </component>
