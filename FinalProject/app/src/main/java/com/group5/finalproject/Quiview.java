@@ -21,13 +21,14 @@ public class Quiview {
     /*
         For Students
      */
-    private String student_id;
+    // id - PK (auto increment)
+    private String student_id; //Username
     private String student_surname;
     private String student_firstname;
     private String student_gender;
     private String student_course;
-    private String student_email; // In case
-    private String student_pass; //In case
+    //private String student_email; // Username
+    private String student_pass; // Password
 
     //Student ID
     public String getStudentId(){
@@ -70,12 +71,14 @@ public class Quiview {
     }
 
     //Student Email
+    /*
     public String getStudentEmail(){
         return student_email;
     }
     public void setStudentEmail(String student_email){
         this.student_email = student_email;
     }
+    */
 
     //Student password
     public String getStudentPassword(){
@@ -89,20 +92,20 @@ public class Quiview {
         For Teachers
      */
 
-    private String teacher_id;
+    private String teacher_username; //Username
     private String teacher_surname;
     private String teacher_firstname;
     private String teacher_gender;
     private String teacher_subject;
-    private String teacher_email;
-    private String teacher_pass;
+    //private String teacher_email; //Username
+    private String teacher_pass; //Password
 
     //Teacher ID
-    public String getTeacherId(){
-        return teacher_id;
+    public String getTeacherUsername(){
+        return teacher_username;
     }
-    public void setTeacherId(String teacher_id){
-        this.teacher_id = teacher_id;
+    public void setTeacherUsername(String teacher_username){
+        this.teacher_username = teacher_username;
     }
 
     //Teacher Surname
@@ -138,12 +141,14 @@ public class Quiview {
     }
 
     //Teacher Email
+    /*
     public String getTeacherEmail(){
         return teacher_email;
     }
     public void setTeacherEmail(String teacher_email){
         this.teacher_email = teacher_email;
     }
+    */
 
     //Teacher Password
     public String getTeacherPassword(){
