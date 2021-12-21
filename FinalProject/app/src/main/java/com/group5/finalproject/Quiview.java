@@ -19,24 +19,39 @@ public class Quiview {
      */
 
     /*
+        Para sa login dun sa simula
+     */
+    private String login_username;
+    private String login_password;
+
+    //Username
+    public String getLoginUsername(){
+        return login_username;
+    }
+    public void setLoginUsername(String login_username){
+        this.login_username = login_username;
+    }
+
+    //Password
+    public String getLoginPassword(){
+        return login_password;
+    }
+    public void setLoginPassword(String login_password){
+        this.login_password = login_password;
+    }
+
+    /******************************
+     * Itong mga nasa baba ay para sa Registration ng student and teachers
+     */
+
+    /*
         For Students
      */
-    // id - PK (auto increment)
-    private String student_id; //Username
     private String student_surname;
     private String student_firstname;
     private String student_gender;
-    private String student_course;
-    //private String student_email; // Username
+    private String student_id; //Username
     private String student_pass; // Password
-
-    //Student ID
-    public String getStudentId(){
-        return student_id;
-    }
-    public void setStudent_id(String student_id){
-        this.student_id = student_id;
-    }
 
     //Student Surname
     public String getStudentSurname(){
@@ -62,23 +77,13 @@ public class Quiview {
         this.student_gender = student_gender;
     }
 
-    //Student Course
-    public String getStudentCourse(){
-        return student_course;
+    //Student ID
+    public String getStudentId(){
+        return student_id;
     }
-    public void setStudentCourse(String student_course){
-        this.student_course = student_course;
+    public void setStudent_id(String student_id){
+        this.student_id = student_id;
     }
-
-    //Student Email
-    /*
-    public String getStudentEmail(){
-        return student_email;
-    }
-    public void setStudentEmail(String student_email){
-        this.student_email = student_email;
-    }
-    */
 
     //Student password
     public String getStudentPassword(){
@@ -92,21 +97,11 @@ public class Quiview {
         For Teachers
      */
 
-    private String teacher_username; //Username
     private String teacher_surname;
     private String teacher_firstname;
     private String teacher_gender;
-    private String teacher_subject;
-    //private String teacher_email; //Username
+    private String teacher_username; //Username
     private String teacher_pass; //Password
-
-    //Teacher ID
-    public String getTeacherUsername(){
-        return teacher_username;
-    }
-    public void setTeacherUsername(String teacher_username){
-        this.teacher_username = teacher_username;
-    }
 
     //Teacher Surname
     public String getTeacherSurname(){
@@ -132,23 +127,13 @@ public class Quiview {
         this.teacher_gender = teacher_gender;
     }
 
-    //Teacher Subject
-    public String getTeacherSubject(){
-        return teacher_subject;
+    //Teacher Username
+    public String getTeacherUsername(){
+        return teacher_username;
     }
-    public void setTeacherSubject(String teacher_subject){
-        this.teacher_subject = teacher_subject;
+    public void setTeacherUsername(String teacher_username){
+        this.teacher_username = teacher_username;
     }
-
-    //Teacher Email
-    /*
-    public String getTeacherEmail(){
-        return teacher_email;
-    }
-    public void setTeacherEmail(String teacher_email){
-        this.teacher_email = teacher_email;
-    }
-    */
 
     //Teacher Password
     public String getTeacherPassword(){

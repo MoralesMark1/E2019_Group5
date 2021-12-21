@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     String URL= "http://e2019cc107group5.000webhostapp.com/test_android/index.php";
 
-    JSONParser jsonParser=new JSONParser();
+    JSONParser jsonParser=new JSONParser(); //The JSONParser class
 
     int i=0;
 
