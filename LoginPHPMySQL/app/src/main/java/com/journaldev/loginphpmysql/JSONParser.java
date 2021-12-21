@@ -45,7 +45,6 @@ public class JSONParser {
 
         // Making HTTP request
         try {
-
             // check for request method
             if(method.equals("POST")){
                 // request method is POST
