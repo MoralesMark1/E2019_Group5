@@ -1,12 +1,23 @@
 package com.group5.finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.ActivityOptions;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.transition.Explode;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.TextView;
+
+/*
+    Pambihirang buhayy tohhh hayyy ano ba ginagawa kooooo whoooo ahhahahha
+    Sadlife di na ako masaya sa course koo :(
+ */
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,11 +41,12 @@ public class MainActivity extends AppCompatActivity {
 
     String URL= "http://e2019cc107group5.000webhostapp.com/"; //URL ng database natin sa webhost
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        layouts();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         //Need natin kunin yung id dun sa xml file natin
         login = (ImageButton) findViewById(R.id.login); //ImageButton natin
@@ -57,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
                 //Ah basta kapag may laman ang username and password go na pag wala edi yung else
                 //Pero seriously, sa database tayo kukuha nung laman hayyy buhay
                 if(!quiview.getLoginUsername().contentEquals("") && !quiview.getLoginPassword().contentEquals("")){
-                    toast.setText("Yehey nakalogin yan");
+                    toast.setText("Yehey nakalogin na siya");
+
                 }
                 else{
                     toast.setText("Sad Life Sign up ka muna");
@@ -66,7 +79,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        tv_signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Dito sa signup textview natin pag naclick siya lilipat siya sa next class or activity
+                //using intent hehehe
+
+                Intent intent = new Intent(getApplicationContext(),SignupAs.class);
+
+                //Kung ang build version daw ay more than lollipop edi goods sa transition sabi sa docs ahh
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    // Activity transition dito hehehe
+                    startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+                } else {
+                    // Edi walang transition
+                    startActivity(intent);
+                }
+
+            }
+        });
     }
 
+    private void layouts(){
 
+        //Lagay ako transition para maganda
+        // Dito ko ito ilalagay ayoko sa theme eh
+        getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
+
+        // Exit Transition natin para maangas
+        getWindow().setExitTransition(new Explode());
+    }
 }
