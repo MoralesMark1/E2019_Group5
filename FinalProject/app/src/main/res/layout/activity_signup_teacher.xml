@@ -102,7 +102,7 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/et_schoolID"
+        android:id="@+id/et_usernameTeacher"
         android:layout_width="360dp"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
@@ -111,7 +111,7 @@
         android:inputType="text"
         android:paddingLeft="36sp"
         android:paddingRight="36sp"
-        android:hint = "School ID No."
+        android:hint = "Username"
         android:textColor="#454545"
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -134,7 +134,7 @@
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_schoolID"
+        app:layout_constraintTop_toBottomOf="@+id/et_usernameTeacher"
         tools:ignore="MissingConstraints" />
 
     <EditText
@@ -198,6 +198,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@id/button_signin"
-         />
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

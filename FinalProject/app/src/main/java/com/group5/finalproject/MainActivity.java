@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(),SignupAs.class);
 
-                //Kung ang build version daw ay more than lollipop edi goods sa transition sabi sa docs ahh
+                //Kung ang build version daw ay more than lollipop "android 5.0" edi goods sa transition sabi sa docs ahh
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     // Activity transition dito hehehe
                     startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
