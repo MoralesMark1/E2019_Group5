@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.transition.Explode;
+import android.transition.Fade;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
@@ -69,7 +70,18 @@ public class SignupAs extends AppCompatActivity implements View.OnClickListener{
             //ImageButton ng Teacher dun sa XML file
             case R.id.imagebutton_teacher:
                     //Intent para makapunta sa sign up class and xml layout ng teacher
-                    Intent signup_teacher = new Intent(); //Hehe wala pa yung class eh
+                    Intent signup_teacher = new Intent(getApplicationContext(),SignupTeacher.class);
+
+                //Kung ang build version daw ay more than lollipop edi goods sa transition sabi ni docs ehh
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    // Activity transition dito hehehe
+                    startActivity(signup_teacher, ActivityOptions.makeSceneTransitionAnimation(SignupAs.this).toBundle());
+                    finish();
+                } else {
+                    // Edi walang transition
+                    startActivity(signup_teacher);
+                    finish();
+                }
 
                 break;
             //ImageButton ng Student dun sa XML File
@@ -81,9 +93,11 @@ public class SignupAs extends AppCompatActivity implements View.OnClickListener{
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     // Activity transition dito hehehe
                     startActivity(signup_student, ActivityOptions.makeSceneTransitionAnimation(SignupAs.this).toBundle());
+                    finish();
                 } else {
                     // Edi walang transition
                     startActivity(signup_student);
+                    finish();
                 }
 
                 break;
@@ -96,9 +110,11 @@ public class SignupAs extends AppCompatActivity implements View.OnClickListener{
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     // Activity transition dito hehehe
                     startActivity(back_login, ActivityOptions.makeSceneTransitionAnimation(SignupAs.this).toBundle());
+                    finish();
                 } else {
                     // Edi walang transition
                     startActivity(back_login);
+                    finish();
                 }
                 break;
             default:
@@ -121,6 +137,6 @@ public class SignupAs extends AppCompatActivity implements View.OnClickListener{
         getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
 
         // Exit Transition natin para maangas
-        getWindow().setExitTransition(new Explode());
+        getWindow().setExitTransition(new Fade());
     }
 }

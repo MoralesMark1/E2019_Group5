@@ -57,7 +57,7 @@ public class Quiview {
     public String getStudentSurname(){
         return student_surname;
     }
-    public void setStudent_surname(String student_surname){
+    public void setStudentSurname(String student_surname){
         this.student_surname = student_surname;
     }
 

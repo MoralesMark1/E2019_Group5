@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.transition.Explode;
+import android.transition.Slide;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
@@ -43,10 +44,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        layouts();
+        layouts(); //Eh saaa gusto ko tanggalin yung status bar sa taas ahahaha
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         //Need natin kunin yung id dun sa xml file natin
         login = (ImageButton) findViewById(R.id.login); //ImageButton natin
@@ -68,17 +68,22 @@ public class MainActivity extends AppCompatActivity {
 
                 //Ah basta kapag may laman ang username and password go na pag wala edi yung else
                 //Pero seriously, sa database tayo kukuha nung laman hayyy buhay
-                if(!quiview.getLoginUsername().contentEquals("") && !quiview.getLoginPassword().contentEquals("")){
+                if(!quiview.getLoginUsername().trim().isEmpty() && !quiview.getLoginPassword().trim().isEmpty()){
                     toast.setText("Yehey nakalogin na siya");
+                    toast.setDuration(Toast.LENGTH_LONG); //Para medyo matagal siyaaa
+                    toast.show(); //Para makita kasi kung hindi panigurado mag crash yung app
 
                 }
                 else{
                     toast.setText("Sad Life Sign up ka muna");
+                    toast.setDuration(Toast.LENGTH_LONG);
+                    toast.show(); //Para ngaaa hindiii mag crash yung app ahahha
                 }
 
             }
         });
 
+        //Ahhh basta ito yung sign up textview na color blue na light na hayy ewan
         tv_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,9 +96,11 @@ public class MainActivity extends AppCompatActivity {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     // Activity transition dito hehehe
                     startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+                    finish(); //Iwas balik sa activity hehehee
                 } else {
                     // Edi walang transition
                     startActivity(intent);
+                    finish(); //PAra ngaa iwas balikkk sa activity na itooo
                 }
 
             }
@@ -107,6 +114,6 @@ public class MainActivity extends AppCompatActivity {
         getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
 
         // Exit Transition natin para maangas
-        getWindow().setExitTransition(new Explode());
+        getWindow().setExitTransition(new Slide());
     }
 }

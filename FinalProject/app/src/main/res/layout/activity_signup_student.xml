@@ -48,7 +48,7 @@
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <EditText
-        android:id="@+id/et_surname"
+        android:id="@+id/et_studentsurname"
         android:layout_width="360dp"
         android:layout_height="56dp"
         android:layout_marginTop="24dp"
@@ -66,7 +66,7 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/et_firstname"
+        android:id="@+id/et_studentfirstname"
         android:layout_width="360dp"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
@@ -80,11 +80,11 @@
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_surname"
+        app:layout_constraintTop_toBottomOf="@+id/et_studentsurname"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/et_course"
+        android:id="@+id/et_studentcourse"
         android:layout_width="360dp"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
@@ -98,11 +98,11 @@
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_firstname"
+        app:layout_constraintTop_toBottomOf="@+id/et_studentfirstname"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/et_schoolID"
+        android:id="@+id/et_studentschoolID"
         android:layout_width="360dp"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
@@ -116,11 +116,11 @@
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_course"
+        app:layout_constraintTop_toBottomOf="@+id/et_studentcourse"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/et_createPassword"
+        android:id="@+id/et_studentcreatePassword"
         android:layout_width="360dp"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
@@ -134,11 +134,11 @@
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_schoolID"
+        app:layout_constraintTop_toBottomOf="@+id/et_studentschoolID"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/et_confirmPassword"
+        android:id="@+id/et_studentconfirmPassword"
         android:layout_width="360dp"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
@@ -152,11 +152,11 @@
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_createPassword"
+        app:layout_constraintTop_toBottomOf="@+id/et_studentcreatePassword"
         tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@+id/button_signin"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_studentsignin"
         android:layout_width="230dp"
         android:layout_height="54dp"
         android:layout_marginTop="32dp"
@@ -170,7 +170,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_confirmPassword"
+        app:layout_constraintTop_toBottomOf="@+id/et_studentconfirmPassword"
         app:layout_constraintVertical_bias="0.187" />
 
     <TextView
@@ -180,7 +180,7 @@
         android:text="Already have an account?"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_signin"
+        app:layout_constraintTop_toBottomOf="@id/button_studentsignin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.35"
         />
@@ -197,7 +197,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@id/button_signin"
+        app:layout_constraintTop_toBottomOf="@id/button_studentsignin"
          />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

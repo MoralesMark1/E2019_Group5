@@ -155,7 +155,7 @@
         app:layout_constraintTop_toBottomOf="@+id/et_createPassword"
         tools:ignore="MissingConstraints" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_signin"
         android:layout_width="230dp"
         android:layout_height="54dp"
