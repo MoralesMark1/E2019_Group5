@@ -33,22 +33,21 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <ImageButton
-        android:id="@+id/imageView6"
+        android:id="@+id/imb_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/ic_eva_arrow_back_fill"
         android:minWidth="40dp"
         android:minHeight="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.03"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <EditText
-        android:id="@+id/et_surname"
+        android:id="@+id/et_teachersurname"
         android:layout_width="360dp"
         android:layout_height="56dp"
         android:layout_marginTop="24dp"
@@ -66,7 +65,7 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/et_firstname"
+        android:id="@+id/et_teacherfirstname"
         android:layout_width="360dp"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
@@ -80,11 +79,11 @@
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_surname"
+        app:layout_constraintTop_toBottomOf="@+id/et_teachersurname"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/et_course"
+        android:id="@+id/et_teachercourse"
         android:layout_width="360dp"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
@@ -98,11 +97,11 @@
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_firstname"
+        app:layout_constraintTop_toBottomOf="@+id/et_teacherfirstname"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/et_usernameTeacher"
+        android:id="@+id/et_teacherusername"
         android:layout_width="360dp"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
@@ -116,11 +115,11 @@
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_course"
+        app:layout_constraintTop_toBottomOf="@+id/et_teachercourse"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/et_createPassword"
+        android:id="@+id/et_teachercreatePassword"
         android:layout_width="360dp"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
@@ -134,11 +133,11 @@
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_usernameTeacher"
+        app:layout_constraintTop_toBottomOf="@+id/et_teacherusername"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/et_confirmPassword"
+        android:id="@+id/et_teacherconfirmPassword"
         android:layout_width="360dp"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
@@ -152,7 +151,7 @@
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_createPassword"
+        app:layout_constraintTop_toBottomOf="@+id/et_teachercreatePassword"
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -170,7 +169,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_confirmPassword"
+        app:layout_constraintTop_toBottomOf="@+id/et_teacherconfirmPassword"
         app:layout_constraintVertical_bias="0.187" />
 
     <TextView
@@ -186,7 +185,7 @@
         />
 
     <TextView
-        android:id="@+id/textView_login"
+        android:id="@+id/teacher_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

@@ -60,24 +60,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Hindi ito yung final na logic ahh
-                Toast toast = new Toast(getApplicationContext());
-
                 //Pasok laman ng edit text sa ating getters and setters
                 quiview.setLoginUsername(et_username.getText().toString()); //Username na tinype
                 quiview.setLoginPassword(et_password.getText().toString()); //Password na tinype
 
                 //Ah basta kapag may laman ang username and password go na pag wala edi yung else
                 //Pero seriously, sa database tayo kukuha nung laman hayyy buhay
-                if(!quiview.getLoginUsername().trim().isEmpty() && !quiview.getLoginPassword().trim().isEmpty()){
-                    toast.setText("Yehey nakalogin na siya");
-                    toast.setDuration(Toast.LENGTH_LONG); //Para medyo matagal siyaaa
-                    toast.show(); //Para makita kasi kung hindi panigurado mag crash yung app
-
+                if(quiview.getLoginUsername().trim().isEmpty() && quiview.getLoginPassword().trim().isEmpty()){
+                    Toast.makeText(getApplicationContext(),"Walang laman hoy", Toast.LENGTH_LONG).show();
                 }
                 else{
-                    toast.setText("Sad Life Sign up ka muna");
-                    toast.setDuration(Toast.LENGTH_LONG);
-                    toast.show(); //Para ngaaa hindiii mag crash yung app ahahha
+                    Toast.makeText(getApplicationContext(),"Alright success", Toast.LENGTH_LONG).show();
+
                 }
 
             }

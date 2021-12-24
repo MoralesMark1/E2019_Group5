@@ -9,10 +9,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.transition.Explode;
+import android.transition.Slide;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class SignupStudent extends AppCompatActivity {
     EditText et_studentsurname, et_studentfirstname,et_studentcourse,et_studentschoolID,
             et_studentcreatepassword,et_studentconfirmpassword;
     AppCompatButton button_signin; //Yung button sign in na color blue
+    ImageButton ib_back; //Yung Image button na back button para bumalik sa nakaraang activity
     TextView textview_login; //Yung login din na color blue
 
     //Try ko ipasok yung component ng edit text sa arraylist para looping na hanapin lang
@@ -47,6 +49,7 @@ public class SignupStudent extends AppCompatActivity {
         //Kuhanin yung ID nung mga component para sa onclick event listener natin and text watcher
         button_signin = (AppCompatButton) findViewById(R.id.button_studentsignin);
         textview_login = (TextView) findViewById(R.id.textView_login);
+        ib_back = (ImageButton) findViewById(R.id.ib_back);
 
         //Mga EditText natin
         et_studentsurname = (EditText) findViewById(R.id.et_studentsurname);
@@ -66,7 +69,7 @@ public class SignupStudent extends AppCompatActivity {
         et_arrlist.add(et_studentcreatepassword);
         et_arrlist.add(et_studentconfirmpassword);
 
-        button_signin.setEnabled(false);
+        //button_signin.setEnabled(false);
 
         for (final EditText editText : et_arrlist) { //need to be final daw eh
             editText.addTextChangedListener(new TextWatcher() {
@@ -78,19 +81,7 @@ public class SignupStudent extends AppCompatActivity {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    //Check natin kung may mga nakalagay ba dun sa edit text
 
-                    if(s.toString().trim().length() == 0){
-                        button_signin.setEnabled(false);
-                    }
-                    else {
-                        //Now need natin iconfirm kung same ba ang nilagay sa password and
-                        //confirm password
-                        //Well logic ko ito sooo hehe di ako nag google :P
-                        if(et_arrlist.get(4).toString().trim() == et_arrlist.get(5).toString().trim()){
-                            button_signin.setEnabled(true);
-                        }
-                    }
                 }
 
                 @Override
@@ -103,16 +94,27 @@ public class SignupStudent extends AppCompatActivity {
             button_signin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //So ang plano is pag kumpleto na mga mga informations dun sa mga editText edi goods
 
-                    //Hindi pa ito final for testing purposes lang ito hehhehe
-                    Toast toast = new Toast(getApplicationContext());
-                    toast.setText("Yeheyyy naka sign in na siyaa");
-                    toast.setDuration(Toast.LENGTH_LONG);
-                    toast.show();
                 }
             });
 
+            ib_back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(SignupStudent.this,SignupAs.class);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        // Activity transition dito hehehe
+                        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(SignupStudent.this).toBundle());
+                        finish();
+
+                    } else {
+                        // Edi walang transition
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+            });
             //Last is yung text view login natin na may onclick listener hayahayy
             textview_login.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -137,14 +139,11 @@ public class SignupStudent extends AppCompatActivity {
     }
     private void layouts(){
 
-        //Tanggalin yung status bar na may battery percentage or signal sa taas ng kahit anong cp
-        getWindow().requestFeature(View.SYSTEM_UI_FLAG_FULLSCREEN);
-
         //Lagay ako transition para maganda
         // Dito ko ito ilalagay ayoko sa theme eh
         getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
 
         // Exit Transition natin para maangas
-        getWindow().setExitTransition(new Explode());
+        getWindow().setExitTransition(new Slide());
     }
 }

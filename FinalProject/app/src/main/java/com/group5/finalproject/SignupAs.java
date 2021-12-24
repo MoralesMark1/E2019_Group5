@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.transition.Explode;
 import android.transition.Fade;
+import android.transition.Slide;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
@@ -76,11 +77,11 @@ public class SignupAs extends AppCompatActivity implements View.OnClickListener{
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     // Activity transition dito hehehe
                     startActivity(signup_teacher, ActivityOptions.makeSceneTransitionAnimation(SignupAs.this).toBundle());
-                    finish();
+
                 } else {
                     // Edi walang transition
                     startActivity(signup_teacher);
-                    finish();
+
                 }
 
                 break;
@@ -93,11 +94,11 @@ public class SignupAs extends AppCompatActivity implements View.OnClickListener{
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     // Activity transition dito hehehe
                     startActivity(signup_student, ActivityOptions.makeSceneTransitionAnimation(SignupAs.this).toBundle());
-                    finish();
+
                 } else {
                     // Edi walang transition
                     startActivity(signup_student);
-                    finish();
+
                 }
 
                 break;
@@ -128,15 +129,12 @@ public class SignupAs extends AppCompatActivity implements View.OnClickListener{
 
     private void layouts(){
 
-        //Tanggalin yung status bar na may battery percentage or signal sa taas ng kahit anong cp
-        getWindow().requestFeature(View.SYSTEM_UI_FLAG_FULLSCREEN);
-
         //Lagay ako transition para maganda
         // Dito ko ito ilalagay ayoko sa theme eh wala naman akong theme naging dalawa sila bigla
         //Siguro sa dating android studio may theme.xml talaga eh dito sakin style.xml ehh hayy buhay
         getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
 
         // Exit Transition natin para maangas
-        getWindow().setExitTransition(new Fade());
+        getWindow().setExitTransition(new Slide());
     }
 }
