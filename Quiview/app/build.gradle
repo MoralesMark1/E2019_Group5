@@ -6,8 +6,8 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.example.quiview"
-        minSdk 24
+        applicationId "com.group5.finalproject"
+        minSdk 21
         targetSdk 31
         versionCode 1
         versionName "1.0"

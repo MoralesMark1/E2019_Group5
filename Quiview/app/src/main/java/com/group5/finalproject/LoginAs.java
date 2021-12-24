@@ -1,5 +1,6 @@
 package com.group5.finalproject;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActivityOptions;
@@ -15,35 +16,28 @@ import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-/*
-    Another class nanaman ang malalagyan ng comment na may halong buntong hiningaaaa whooooo
-    buhayyy grabeee merry christmas nga palaaa sa inyoooo para akong nagvlog ditoooo
-
-    Created by: Jerome Pasag na nawawalan na ng gana dahil sa pandemic
-
- */
-public class SignupAs extends AppCompatActivity implements View.OnClickListener{
+public class LoginAs extends AppCompatActivity implements View.OnClickListener {
 
     //Dito dalawang Buttons lang and isang textview
-    ImageButton signup_teacher,signup_student;
-    TextView login;
+    ImageButton login_teacher,login_student;
+    TextView signup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         layouts();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup_as);
+        setContentView(R.layout.activity_login_as);
 
 
         //Ilagay yung onclick listener sa kanila hehhe para makapag switch case akoo
-        signup_teacher = (ImageButton) findViewById(R.id.imagebutton_teacher);
-        signup_student = (ImageButton) findViewById(R.id.imagebutton_student);
-        login = (TextView) findViewById(R.id.tv_login_here);
+        login_teacher = (ImageButton) findViewById(R.id.imagebutton_teacher);
+        login_student = (ImageButton) findViewById(R.id.imagebutton_student);
+        signup = (TextView) findViewById(R.id.tv_signup_here);
 
         //Implement sa kanila yung on click listener hayy buhayyyy katamad mag type
-        signup_teacher.setOnClickListener(this);
-        signup_student.setOnClickListener(this);
-        login.setOnClickListener(this);
+        login_teacher.setOnClickListener(this);
+        login_student.setOnClickListener(this);
+        signup.setOnClickListener(this);
 
     }
 
@@ -58,6 +52,8 @@ public class SignupAs extends AppCompatActivity implements View.OnClickListener{
             Override o hindi gagana parin yang onClick sabi kasi ng IDE ko lagyan ko ng Override eh
             kahit wag na hay naku pero ilalagay ko talaga hehhehe para maganda
 
+            okiiee......
+
          */
 
     @Override
@@ -70,57 +66,58 @@ public class SignupAs extends AppCompatActivity implements View.OnClickListener{
         switch (v.getId()){
             //ImageButton ng Teacher dun sa XML file
             case R.id.imagebutton_teacher:
-                    //Intent para makapunta sa sign up class and xml layout ng teacher
-                    Intent signup_teacher = new Intent(getApplicationContext(),SignupTeacher.class);
+                //Intent para makapunta sa log-in class and xml layout ng teacher
+                Intent login_teacher = new Intent(getApplicationContext(),MainActivity.class);
 
                 //Kung ang build version daw ay more than lollipop edi goods sa transition sabi ni docs ehh
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     // Activity transition dito hehehe
-                    startActivity(signup_teacher, ActivityOptions.makeSceneTransitionAnimation(SignupAs.this).toBundle());
+                    startActivity(login_teacher, ActivityOptions.makeSceneTransitionAnimation(LoginAs.this).toBundle());
 
                 } else {
                     // Edi walang transition
-                    startActivity(signup_teacher);
+                    startActivity(login_teacher);
 
                 }
 
                 break;
             //ImageButton ng Student dun sa XML File
             case R.id.imagebutton_student:
-                    //Intent para makapunta sa sign up class and xml layout ng student
-                    Intent signup_student = new Intent(getApplicationContext(),SignupStudent.class);
+                //Intent para makapunta sa log-in class and xml layout ng student
+                Intent login_student = new Intent(getApplicationContext(),MainActivity2.class);
 
                 //Kung ang build version daw ay more than lollipop edi goods sa transition sabi ni docs ehh
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     // Activity transition dito hehehe
-                    startActivity(signup_student, ActivityOptions.makeSceneTransitionAnimation(SignupAs.this).toBundle());
+                    startActivity(login_student, ActivityOptions.makeSceneTransitionAnimation(LoginAs.this).toBundle());
 
                 } else {
                     // Edi walang transition
-                    startActivity(signup_student);
+                    startActivity(login_student);
 
                 }
 
                 break;
             //TextView ng login para bumalik dun sa login natin na main activity
-            case R.id.tv_login_here:
-                    //Intent para bumalik sa login
-                    Intent back_login = new Intent(getApplication(),LoginAs.class);
+            //Pacheck nalang dito pre...
+            case R.id.tv_signup_here:
+                //Intent para bumalik sa login
+                Intent back = new Intent(getApplication(),SignupAs.class);
 
                 //Kung ang build version daw ay more than lollipop edi goods sa transition sabi sa docs ahh
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     // Activity transition dito hehehe
-                    startActivity(back_login, ActivityOptions.makeSceneTransitionAnimation(SignupAs.this).toBundle());
+                    startActivity(back, ActivityOptions.makeSceneTransitionAnimation(LoginAs.this).toBundle());
                     finish();
                 } else {
                     // Edi walang transition
-                    startActivity(back_login);
+                    startActivity(back);
                     finish();
                 }
                 break;
             default:
-                    //Nevermind wala namang dapat idefault dito ehh alangan namang gawa ako ng
-                    //toast kasi di wala silang naclick hahhaha hayy buhayyy
+                //Nevermind wala namang dapat idefault dito ehh alangan namang gawa ako ng
+                //toast kasi di wala silang naclick hahhaha hayy buhayyy
                 break;
 
 

@@ -32,20 +32,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <ImageView
-        android:id="@+id/imageView6"
+    <ImageButton
+        android:id="@+id/ib_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
+        android:background="@drawable/ic_eva_arrow_back_fill"
+        android:minWidth="40dp"
+        android:minHeight="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.03"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_eva_arrow_back_fill" />
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <EditText
-        android:id="@+id/text_surname"
+        android:id="@+id/et_studentsurname"
         android:layout_width="360dp"
         android:layout_height="56dp"
         android:layout_marginTop="24dp"
@@ -53,7 +55,8 @@
         android:ems="10"
         android:inputType="text"
         android:paddingLeft="36sp"
-        android:text="Surname"
+        android:paddingRight="36sp"
+        android:hint="Surname"
         android:textColor="#454545"
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +65,7 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/text_surname2"
+        android:id="@+id/et_studentfirstname"
         android:layout_width="360dp"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
@@ -70,16 +73,17 @@
         android:ems="10"
         android:inputType="text"
         android:paddingLeft="36sp"
-        android:text="Fullname"
+        android:paddingRight="36sp"
+        android:hint="Firstname"
         android:textColor="#454545"
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_surname"
+        app:layout_constraintTop_toBottomOf="@+id/et_studentsurname"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/text_surname3"
+        android:id="@+id/et_studentEmail"
         android:layout_width="360dp"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
@@ -87,16 +91,17 @@
         android:ems="10"
         android:inputType="text"
         android:paddingLeft="36sp"
-        android:text="Course"
+        android:paddingRight="36sp"
+        android:hint = "Email Address"
         android:textColor="#454545"
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_surname2"
+        app:layout_constraintTop_toBottomOf="@+id/et_studentfirstname"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/text_surname4"
+        android:id="@+id/et_studentschoolID"
         android:layout_width="360dp"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
@@ -104,87 +109,94 @@
         android:ems="10"
         android:inputType="text"
         android:paddingLeft="36sp"
-        android:text="School ID No."
+        android:paddingRight="36sp"
+        android:hint = "School ID No."
         android:textColor="#454545"
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_surname3"
+        app:layout_constraintTop_toBottomOf="@+id/et_studentEmail"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/text_surname5"
+        android:id="@+id/et_studentcreatePassword"
         android:layout_width="360dp"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/edit_text_background"
         android:ems="10"
-        android:inputType="text"
+        android:inputType="textPassword"
         android:paddingLeft="36sp"
-        android:text="Create Password"
+        android:paddingRight="36sp"
+        android:hint="Create Password"
         android:textColor="#454545"
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_surname4"
+        app:layout_constraintTop_toBottomOf="@+id/et_studentschoolID"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/text_surname6"
+        android:id="@+id/et_studentconfirmPassword"
         android:layout_width="360dp"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/edit_text_background"
         android:ems="10"
-        android:inputType="text"
+        android:inputType="textPassword"
         android:paddingLeft="36sp"
-        android:text="Confirm Password"
+        android:paddingRight="36sp"
+        android:hint="Confirm Password"
         android:textColor="#454545"
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_surname5"
+        app:layout_constraintTop_toBottomOf="@+id/et_studentcreatePassword"
         tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@+id/button"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_studentsignin"
         android:layout_width="230dp"
         android:layout_height="54dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/button_background_blue"
         android:text="Sign-In"
+        android:textColor="@color/white"
         android:textAllCaps="false"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_surname6"
+        app:layout_constraintTop_toBottomOf="@+id/et_studentconfirmPassword"
         app:layout_constraintVertical_bias="0.187" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginBottom="75dp"
         android:text="Already have an account?"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_studentsignin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.35"
+        />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/tv_login_here"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="75dp"
         android:text="Log-in here"
         android:textColor="#0072FF"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView8" />
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@id/button_studentsignin"
+         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

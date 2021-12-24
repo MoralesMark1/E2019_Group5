@@ -1,4 +1,4 @@
-package com.example.quiview;
+package com.group5.finalproject;
 
 import org.junit.Test;
 

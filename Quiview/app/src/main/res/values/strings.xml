@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Quiview</string>
+    <string name="app_name">FinalProject</string>
+    <string name="welcome">Welcome!</string>
+    <string name="login_to_your_existing_account">Login to your existing account</string>
+
+
 </resources>

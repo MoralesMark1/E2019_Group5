@@ -83,7 +83,7 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/et_studentcourse"
+        android:id="@+id/et_studentEmail"
         android:layout_width="360dp"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
@@ -92,7 +92,7 @@
         android:inputType="text"
         android:paddingLeft="36sp"
         android:paddingRight="36sp"
-        android:hint = "Course"
+        android:hint = "Email Address"
         android:textColor="#454545"
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -115,7 +115,7 @@
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_studentcourse"
+        app:layout_constraintTop_toBottomOf="@+id/et_studentEmail"
         tools:ignore="MissingConstraints" />
 
     <EditText
@@ -185,7 +185,7 @@
         />
 
     <TextView
-        android:id="@+id/textView_login"
+        android:id="@+id/tv_login_here"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

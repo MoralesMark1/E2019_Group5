@@ -14,71 +14,76 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="176dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView_sign_up_as"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.500"
         app:srcCompat="@drawable/ic_icon"
         tools:ignore="ImageContrastCheck" />
 
     <TextView
-        android:id="@+id/textView_sign_up_as"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign-up as:"
+        android:text="Log-in as:"
         android:textColor="#000000"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="500dp"
-        tools:ignore="MissingConstraints" />
-
-    <ImageView
-        android:id="@+id/imageView4_student"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_sign_up_as"
-        app:srcCompat="@drawable/ic_button_student" />
-
-    <ImageView
-        android:id="@+id/imageView5_teacher"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:textSize="23sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4_student"
-        app:layout_constraintVertical_bias="0.093"
-        app:srcCompat="@drawable/ic_button_teacher" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.500" />
+
+    <ImageButton
+        android:id="@+id/imagebutton_student"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/ic_button_student"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/imagebutton_teacher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_button_teacher"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagebutton_student"
+        app:layout_constraintVertical_bias="0.05"
+        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginBottom="80dp"
-        android:text="Already have an account?"
+        android:text="Don't have an account?"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imagebutton_teacher"
+        app:layout_constraintVertical_bias="0.420"
+        app:layout_constraintHorizontal_bias="0.3"
+        />
 
     <TextView
-        android:id="@+id/textView8_login"
+        android:id="@+id/tv_signup_here"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="80dp"
-        android:text="Log-in here"
+        android:text="Sign-up here"
         android:textColor="#0072FF"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imagebutton_teacher"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintVertical_bias="0.420"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toEndOf="@+id/textView7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

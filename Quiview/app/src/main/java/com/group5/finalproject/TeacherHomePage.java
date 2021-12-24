@@ -1,14 +1,14 @@
-package com.example.quiview;
+package com.group5.finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class SignupAs extends AppCompatActivity {
+public class TeacherHomePage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up_as);
+        setContentView(R.layout.activity_teacher_home_page);
     }
 }

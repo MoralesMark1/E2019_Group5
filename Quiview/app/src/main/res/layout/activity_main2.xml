@@ -59,32 +59,31 @@
         app:srcCompat="@drawable/ic_blue_bg_gradient" />
 
     <TextView
-        android:id="@+id/tv_username"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
-        android:text="Username"
+        android:text="Student ID No."
         android:textColor="#FDFDFD"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/et_username"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.096"
+        app:layout_constraintHorizontal_bias="0.109"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/background_gradient"
         tools:ignore="TextContrastCheck" />
 
     <EditText
-        android:id="@+id/et_username"
+        android:id="@+id/et_studentID"
         android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_username"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
         android:importantForAutofill="no" />
 
@@ -99,7 +98,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.095"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_username" />
+        app:layout_constraintTop_toBottomOf="@+id/et_studentID" />
 
     <EditText
         android:id="@+id/et_password"
