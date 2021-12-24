@@ -36,7 +36,7 @@ public class SignupStudent extends AppCompatActivity {
     TextView textview_login; //Yung login din na color blue
 
     //Try ko ipasok yung component ng edit text sa arraylist para looping na hanapin lang
-    ArrayList<EditText> et_arrlist = new ArrayList<>();
+    ArrayList<EditText> et_studentarrlist = new ArrayList<>();
 
     Quiview quiview = new Quiview();
 
@@ -62,16 +62,16 @@ public class SignupStudent extends AppCompatActivity {
         //Pasok ko muna sila sa setters ko pero wag muna MAY GAGAWIN LANG DUN PAPALITAN DATA
 
         //Pasok sila sa arraylist natin kasi iloop natin sila
-        et_arrlist.add(et_studentsurname);
-        et_arrlist.add(et_studentfirstname);
-        et_arrlist.add(et_studentcourse);
-        et_arrlist.add(et_studentschoolID);
-        et_arrlist.add(et_studentcreatepassword);
-        et_arrlist.add(et_studentconfirmpassword);
+        et_studentarrlist.add(et_studentsurname);
+        et_studentarrlist.add(et_studentfirstname);
+        et_studentarrlist.add(et_studentcourse);
+        et_studentarrlist.add(et_studentschoolID);
+        et_studentarrlist.add(et_studentcreatepassword);
+        et_studentarrlist.add(et_studentconfirmpassword);
 
-        //button_signin.setEnabled(false);
+        button_signin.setEnabled(false);
 
-        for (final EditText editText : et_arrlist) { //need to be final daw eh
+        for (final EditText editText : et_studentarrlist) { //need to be final daw eh
             editText.addTextChangedListener(new TextWatcher() {
 
                 @Override

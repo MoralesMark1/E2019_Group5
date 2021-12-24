@@ -59,7 +59,7 @@ public class SignupTeacher extends AppCompatActivity {
         et_teacherarrlist.add(et_teachercreatepassword);
         et_teacherarrlist.add(et_teacherconfirmpassword);
 
-        //button_signin.setEnabled(false);
+        button_signin.setEnabled(false);
 
         for (final EditText editText : et_teacherarrlist) { //need to be final daw eh
             editText.addTextChangedListener(new TextWatcher() {
@@ -71,7 +71,6 @@ public class SignupTeacher extends AppCompatActivity {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-
 
 
                 }
@@ -101,6 +100,13 @@ public class SignupTeacher extends AppCompatActivity {
                 }
             });
 
+            //Yung sign in button
+            button_signin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
             textview_login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

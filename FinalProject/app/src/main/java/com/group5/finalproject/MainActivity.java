@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //Ah basta kapag may laman ang username and password go na pag wala edi yung else
                 //Pero seriously, sa database tayo kukuha nung laman hayyy buhay
-                
+
                 if(quiview.getLoginUsername().trim().isEmpty() || quiview.getLoginPassword().trim().isEmpty()){
                     Toast.makeText(getApplicationContext(),"Walang laman hoy", Toast.LENGTH_LONG).show();
                 }
