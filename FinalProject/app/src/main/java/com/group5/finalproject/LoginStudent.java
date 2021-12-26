@@ -30,7 +30,7 @@ public class LoginStudent extends AppCompatActivity {
 
     TextView tv_signup; //Ito yung sign up textview na pipindutin para makapunta sa next activity
     ImageButton login; //Yung image button na may pangalan na Login
-    EditText et_studentId,et_password; //Yung dalawang parang textbox natin
+    EditText et_studentId,et_studentpassword; //Yung dalawang parang textbox natin
 
     Quiview quiview = new Quiview(); //Yung Quiview Class na andito student and teachers data
 
@@ -46,7 +46,7 @@ public class LoginStudent extends AppCompatActivity {
         login = (ImageButton) findViewById(R.id.login); //ImageButton natin
         tv_signup = (TextView) findViewById(R.id.tv_signup); //TextView natin
         et_studentId = (EditText) findViewById(R.id.et_studentID); //EditText ng StudentID natin
-        et_password = (EditText) findViewById(R.id.et_password); //EditText ng Password natin
+        et_studentpassword = (EditText) findViewById(R.id.et_studentpassword); //EditText ng Password natin
 
         //Attempted Login pero ichecheck muna natin kung tama ba ang mga credentials base sa nandun
         //sa database natin
@@ -55,13 +55,13 @@ public class LoginStudent extends AppCompatActivity {
             public void onClick(View v) {
                 //Hindi ito yung final na logic ahh
                 //Pasok laman ng edit text sa ating getters and setters
-                quiview.setLoginUsername(et_studentId.getText().toString()); //StudentID na tinype
-                quiview.setLoginPassword(et_password.getText().toString()); //Password na tinype
+                quiview.setStudent_id(et_studentId.getText().toString()); //StudentID na tinype
+                quiview.setStudentPassword(et_studentpassword.getText().toString()); //Password na tinype
 
                 //Ah basta kapag may laman ang username and password go na pag wala edi yung else
                 //Pero seriously, sa database tayo kukuha nung laman hayyy buhay
 
-                if(quiview.getLoginUsername().trim().isEmpty() || quiview.getLoginPassword().trim().isEmpty()){
+                if(quiview.getStudentId().trim().isEmpty() || quiview.getStudentPassword().trim().isEmpty()){
                     Toast.makeText(getApplicationContext(),"Walang laman hoy", Toast.LENGTH_LONG).show();
                 }
                 else{

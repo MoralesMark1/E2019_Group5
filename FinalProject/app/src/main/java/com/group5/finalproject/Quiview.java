@@ -18,30 +18,9 @@ public class Quiview {
     *   Answers (answer_id[FK], answer)
      */
 
-    /*
-        Para sa login dun sa simula
-     */
-    private String login_username;
-    private String login_password;
-
-    //Username
-    public String getLoginUsername(){
-        return login_username;
-    }
-    public void setLoginUsername(String login_username){
-        this.login_username = login_username;
-    }
-
-    //Password
-    public String getLoginPassword(){
-        return login_password;
-    }
-    public void setLoginPassword(String login_password){
-        this.login_password = login_password;
-    }
-
     /******************************
-     * Itong mga nasa baba ay para sa Registration ng student and teachers
+     * Itong mga nasa baba ay para sa Registration ng student and teachers and
+     * for other things din
      */
 
     /*
@@ -49,7 +28,7 @@ public class Quiview {
      */
     private String student_surname;
     private String student_firstname;
-    private String student_gender;
+    private String student_email;
     private String student_id; //Username
     private String student_pass; // Password
 
@@ -70,11 +49,11 @@ public class Quiview {
     }
 
     //Student Gender
-    public String getStudentGender(){
-        return student_gender;
+    public String getStudentEmail(){
+        return student_email;
     }
     public void setStudentGender(String student_gender){
-        this.student_gender = student_gender;
+        this.student_email = student_email;
     }
 
     //Student ID
@@ -99,7 +78,7 @@ public class Quiview {
 
     private String teacher_surname;
     private String teacher_firstname;
-    private String teacher_gender;
+    private String teacher_email;
     private String teacher_username; //Username
     private String teacher_pass; //Password
 
@@ -120,11 +99,11 @@ public class Quiview {
     }
 
     //Teacher Gender
-    public String getTeacherGender(){
-        return teacher_gender;
+    public String getTeacherEmail(){
+        return teacher_email;
     }
-    public void setTeacherGender(String teacher_gender){
-        this.teacher_gender = teacher_gender;
+    public void setTeacherEmail(String teacher_gender){
+        this.teacher_email = teacher_gender;
     }
 
     //Teacher Username

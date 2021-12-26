@@ -4,12 +4,9 @@ package com.group5.finalproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActivityOptions;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.transition.Explode;
-import android.transition.Fade;
 import android.transition.Slide;
 import android.view.View;
 import android.view.Window;
@@ -35,9 +32,9 @@ public class LoginAs extends AppCompatActivity implements View.OnClickListener {
         signup = (TextView) findViewById(R.id.tv_signup_here);
 
         //Implement sa kanila yung on click listener hayy buhayyyy katamad mag type
-        login_teacher.setOnClickListener(this);
-        login_student.setOnClickListener(this);
-        signup.setOnClickListener(this);
+        login_teacher.setOnClickListener(this); //Para maglogin as Teacher
+        login_student.setOnClickListener(this); //Para maglogin as Student
+        signup.setOnClickListener(this); //Para pumunta sa signup
 
     }
 
@@ -101,7 +98,7 @@ public class LoginAs extends AppCompatActivity implements View.OnClickListener {
             //TextView ng login para bumalik dun sa login natin na main activity
             //Pacheck nalang dito pre...
             case R.id.tv_signup_here:
-                //Intent para bumalik sa login
+                //Intent para bumalik sa signup class natin for signup
                 Intent back = new Intent(getApplication(),SignupAs.class);
 
                 //Kung ang build version daw ay more than lollipop edi goods sa transition sabi sa docs ahh
