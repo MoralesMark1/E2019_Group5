@@ -12,11 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProject">
         <activity
-            android:name=".MainActivity"
-            android:exported="false" />
+            android:name=".LoginTeacher"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
-            android:name=".MainActivity2"
-            android:exported="false" />
+            android:name=".LoginStudent"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".TeacherHomePage"
             android:exported="false" />

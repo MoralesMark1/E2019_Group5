@@ -11,12 +11,17 @@ import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.TextView;
 
-public class MainActivity2 extends AppCompatActivity {
+/*
+    Pambihirang buhayy tohhh hayyy ano ba ginagawa kooooo whoooo ahhahahha
+    Sadlife di na ako masaya sa course koo :(
+ */
 
-     /*
+public class LoginTeacher extends AppCompatActivity {
+
+    /*
         Ang need lang natin is imagebutton na login para makapasok sa susunod na activity base sa
         kung sino ang nag sign up and kasama yung textview na signup para makapasok sa sign up activity
         and lastly yung dalawang editText para makuha natin yung laman nung string value na nandun
@@ -30,7 +35,7 @@ public class MainActivity2 extends AppCompatActivity {
 
     TextView tv_signup; //Ito yung sign up textview na pipindutin para makapunta sa next activity
     ImageButton login; //Yung image button na may pangalan na Login
-    EditText et_studentId,et_password; //Yung dalawang parang textbox natin
+    EditText et_username,et_password; //Yung dalawang parang textbox natin
 
     Quiview quiview = new Quiview(); //Yung Quiview Class na andito student and teachers data
 
@@ -40,12 +45,12 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         layouts(); //Eh saaa gusto ko tanggalin yung status bar sa taas ahahaha
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_login_teacher);
 
         //Need natin kunin yung id dun sa xml file natin
         login = (ImageButton) findViewById(R.id.login); //ImageButton natin
         tv_signup = (TextView) findViewById(R.id.tv_signup); //TextView natin
-        et_studentId = (EditText) findViewById(R.id.et_studentID); //EditText ng StudentID natin
+        et_username = (EditText) findViewById(R.id.et_username); //EditText ng Username natin
         et_password = (EditText) findViewById(R.id.et_password); //EditText ng Password natin
 
         //Attempted Login pero ichecheck muna natin kung tama ba ang mga credentials base sa nandun
@@ -55,7 +60,7 @@ public class MainActivity2 extends AppCompatActivity {
             public void onClick(View v) {
                 //Hindi ito yung final na logic ahh
                 //Pasok laman ng edit text sa ating getters and setters
-                quiview.setLoginUsername(et_studentId.getText().toString()); //StudentID na tinype
+                quiview.setLoginUsername(et_username.getText().toString()); //Username na tinype
                 quiview.setLoginPassword(et_password.getText().toString()); //Password na tinype
 
                 //Ah basta kapag may laman ang username and password go na pag wala edi yung else
@@ -84,12 +89,12 @@ public class MainActivity2 extends AppCompatActivity {
                 //Kung ang build version daw ay more than lollipop "android 5.0" edi goods sa transition sabi sa docs ahh
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     // Activity transition dito hehehe
-                    startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(MainActivity2.this).toBundle());
+                    startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(LoginTeacher.this).toBundle());
                     finish(); //Iwas balik sa activity hehehee
                 } else {
                     // Edi walang transition
                     startActivity(intent);
-                    finish(); //PAra ngaa iwas balikkk sa activity na itooo
+                    finish(); //Para ngaa iwas balikkk sa activity na itooo
                 }
 
             }

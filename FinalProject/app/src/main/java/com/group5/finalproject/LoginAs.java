@@ -67,7 +67,7 @@ public class LoginAs extends AppCompatActivity implements View.OnClickListener {
             //ImageButton ng Teacher dun sa XML file
             case R.id.imagebutton_teacher:
                 //Intent para makapunta sa log-in class and xml layout ng teacher
-                Intent login_teacher = new Intent(getApplicationContext(),MainActivity.class);
+                Intent login_teacher = new Intent(getApplicationContext(),LoginTeacher.class);
 
                 //Kung ang build version daw ay more than lollipop edi goods sa transition sabi ni docs ehh
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -84,7 +84,7 @@ public class LoginAs extends AppCompatActivity implements View.OnClickListener {
             //ImageButton ng Student dun sa XML File
             case R.id.imagebutton_student:
                 //Intent para makapunta sa log-in class and xml layout ng student
-                Intent login_student = new Intent(getApplicationContext(),MainActivity2.class);
+                Intent login_student = new Intent(getApplicationContext(),LoginStudent.class);
 
                 //Kung ang build version daw ay more than lollipop edi goods sa transition sabi ni docs ehh
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
