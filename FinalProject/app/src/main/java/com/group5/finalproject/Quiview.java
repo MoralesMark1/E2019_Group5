@@ -52,7 +52,7 @@ public class Quiview {
     public String getStudentEmail(){
         return student_email;
     }
-    public void setStudentGender(String student_gender){
+    public void setStudentEmail(String student_email){
         this.student_email = student_email;
     }
 
@@ -76,9 +76,9 @@ public class Quiview {
         For Teachers
      */
 
-    private String teacher_surname;
-    private String teacher_firstname;
-    private String teacher_email;
+    private String teacher_surname; //Surname
+    private String teacher_firstname; //Firstname
+    private String teacher_email; //Email Address
     private String teacher_username; //Username
     private String teacher_pass; //Password
 
@@ -102,8 +102,8 @@ public class Quiview {
     public String getTeacherEmail(){
         return teacher_email;
     }
-    public void setTeacherEmail(String teacher_gender){
-        this.teacher_email = teacher_gender;
+    public void setTeacherEmail(String teacher_email){
+        this.teacher_email = teacher_email;
     }
 
     //Teacher Username

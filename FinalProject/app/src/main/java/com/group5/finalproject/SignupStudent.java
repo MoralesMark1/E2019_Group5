@@ -59,8 +59,6 @@ public class SignupStudent extends AppCompatActivity {
         et_studentcreatepassword = (EditText) findViewById(R.id.et_studentcreatePassword);
         et_studentconfirmpassword = (EditText) findViewById(R.id.et_studentconfirmPassword);
 
-        //Pasok ko muna sila sa setters ko pero wag muna MAY GAGAWIN LANG DUN PAPALITAN DATA
-
         //Pasok sila sa arraylist natin kasi iloop natin sila
         et_studentarrlist.add(et_studentsurname);
         et_studentarrlist.add(et_studentfirstname);
@@ -71,7 +69,7 @@ public class SignupStudent extends AppCompatActivity {
 
         button_signin.setEnabled(false);
 
-        for (final EditText editText : et_studentarrlist) { //need to be final daw eh
+        for (final EditText editText : et_studentarrlist) {
             editText.addTextChangedListener(new TextWatcher() {
 
                 @Override
@@ -87,6 +85,18 @@ public class SignupStudent extends AppCompatActivity {
                 @Override
                 public void afterTextChanged(Editable s) {
 
+                    //Isa-isahin ko nalang sila dito
+                    button_signin.setEnabled(
+                            et_studentarrlist.get(0).getText().toString().trim().length() > 0
+                            && et_studentarrlist.get(1).getText().toString().trim().length() > 0
+                            && et_studentarrlist.get(2).getText().toString().trim().length() > 0
+                            && et_studentarrlist.get(3).getText().toString().trim().length() > 0
+                            && et_studentarrlist.get(4).getText().toString().trim().length() > 0
+                            && et_studentarrlist.get(5).getText().toString().trim().length() > 0
+                            && et_studentarrlist.get(4).getText().toString().trim().equals(
+                                    et_studentarrlist.get(5).getText().toString().trim()
+                            )
+                    );
                 }
             });
 
@@ -94,7 +104,8 @@ public class SignupStudent extends AppCompatActivity {
             button_signin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    //Dito ibig sabihin successful ang sign in plano ko sana redirect sa login student class
+                    Toast.makeText(getApplicationContext(),"Sign-up Successfully!", Toast.LENGTH_LONG );
                 }
             });
 

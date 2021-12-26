@@ -15,6 +15,7 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -77,9 +78,19 @@ public class SignupTeacher extends AppCompatActivity {
 
                 @Override
                 public void afterTextChanged(Editable s) {
-
+                    //Isa-isahin ko nalang sila dito
+                    button_signin.setEnabled(
+                            et_teacherarrlist.get(0).getText().toString().trim().length() > 0
+                                    && et_teacherarrlist.get(1).getText().toString().trim().length() > 0
+                                    && et_teacherarrlist.get(2).getText().toString().trim().length() > 0
+                                    && et_teacherarrlist.get(3).getText().toString().trim().length() > 0
+                                    && et_teacherarrlist.get(4).getText().toString().trim().length() > 0
+                                    && et_teacherarrlist.get(5).getText().toString().trim().length() > 0
+                                    && et_teacherarrlist.get(4).getText().toString().trim().equals(
+                                        et_teacherarrlist.get(5).getText().toString().trim()
+                            )
+                    );
                 }
-
             });
 
             //Yung back image button arrow pabalik dun sa sign up as class
@@ -104,6 +115,7 @@ public class SignupTeacher extends AppCompatActivity {
             button_signin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(),"Sign-up Successfully", Toast.LENGTH_LONG);
 
                 }
             });
