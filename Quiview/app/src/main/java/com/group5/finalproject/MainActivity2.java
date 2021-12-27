@@ -24,7 +24,7 @@ public class MainActivity2 extends AppCompatActivity {
         to notify the user na mali yung credentials na nilagay niya
 
        Ps. Hindi na natin need galawin yung ibang components such as yung mga textview na andun
-       or yung imageview na logo natin
+       or yung imageview na logo natin!-------
 
      */
 
