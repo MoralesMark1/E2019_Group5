@@ -152,4 +152,14 @@ public class SignupTeacher extends AppCompatActivity {
         // Exit Transition natin para maangas
         getWindow().setExitTransition(new Slide());
     }
+
+    /**************
+     *  Dito sa part na ito papaikliin ko ang connection sa database
+     *  using Volley library para easyyyyyyyy hehehhehe :) :) :) :)
+     *
+     *  Created by: The Group 5
+     */
+    private void Register() {
+        
+    }
 }
