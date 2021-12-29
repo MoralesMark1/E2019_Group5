@@ -17,7 +17,20 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /*
     Isa nanamang class hayyy this time student sign up naman
@@ -29,16 +42,18 @@ public class SignupStudent extends AppCompatActivity {
 
     //Itong EditText para sa TextWatcher ko hehehe gusto ko sana pag di complete ang values then
     //Di mag activate ang Sign-in Button
-    EditText et_studentsurname, et_studentfirstname,et_studentemail,et_studentschoolID,
+    private EditText et_studentsurname, et_studentfirstname,et_studentemail,et_studentschoolID,
             et_studentcreatepassword,et_studentconfirmpassword;
-    AppCompatButton button_signin; //Yung button sign in na color blue
-    ImageButton ib_back; //Yung Image button na back button para bumalik sa nakaraang activity
-    TextView textview_login; //Yung login din na color blue
+    private AppCompatButton button_signin; //Yung button sign in na color blue
+    private ImageButton ib_back; //Yung Image button na back button para bumalik sa nakaraang activity
+    private TextView textview_login; //Yung login din na color blue
 
     //Try ko ipasok yung component ng edit text sa arraylist para looping na hanapin lang
     ArrayList<EditText> et_studentarrlist = new ArrayList<>();
 
     Quiview quiview = new Quiview();
+
+    String URL_StudentReg = "http://e2019cc107group5.000webhostapp.com/finalproject/student_register.php"; //URL ng database natin sa webhost
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +120,10 @@ public class SignupStudent extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     //Dito ibig sabihin successful ang sign in plano ko sana redirect sa login student class
-                    Toast.makeText(getApplicationContext(),"Sign-up Successfully!", Toast.LENGTH_LONG );
+                    //Toast.makeText(getApplicationContext(),"Sign-up Successfully!", Toast.LENGTH_LONG );
+
+                    //Register function here
+                    Register();
                 }
             });
 
@@ -156,5 +174,85 @@ public class SignupStudent extends AppCompatActivity {
 
         // Exit Transition natin para maangas
         getWindow().setExitTransition(new Slide());
+    }
+
+    /**************
+     *  Dito sa part na ito papaikliin ko ang connection sa database
+     *  using Volley library para easyyyyyyyy hehehhehe :) :) :) :)
+     *
+     *  Created by: The Group 5
+     */
+    private void Register() {
+
+        //Kunin ang mga text natin sa ating edit text whether using edittext mismo
+        //Pwede rin kunin nalang from the arraylist natin hehehe
+        // 0 - Surname
+        // 1 - Firstname
+        // 2 - Email
+        // 3 - School ID
+        // 4 - Create Password
+        // 5 - Confirm Password
+
+        quiview.setStudentSurname(et_studentarrlist.get(0).getText().toString().trim());
+        quiview.setStudentFirstname(et_studentarrlist.get(1).getText().toString().trim());
+        quiview.setStudentEmail(et_studentarrlist.get(2).getText().toString().trim());
+        quiview.setStudent_id(et_studentarrlist.get(3).getText().toString().trim());
+
+        //Sa String ko muna ipasok yung sa create password
+        String createpass = et_studentarrlist.get(4).getText().toString().trim();
+        quiview.setStudentPassword(et_studentarrlist.get(5).getText().toString().trim());
+
+        //Hayy balik tayo sa String
+        String surname = quiview.getStudentSurname();
+        String firstname = quiview.getStudentFirstname();
+        String email = quiview.getStudentEmail();
+        String studid = quiview.getStudentId();
+        String password = quiview.getStudentPassword();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_StudentReg,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject jsonObject = new JSONObject(response);
+                            //Log.d("JSONR", jsonObject.toString());
+                            String success = jsonObject.getString("success");
+
+                            if(success.equals("1")){
+                                Toast.makeText(SignupStudent.this,"Registered Successfully", Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(SignupStudent.this,"Register Error! " + e.toString() , Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(SignupStudent.this,"Register Error! " , Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<>();
+                params.put("surname", surname);
+                params.put("firstname",firstname);
+                params.put("email",email);
+                params.put("studid",studid);
+                params.put("password",password);
+
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
     }
 }
