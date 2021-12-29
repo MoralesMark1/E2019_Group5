@@ -17,22 +17,38 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /*
     So ito yung class nung teachers sign up hehehe
  */
 public class SignupTeacher extends AppCompatActivity {
 
-    EditText et_teachersurname, et_teacherfirstname, et_teacheremail, et_teacherusername,
+    private EditText et_teachersurname, et_teacherfirstname, et_teacheremail, et_teacherusername,
             et_teachercreatepassword, et_teacherconfirmpassword;
-    AppCompatButton button_signin; //Yung button sign in na color blue
-    ImageButton imb_back; //Yung Image button na back button para bumalik sa nakaraang activity
-    TextView textview_login; //Yung login din na color blue
+    private AppCompatButton button_signin; //Yung button sign in na color blue
+    private ImageButton imb_back; //Yung Image button na back button para bumalik sa nakaraang activity
+    private TextView textview_login; //Yung login din na color blue
 
     //Try ko ipasok yung component ng edit text sa arraylist para looping na hanapin lang
     ArrayList<EditText> et_teacherarrlist = new ArrayList<>();
 
+    Quiview quiview = new Quiview();
+
+    String URL_TeacherReg = "http://e2019cc107group5.000webhostapp.com/finalproject/teacher_register.php"; //URL ng database natin sa webhost
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,8 +131,9 @@ public class SignupTeacher extends AppCompatActivity {
             button_signin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getApplicationContext(),"Sign-up Successfully", Toast.LENGTH_LONG);
+                    //Toast.makeText(getApplicationContext(),"Sign-up Successfully", Toast.LENGTH_LONG).show();
 
+                    Register();
 
                 }
             });
@@ -160,6 +177,77 @@ public class SignupTeacher extends AppCompatActivity {
      *  Created by: The Group 5
      */
     private void Register() {
-        
+        //Kunin ang mga text natin sa ating edit text whether using edittext mismo
+        //Pwede rin kunin nalang from the arraylist natin hehehe
+        // 0 - Surname
+        // 1 - Firstname
+        // 2 - Email
+        // 3 - Username
+        // 4 - Create Password
+        // 5 - Confirm Password
+
+        //Then pasok ko ulit sa setters hehehe
+        quiview.setTeacherSurname(et_teacherarrlist.get(0).getText().toString().trim());
+        quiview.setTeacherFirstname(et_teacherarrlist.get(1).getText().toString().trim());
+        quiview.setTeacherEmail(et_teacherarrlist.get(2).getText().toString().trim());
+        quiview.setTeacherUsername(et_teacherarrlist.get(3).getText().toString().trim());
+
+        //Yung passwords natin pero later baka tanggalin ko yung create password di ko na isama
+        //since may parang validation ako sa setEnabled function ng button sign in na yun
+        String createpass = et_teacherarrlist.get(4).getText().toString().trim();
+        quiview.setStudentPassword(et_teacherarrlist.get(5).getText().toString().trim());
+
+        //Then balik ko ulit sa String
+        String teach_surname = quiview.getTeacherSurname();
+        String teach_firstname = quiview.getTeacherFirstname();
+        String teach_email = quiview.getTeacherEmail();
+        String teach_username = quiview.getTeacherUsername();
+        String teach_password = quiview.getTeacherPassword();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_TeacherReg,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject jsonObject = new JSONObject(response);
+                            //Log.d("JSONR", jsonObject.toString());
+                            String success = jsonObject.getString("success");
+
+                            if(success.equals("1")){
+                                Toast.makeText(SignupTeacher.this,"Registered Successfully", Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(SignupTeacher.this,"Register Error! " + e.toString() , Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    //Ito ay para sa Error kung sakaling di makapasok ang data
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(SignupTeacher.this,"Register Error! " + error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<>();
+                params.put("teach_surname", teach_surname);
+                params.put("teach_firstname",teach_firstname);
+                params.put("teach_email",teach_email);
+                params.put("teach_username",teach_username);
+                params.put("teach_password",teach_password);
+
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
     }
 }

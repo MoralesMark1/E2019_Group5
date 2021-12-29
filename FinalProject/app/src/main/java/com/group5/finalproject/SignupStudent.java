@@ -203,11 +203,11 @@ public class SignupStudent extends AppCompatActivity {
         quiview.setStudentPassword(et_studentarrlist.get(5).getText().toString().trim());
 
         //Hayy balik tayo sa String
-        String surname = quiview.getStudentSurname();
-        String firstname = quiview.getStudentFirstname();
-        String email = quiview.getStudentEmail();
+        String stud_surname = quiview.getStudentSurname();
+        String stud_firstname = quiview.getStudentFirstname();
+        String stud_email = quiview.getStudentEmail();
         String studid = quiview.getStudentId();
-        String password = quiview.getStudentPassword();
+        String stud_password = quiview.getStudentPassword();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_StudentReg,
                 new Response.Listener<String>() {
@@ -231,6 +231,7 @@ public class SignupStudent extends AppCompatActivity {
                     }
                 },
                 new Response.ErrorListener() {
+                    //Ito ay para sa Error kung sakaling di makapasok ang data
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(SignupStudent.this,"Register Error! " , Toast.LENGTH_SHORT).show();
@@ -241,11 +242,11 @@ public class SignupStudent extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
 
                 Map<String, String> params = new HashMap<>();
-                params.put("surname", surname);
-                params.put("firstname",firstname);
-                params.put("email",email);
+                params.put("stud_surname", stud_surname);
+                params.put("stud_firstname",stud_firstname);
+                params.put("stud_email",stud_email);
                 params.put("studid",studid);
-                params.put("password",password);
+                params.put("stud_password",stud_password);
 
                 return params;
             }
