@@ -131,7 +131,7 @@
         android:hint="Create Password"
         android:textColor="#454545"
         android:elevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_studentschoolID"
         tools:ignore="MissingConstraints" />

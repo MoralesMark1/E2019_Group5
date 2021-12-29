@@ -11,6 +11,7 @@ import android.transition.Slide;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class LoginAs extends AppCompatActivity implements View.OnClickListener {
@@ -18,6 +19,8 @@ public class LoginAs extends AppCompatActivity implements View.OnClickListener {
     //Dito dalawang Buttons lang and isang textview
     ImageButton login_teacher,login_student;
     TextView signup;
+
+    ImageView go_to;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +34,15 @@ public class LoginAs extends AppCompatActivity implements View.OnClickListener {
         login_student = (ImageButton) findViewById(R.id.imagebutton_student);
         signup = (TextView) findViewById(R.id.tv_signup_here);
 
+        go_to = (ImageView) findViewById(R.id.imageView);
+
         //Implement sa kanila yung on click listener hayy buhayyyy katamad mag type
         login_teacher.setOnClickListener(this); //Para maglogin as Teacher
         login_student.setOnClickListener(this); //Para maglogin as Student
         signup.setOnClickListener(this); //Para pumunta sa signup
+
+        go_to.setOnClickListener(this);
+
 
     }
 
@@ -111,6 +119,23 @@ public class LoginAs extends AppCompatActivity implements View.OnClickListener {
                     startActivity(back);
                     finish();
                 }
+                break;
+
+            case R.id.imageView:
+                //Intent para makapunta sa log-in class and xml layout ng teacher
+                Intent Goto = new Intent(getApplicationContext(),StudentHomePage.class);
+
+                //Kung ang build version daw ay more than lollipop edi goods sa transition sabi ni docs ehh
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    // Activity transition dito hehehe
+                    startActivity(Goto, ActivityOptions.makeSceneTransitionAnimation(LoginAs.this).toBundle());
+
+                } else {
+                    // Edi walang transition
+                    startActivity(Goto);
+
+                }
+
                 break;
             default:
                 //Nevermind wala namang dapat idefault dito ehh alangan namang gawa ako ng
