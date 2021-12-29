@@ -117,6 +117,7 @@ public class SignupTeacher extends AppCompatActivity {
                 public void onClick(View v) {
                     Toast.makeText(getApplicationContext(),"Sign-up Successfully", Toast.LENGTH_LONG);
 
+
                 }
             });
             textview_login.setOnClickListener(new View.OnClickListener() {
@@ -138,7 +139,6 @@ public class SignupTeacher extends AppCompatActivity {
                     }
                 }
             });
-
 
         }
     }
