@@ -8,6 +8,7 @@
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/drawable/gradient.xml" value="0.19583333333333333" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/drawable/ic_blue_bg_gradient.xml" value="0.1606837606837607" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/drawable/ic_button_login.xml" value="0.19583333333333333" />
+        <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/drawable/ic_button_teacher.xml" value="0.2101851851851852" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/drawable/ic_icon.xml" value="0.19583333333333333" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/drawable/ic_light_theme_start_login.xml" value="0.22" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/drawable/ic_logo.xml" value="0.19583333333333333" />
@@ -33,23 +34,36 @@
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/activity_signup_teacher.xml" value="0.13333333333333333" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/activity_student_home_page.xml" value="0.11348684210526316" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/activity_teacher_home_page.xml" value="0.11348684210526316" />
+        <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/classes.xml" value="0.1675925925925926" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/light_theme_start_login.xml" value="0.12" />
         <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/drawable/button_background_blue.xml" value="0.13355263157894737" />
         <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/drawable/ic_baseline_account_circle.xml" value="0.14104234527687295" />
         <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/drawable/ic_blue_bg_gradient.xml" value="0.13355263157894737" />
         <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/drawable/ic_button_join.xml" value="0.14104234527687295" />
-        <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/drawable/ic_button_login.xml" value="0.14104234527687295" />
-        <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/drawable/ic_button_student.xml" value="0.14104234527687295" />
         <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/drawable/rectangle_gradient.xml" value="0.13355263157894737" />
         <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/layout/activity_login_as.xml" value="0.10177595628415301" />
-        <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/layout/activity_login_student.xml" value="0.12978142076502733" />
         <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/layout/activity_main.xml" value="0.11" />
         <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/layout/activity_signup_as.xml" value="0.21" />
         <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/layout/activity_signup_student.xml" value="0.16" />
         <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/layout/activity_signup_teacher.xml" value="0.14" />
-        <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/layout/activity_student_home_page.xml" value="0.14" />
+        <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/layout/activity_student_home_page.xml" value="0.15" />
         <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/layout/activity_teacher_home_page.xml" value="0.13114754098360656" />
-        <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/layout/classes.xml" value="0.2" />
+        <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/layout/classes.xml" value="0.25" />
+        <entry key="..\:/Users/Lenovo/Downloads/E2019_Group5-918abbc805c00293bf39a0751d039fdcf27ce554/E2019_Group5-918abbc805c00293bf39a0751d039fdcf27ce554/FinalProject/app/src/main/res/drawable/ic_rectangle_43.xml" value="0.1" />
+        <entry key="..\:/Users/Lenovo/Downloads/E2019_Group5-918abbc805c00293bf39a0751d039fdcf27ce554/E2019_Group5-918abbc805c00293bf39a0751d039fdcf27ce554/FinalProject/app/src/main/res/layout/activity_student_home_page.xml" value="0.209375" />
+        <entry key="..\:/Users/Lenovo/Downloads/E2019_Group5-918abbc805c00293bf39a0751d039fdcf27ce554/E2019_Group5-918abbc805c00293bf39a0751d039fdcf27ce554/FinalProject/app/src/main/res/layout/activity_teacher_home_page.xml" value="0.17346014492753623" />
+        <entry key="..\:/Users/Lenovo/Downloads/E2019_Group5-918abbc805c00293bf39a0751d039fdcf27ce554/E2019_Group5-918abbc805c00293bf39a0751d039fdcf27ce554/FinalProject/app/src/main/res/layout/classes.xml" value="0.1712962962962963" />
+        <entry key="..\:/Users/maricar/E2019_Group5/FinalProject/app/src/main/res/drawable/ic_baseline_account_circle.xml" value="0.13651315789473684" />
+        <entry key="..\:/Users/maricar/E2019_Group5/FinalProject/app/src/main/res/drawable/ic_rectangle_43.xml" value="0.13651315789473684" />
+        <entry key="..\:/Users/maricar/E2019_Group5/FinalProject/app/src/main/res/layout/activity_login_as.xml" value="0.2" />
+        <entry key="..\:/Users/maricar/E2019_Group5/FinalProject/app/src/main/res/layout/activity_login_student.xml" value="0.2" />
+        <entry key="..\:/Users/maricar/E2019_Group5/FinalProject/app/src/main/res/layout/activity_login_teacher.xml" value="0.2" />
+        <entry key="..\:/Users/maricar/E2019_Group5/FinalProject/app/src/main/res/layout/activity_my_profile_student.xml" value="0.12631578947368421" />
+        <entry key="..\:/Users/maricar/E2019_Group5/FinalProject/app/src/main/res/layout/activity_signup_as.xml" value="0.2" />
+        <entry key="..\:/Users/maricar/E2019_Group5/FinalProject/app/src/main/res/layout/activity_signup_student.xml" value="0.12" />
+        <entry key="..\:/Users/maricar/E2019_Group5/FinalProject/app/src/main/res/layout/activity_student_home_page.xml" value="0.12631578947368421" />
+        <entry key="..\:/Users/maricar/E2019_Group5/FinalProject/app/src/main/res/layout/activity_teacher_home_page.xml" value="0.2" />
+        <entry key="..\:/Users/maricar/E2019_Group5/FinalProject/app/src/main/res/layout/activity_teacher_ui.xml" value="0.12631578947368421" />
       </map>
     </option>
   </component>
