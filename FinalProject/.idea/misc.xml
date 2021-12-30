@@ -38,15 +38,18 @@
         <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/drawable/ic_baseline_account_circle.xml" value="0.14104234527687295" />
         <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/drawable/ic_blue_bg_gradient.xml" value="0.13355263157894737" />
         <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/drawable/ic_button_join.xml" value="0.14104234527687295" />
+        <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/drawable/ic_button_login.xml" value="0.14104234527687295" />
+        <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/drawable/ic_button_student.xml" value="0.14104234527687295" />
         <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/drawable/rectangle_gradient.xml" value="0.13355263157894737" />
         <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/layout/activity_login_as.xml" value="0.10177595628415301" />
+        <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/layout/activity_login_student.xml" value="0.12978142076502733" />
         <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/layout/activity_main.xml" value="0.11" />
         <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/layout/activity_signup_as.xml" value="0.21" />
         <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/layout/activity_signup_student.xml" value="0.16" />
         <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/layout/activity_signup_teacher.xml" value="0.14" />
-        <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/layout/activity_student_home_page.xml" value="0.15" />
+        <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/layout/activity_student_home_page.xml" value="0.14" />
         <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/layout/activity_teacher_home_page.xml" value="0.13114754098360656" />
-        <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/layout/classes.xml" value="0.25" />
+        <entry key="..\:/Mob_Programming_Projects/FinalProject/app/src/main/res/layout/classes.xml" value="0.2" />
       </map>
     </option>
   </component>
