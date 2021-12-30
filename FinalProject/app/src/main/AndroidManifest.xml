@@ -14,7 +14,7 @@
         android:theme="@style/Theme.FinalProject"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".My_profile_student"
+            android:name=".MyProfileStudent"
             android:exported="false" />
         <activity
             android:name=".LoginTeacher"

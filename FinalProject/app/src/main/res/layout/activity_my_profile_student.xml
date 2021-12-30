@@ -4,17 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".My_profile_student">
+    tools:context=".MyProfileStudent">
 
     <ImageView
         android:id="@+id/imageView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_rectangle_43"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView12"
@@ -30,61 +29,55 @@
         android:id="@+id/acc_circle"
         android:layout_width="137dp"
         android:layout_height="150dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="69dp"
+        android:layout_marginTop="64dp"
         android:src="@drawable/ic_baseline_account_circle"
-        app:layout_constraintBottom_toTopOf="@+id/studentProfile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.489" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/namebg"
         android:layout_width="225dp"
         android:layout_height="0dp"
-        android:layout_marginTop="223dp"
-        android:layout_marginBottom="15dp"
         android:src="@drawable/ic_namebg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/acc_circle" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="615dp"
         android:text="William Robert"
         android:textColor="#FFFF"
         android:textSize="20sp"
         android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/acc_circle"
-        app:layout_constraintTop_toBottomOf="@+id/acc_circle"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintBottom_toBottomOf="@+id/namebg"
+        app:layout_constraintEnd_toEndOf="@+id/namebg"
+        app:layout_constraintStart_toStartOf="@+id/namebg"
+        app:layout_constraintTop_toTopOf="@+id/namebg" />
 
     <TextView
         android:id="@+id/studentProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginBottom="570dp"
+        android:layout_marginTop="16dp"
         android:text="Student"
         android:textColor="#FFFF"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="@+id/namebg"
+        app:layout_constraintStart_toStartOf="@+id/namebg"
         app:layout_constraintTop_toBottomOf="@+id/namebg" />
 
     <ImageView
         android:id="@+id/imageView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:src="@drawable/ic_personalinfo"
-        tools:layout_editor_absoluteX="25dp"
-        tools:layout_editor_absoluteY="327dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView11" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
