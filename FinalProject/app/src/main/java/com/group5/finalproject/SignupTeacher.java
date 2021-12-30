@@ -39,7 +39,7 @@ public class SignupTeacher extends AppCompatActivity {
 
     private EditText et_teachersurname, et_teacherfirstname, et_teacheremail, et_teacherusername,
             et_teachercreatepassword, et_teacherconfirmpassword;
-    private AppCompatButton button_signin; //Yung button sign in na color blue
+    private AppCompatButton button_teachersignin; //Yung button sign in na color blue
     private ImageButton imb_back; //Yung Image button na back button para bumalik sa nakaraang activity
     private TextView textview_login; //Yung login din na color blue
 
@@ -53,17 +53,18 @@ public class SignupTeacher extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        layouts();
         setContentView(R.layout.activity_signup_teacher);
 
         //Kuhanin muna natin ID nila hehhehe
-        button_signin = (AppCompatButton) findViewById(R.id.button_signin);
+        button_teachersignin = (AppCompatButton) findViewById(R.id.button_teachersignin);
         imb_back = (ImageButton) findViewById(R.id.imb_back);
         textview_login = (TextView) findViewById(R.id.tv_login_here);
 
         //Mga Edit Text natin hehehe
         et_teachersurname = (EditText) findViewById(R.id.et_teachersurname);
         et_teacherfirstname = (EditText) findViewById(R.id.et_teacherfirstname);
-        et_teacheremail = (EditText) findViewById(R.id.et_teacherEmail);
+        et_teacheremail = (EditText) findViewById(R.id.et_teacheremail);
         et_teacherusername = (EditText) findViewById(R.id.et_teacherusername);
         et_teachercreatepassword = (EditText) findViewById(R.id.et_teachercreatePassword);
         et_teacherconfirmpassword = (EditText) findViewById(R.id.et_teacherconfirmPassword);
@@ -76,7 +77,7 @@ public class SignupTeacher extends AppCompatActivity {
         et_teacherarrlist.add(et_teachercreatepassword);
         et_teacherarrlist.add(et_teacherconfirmpassword);
 
-        button_signin.setEnabled(false);
+        button_teachersignin.setEnabled(false);
 
         for (final EditText editText : et_teacherarrlist) { //need to be final daw eh
             editText.addTextChangedListener(new TextWatcher() {
@@ -95,7 +96,7 @@ public class SignupTeacher extends AppCompatActivity {
                 @Override
                 public void afterTextChanged(Editable s) {
                     //Isa-isahin ko nalang sila dito
-                    button_signin.setEnabled(
+                    button_teachersignin.setEnabled(
                             et_teacherarrlist.get(0).getText().toString().trim().length() > 0
                                     && et_teacherarrlist.get(1).getText().toString().trim().length() > 0
                                     && et_teacherarrlist.get(2).getText().toString().trim().length() > 0
@@ -128,7 +129,7 @@ public class SignupTeacher extends AppCompatActivity {
             });
 
             //Yung sign in button
-            button_signin.setOnClickListener(new View.OnClickListener() {
+            button_teachersignin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //Toast.makeText(getApplicationContext(),"Sign-up Successfully", Toast.LENGTH_LONG).show();
@@ -195,7 +196,7 @@ public class SignupTeacher extends AppCompatActivity {
         //Yung passwords natin pero later baka tanggalin ko yung create password di ko na isama
         //since may parang validation ako sa setEnabled function ng button sign in na yun
         String createpass = et_teacherarrlist.get(4).getText().toString().trim();
-        quiview.setStudentPassword(et_teacherarrlist.get(5).getText().toString().trim());
+        quiview.setTeacherPassword(et_teacherarrlist.get(5).getText().toString().trim());
 
         //Then balik ko ulit sa String
         String teach_surname = quiview.getTeacherSurname();
