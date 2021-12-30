@@ -17,4 +17,7 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
+
+    <!-- Color for Back Arrow -->
+    <color name="colorArrow" tools:ignore="MissingDefaultResource">@color/white</color>
 </resources>

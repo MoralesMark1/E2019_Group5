@@ -63,12 +63,27 @@ public class LoginStudent extends AppCompatActivity {
 
                 if(quiview.getStudentId().trim().isEmpty() || quiview.getStudentPassword().trim().isEmpty()){
                     Toast.makeText(getApplicationContext(),"Walang laman hoy", Toast.LENGTH_LONG).show();
+
+
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"Alright success", Toast.LENGTH_LONG).show();
 
-                }
+                    // Pupunta sa Next activity which is yung student homepage
+                    Intent student_home_page = new Intent(getApplicationContext(),StudentHomePage.class);
 
+                        //Kung ang build version daw ay more than lollipop edi goods sa transition sabi ni docs ehh
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            // Activity transition dito hehehe
+                            startActivity(student_home_page, ActivityOptions.makeSceneTransitionAnimation(LoginStudent.this).toBundle());
+
+                        } else {
+                            // Edi walang transition
+                            startActivity(student_home_page);
+                            finish(); // para hindi na siya bumalik
+
+                        }
+                    }
             }
         });
 
