@@ -219,13 +219,16 @@ public class SignupStudent extends AppCompatActivity {
                             String success = jsonObject.getString("success");
 
                             if(success.equals("1")){
-                                Toast.makeText(SignupStudent.this,"Registered Successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignupStudent.this,jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
 
+                            }
+                            else{
+                                Toast.makeText(SignupStudent.this,jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(SignupStudent.this,"Register Error! " + e.toString() , Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(SignupStudent.this,"Register Error! " + e.toString() , Toast.LENGTH_SHORT).show();
                         }
 
                     }

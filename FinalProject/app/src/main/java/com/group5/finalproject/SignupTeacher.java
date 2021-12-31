@@ -211,16 +211,29 @@ public class SignupTeacher extends AppCompatActivity {
                     public void onResponse(String response) {
                         try{
                             JSONObject jsonObject = new JSONObject(response);
-                            //Log.d("JSONR", jsonObject.toString());
                             String success = jsonObject.getString("success");
 
-                            if(success.equals("1")){
-                                Toast.makeText(SignupTeacher.this,"Registered Successfully", Toast.LENGTH_SHORT).show();
-                            }
+                            /*
+                                May dalawang array response dun ehh yung success and yung message both
+                                ay string... Ang plano ko is pag success or 1 kukuhanin niya yung katumbas
+                                na message sa array then kung failed or error kukuhanin niya yung message
+                                na andun sa 0... Para ito dun sa pagcheck sana ng email and username as ginawa ko silang UNIQUE
+                                values sa database natin heheh :)
+                             */
 
+                            if(success.equals("1")){
+                                Toast.makeText(SignupTeacher.this,jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+
+                                //Intent here papunta sa login teacher
+
+                            }
+                            else {
+                                //Another toast para dun sa error which is success = 0 and kuhanin na natin yung message
+                                Toast.makeText(SignupTeacher.this,jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(SignupTeacher.this,"Register Error! " + e.toString() , Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(SignupTeacher.this,"Register Error! " + e.toString() , Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -235,6 +248,11 @@ public class SignupTeacher extends AppCompatActivity {
         {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
+
+                //Dito naman ang unang parameter ay yung key and second is yung value
+                //kung naalala niyo yung first year java hehehe
+
+                //Sa php POST method ang pinapasok natin ay ang key hehhehe
 
                 Map<String, String> params = new HashMap<>();
                 params.put("teach_surname", teach_surname);
