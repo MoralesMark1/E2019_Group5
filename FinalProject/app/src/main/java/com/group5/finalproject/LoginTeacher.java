@@ -7,12 +7,28 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.transition.Slide;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.TextView;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /*
     Pambihirang buhayy tohhh hayyy ano ba ginagawa kooooo whoooo ahhahahha
@@ -33,13 +49,13 @@ public class LoginTeacher extends AppCompatActivity {
 
      */
 
-    TextView tv_signup; //Ito yung sign up textview na pipindutin para makapunta sa next activity
-    ImageButton login; //Yung image button na may pangalan na Login
-    EditText et_teacherusername,et_teacherpassword; //Yung dalawang parang textbox natin
+    private TextView tv_signup; //Ito yung sign up textview na pipindutin para makapunta sa next activity
+    private ImageButton teacherlogin; //Yung image button na may pangalan na Login
+    private EditText et_teacherusername,et_teacherpassword; //Yung dalawang parang textbox natin
 
     Quiview quiview = new Quiview(); //Yung Quiview Class na andito student and teachers data
 
-    String URL= "http://e2019cc107group5.000webhostapp.com/"; //URL ng database natin sa webhost
+    String URL_teacherlogin= "http://e2019cc107group5.000webhostapp.com/finalproject/teacher_login.php"; //URL sa webhost para makalogin
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,47 +64,35 @@ public class LoginTeacher extends AppCompatActivity {
         setContentView(R.layout.activity_login_teacher);
 
         //Need natin kunin yung id dun sa xml file natin
-        login = (ImageButton) findViewById(R.id.login); //ImageButton natin
+        teacherlogin = (ImageButton) findViewById(R.id.login); //ImageButton natin
         tv_signup = (TextView) findViewById(R.id.tv_signup); //TextView natin
         et_teacherusername = (EditText) findViewById(R.id.et_teacherusername); //EditText ng Username natin
         et_teacherpassword = (EditText) findViewById(R.id.et_teacherpassword); //EditText ng Password natin
 
         //Attempted Login pero ichecheck muna natin kung tama ba ang mga credentials base sa nandun
         //sa database natin
-        login.setOnClickListener(new View.OnClickListener() {
+        teacherlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Hindi ito yung final na logic ahh
+                //Final logic na ito para sa login natin hehehe
                 //Pasok laman ng edit text sa ating getters and setters
-                quiview.setTeacherUsername(et_teacherusername.getText().toString()); //Username na tinype
-                quiview.setTeacherPassword(et_teacherpassword.getText().toString()); //Password na tinype
+                quiview.setTeacherUsername(et_teacherusername.getText().toString().trim()); //Username na tinype
+                quiview.setTeacherPassword(et_teacherpassword.getText().toString().trim()); //Password na tinype
 
                 //Ah basta kapag may laman ang username and password go na pag wala edi yung else
                 //Pero seriously, sa database tayo kukuha nung laman hayyy buhay
 
-                if(quiview.getTeacherUsername().trim().isEmpty() || quiview.getTeacherPassword().trim().isEmpty()){
-                    Toast.makeText(getApplicationContext(),"Walang laman hoy", Toast.LENGTH_LONG).show();
+                String teach_username = quiview.getTeacherUsername();
+                String teach_password = quiview.getTeacherPassword();
+
+                if(!teach_username.isEmpty() || !teach_password.isEmpty()){
+                    //Login function or method natin dito I think lagay nalang ako parameter ahahha
+                    Login(teach_username, teach_password);
                 }
                 else{
-                    Toast.makeText(getApplicationContext(),"Alright success", Toast.LENGTH_LONG).show();
-
-                    // Pupunta sa Next activity which is yung student homepage
-                    Intent teacher_home_page = new Intent(getApplicationContext(),TeacherHomePage.class);
-
-                    //Kung ang build version daw ay more than lollipop edi goods sa transition sabi ni docs ehh
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        // Activity transition dito hehehe
-                        startActivity(teacher_home_page, ActivityOptions.makeSceneTransitionAnimation(LoginTeacher.this).toBundle());
-
-                    } else {
-                        // Edi walang transition
-                        startActivity(teacher_home_page);
-                        finish(); // para hindi na siya bumalik d2
-
-                    }
-
+                    et_teacherusername.setError("Please enter Username");
+                    et_teacherpassword.setError("Please enter Password");
                 }
-
             }
         });
 
@@ -124,5 +128,72 @@ public class LoginTeacher extends AppCompatActivity {
 
         // Exit Transition natin para maangas
         getWindow().setExitTransition(new Slide());
+    }
+
+    private void Login(String teach_username, String teach_password){
+
+        //Another String Request using Volley hehehe :)
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_teacherlogin,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            //JSONArray jsonArray = jsonObject.getJSONArray("login");
+                            Log.i("tagconvertstr", "["+response+"]");
+
+                            if(success.equals("1")){
+                                //So may problem pala kapag JSONArray ang gagamitin hayyyy
+                                /*
+                                for(int i = 0; i < jsonArray.length();i++) {
+
+                                    //Kukuhanin ko yung array dun sa login sa php heheheh then pasok ko dito
+                                    JSONObject object = jsonArray.getJSONObject(i);
+
+                                    //teach_surname
+                                    String t_sname = object.getString("teach_surname").trim();
+
+                                    //teach_firstname
+                                    String t_fname = object.getString("teach_firstname").trim();
+
+                                    Toast.makeText(LoginTeacher.this, jsonObject.getString("message" + t_fname + " " + t_sname), Toast.LENGTH_SHORT).show();
+                                }
+                                 */
+                                Toast.makeText(LoginTeacher.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                                //Intent to Teacher Home Page Here
+                            }
+                            else{
+                                //Then Pag invalid ito lalabas.. Honestly pwedeng wala na itong else eh
+                                //Kasi may catch ako ehh dun ko pwede ipasok yung jsonObject error message natin
+                                Toast.makeText(LoginTeacher.this,jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(LoginTeacher.this, "Login Error!",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //Toast.makeText(LoginTeacher.this,"Login Error: " + error.toString(),Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("teach_username",teach_username);
+                params.put("teach_password",teach_password);
+
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
     }
 }

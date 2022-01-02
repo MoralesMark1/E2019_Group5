@@ -223,6 +223,7 @@ public class SignupStudent extends AppCompatActivity {
 
                             }
                             else{
+                                //Another toast para dun sa error which is success = 0 and kuhanin na natin yung message
                                 Toast.makeText(SignupStudent.this,jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
                             }
 
