@@ -6,6 +6,7 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.transition.Slide;
 import android.util.Log;
 import android.view.View;
@@ -85,13 +86,17 @@ public class LoginTeacher extends AppCompatActivity {
                 String teach_username = quiview.getTeacherUsername();
                 String teach_password = quiview.getTeacherPassword();
 
-                if(!teach_username.isEmpty() || !teach_password.isEmpty()){
+                if(TextUtils.isEmpty(teach_username.trim())){
+                    et_teacherusername.setError("Please enter Username");
+                    et_teacherusername.requestFocus();
+                }
+                if(TextUtils.isEmpty(teach_password.trim())){
+                    et_teacherpassword.setError("Please enter Password");
+                    et_teacherpassword.requestFocus();
+                }
+                else if(!(TextUtils.isEmpty(teach_username.trim())) && !(TextUtils.isEmpty(teach_password.trim()))){
                     //Login function or method natin dito I think lagay nalang ako parameter ahahha
                     Login(teach_username, teach_password);
-                }
-                else{
-                    et_teacherusername.setError("Please enter Username");
-                    et_teacherpassword.setError("Please enter Password");
                 }
             }
         });

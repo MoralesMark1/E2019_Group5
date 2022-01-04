@@ -6,6 +6,7 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.transition.Slide;
 import android.util.Log;
 import android.view.View;
@@ -81,14 +82,18 @@ public class LoginStudent extends AppCompatActivity {
                 String stud_id = quiview.getStudentId();
                 String stud_password = quiview.getStudentPassword();
 
-                if(!stud_id.isEmpty() || !stud_password.isEmpty()){
-                    //Yung login function with student id and student password na parameter
-                    Login(stud_id,stud_password);
-                }
-                else{
+                if(TextUtils.isEmpty(stud_id.trim())){
                     //Set lang tayo ng error
                     et_studentId.setError("Please Enter Your Student ID");
+                    et_studentId.requestFocus();
+                }
+                if(TextUtils.isEmpty(stud_password.trim())){
                     et_studentpassword.setError("Please Enter Your Password");
+                    et_studentpassword.requestFocus();
+                }
+                else if(!(TextUtils.isEmpty(stud_id.trim())) && !(TextUtils.isEmpty(stud_password.trim()))){
+                    //Yung login function with student id and student password na parameter
+                    Login(stud_id,stud_password);
                 }
             }
         });
@@ -180,14 +185,14 @@ public class LoginStudent extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(LoginStudent.this,"Login Error! " +e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginStudent.this,"Login Error",Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(LoginStudent.this,"Login Error: " + error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginStudent.this,"Login Error",Toast.LENGTH_SHORT).show();
                     }
                 })
         {
