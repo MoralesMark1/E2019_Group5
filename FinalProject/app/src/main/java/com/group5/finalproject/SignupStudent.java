@@ -124,8 +124,8 @@ public class SignupStudent extends AppCompatActivity {
                         et_studentarrlist.get(5).requestFocus();
                         return;
                     }
-                    if(et_studentarrlist.get(5).getText().toString().trim().equals(et_studentarrlist.get(4).getText().toString().trim())){
-                        Toast.makeText(SignupStudent.this,"Confirm Password Error",Toast.LENGTH_SHORT).show();
+                    if(!(et_studentarrlist.get(5).getText().toString().trim().equals(et_studentarrlist.get(4).getText().toString().trim()))){
+                        Toast.makeText(SignupStudent.this,"Password Does Not Match",Toast.LENGTH_SHORT).show();
                     }
                     else {
                         //Register function here

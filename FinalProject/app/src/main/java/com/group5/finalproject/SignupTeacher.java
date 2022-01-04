@@ -132,7 +132,7 @@ public class SignupTeacher extends AppCompatActivity {
                         et_teacherarrlist.get(5).requestFocus();
                         return;
                     }
-                    if(et_teacherarrlist.get(5).getText().toString().trim().equals(et_teacherarrlist.get(4).getText().toString().trim())){
+                    if(!(et_teacherarrlist.get(5).getText().toString().trim().equals(et_teacherarrlist.get(4).getText().toString().trim()))){
                         Toast.makeText(SignupTeacher.this,"Confirm Password Error",Toast.LENGTH_SHORT).show();
                     }
                     else{
