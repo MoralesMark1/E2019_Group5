@@ -154,6 +154,18 @@
         app:layout_constraintTop_toBottomOf="@+id/et_teachercreatePassword"
         tools:ignore="MissingConstraints" />
 
+    <ProgressBar
+        android:id = "@+id/progress_teacher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/et_teacherconfirmPassword"
+        app:layout_constraintBottom_toTopOf="@id/button_teachersignin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.200"
+        />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_teachersignin"
         android:layout_width="230dp"

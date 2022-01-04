@@ -4,16 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.ActivityOptions;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.transition.Slide;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,9 +47,10 @@ public class SignupStudent extends AppCompatActivity {
     //Di mag activate ang Sign-in Button
     private EditText et_studentsurname, et_studentfirstname,et_studentemail,et_studentschoolID,
             et_studentcreatepassword,et_studentconfirmpassword;
-    private AppCompatButton button_signin; //Yung button sign in na color blue
+    private AppCompatButton button_studentsignin; //Yung button sign in na color blue
     private ImageButton ib_back; //Yung Image button na back button para bumalik sa nakaraang activity
     private TextView textview_login; //Yung login din na color blue
+    private ProgressBar pBar; //Para sa loading hehe
 
     //Try ko ipasok yung component ng edit text sa arraylist para looping na hanapin lang
     ArrayList<EditText> et_studentarrlist = new ArrayList<>();
@@ -61,10 +65,11 @@ public class SignupStudent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_student);
 
-        //Kuhanin yung ID nung mga component para sa onclick event listener natin and text watcher
-        button_signin = (AppCompatButton) findViewById(R.id.button_studentsignin);
+        //Kuhanin yung ID nung mga component para sa onclick event listener natin
+        button_studentsignin = (AppCompatButton) findViewById(R.id.button_studentsignin);
         textview_login = (TextView) findViewById(R.id.tv_login_here);
         ib_back = (ImageButton) findViewById(R.id.ib_back);
+        pBar = (ProgressBar) findViewById(R.id.progress_student);
 
         //Mga EditText natin
         et_studentsurname = (EditText) findViewById(R.id.et_studentsurname);
@@ -82,48 +87,50 @@ public class SignupStudent extends AppCompatActivity {
         et_studentarrlist.add(et_studentcreatepassword);
         et_studentarrlist.add(et_studentconfirmpassword);
 
-        button_signin.setEnabled(false);
-
-        for (final EditText editText : et_studentarrlist) {
-            editText.addTextChangedListener(new TextWatcher() {
-
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-
-                    //Isa-isahin ko nalang sila dito
-                    button_signin.setEnabled(
-                            et_studentarrlist.get(0).getText().toString().trim().length() > 0
-                            && et_studentarrlist.get(1).getText().toString().trim().length() > 0
-                            && et_studentarrlist.get(2).getText().toString().trim().length() > 0
-                            && et_studentarrlist.get(3).getText().toString().trim().length() > 0
-                            && et_studentarrlist.get(4).getText().toString().trim().length() > 0
-                            && et_studentarrlist.get(5).getText().toString().trim().length() > 0
-                            && et_studentarrlist.get(4).getText().toString().trim().equals(
-                                    et_studentarrlist.get(5).getText().toString().trim()
-                            )
-                    );
-                }
-            });
-
             //Ang sunoddd ay ang ating button onClickListenerrr yeheyyy
-            button_signin.setOnClickListener(new View.OnClickListener() {
+            button_studentsignin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //Dito ibig sabihin successful ang sign in plano ko sana redirect sa login student class
                     //Toast.makeText(getApplicationContext(),"Sign-up Successfully!", Toast.LENGTH_LONG );
 
-                    //Register function here
-                    Register();
+                    if(TextUtils.isEmpty(et_studentarrlist.get(0).getText().toString().trim())){
+                        et_studentarrlist.get(0).setError("This Field is Required");
+                        et_studentarrlist.get(0).requestFocus();
+                        return;
+                    }
+                    if(TextUtils.isEmpty(et_studentarrlist.get(1).getText().toString().trim())){
+                        et_studentarrlist.get(1).setError("This Field is Required");
+                        et_studentarrlist.get(1).requestFocus();
+                        return;
+                    }
+                    if(TextUtils.isEmpty(et_studentarrlist.get(2).getText().toString().trim())){
+                        et_studentarrlist.get(2).setError("This Field is Required");
+                        et_studentarrlist.get(2).requestFocus();
+                        return;
+                    }
+                    if(TextUtils.isEmpty(et_studentarrlist.get(3).getText().toString().trim())){
+                        et_studentarrlist.get(3).setError("This Field is Required");
+                        et_studentarrlist.get(3).requestFocus();
+                        return;
+                    }
+                    if(TextUtils.isEmpty(et_studentarrlist.get(4).getText().toString().trim())){
+                        et_studentarrlist.get(4).setError("This Field is Required");
+                        et_studentarrlist.get(4).requestFocus();
+                        return;
+                    }
+                    if(TextUtils.isEmpty(et_studentarrlist.get(5).getText().toString().trim())){
+                        et_studentarrlist.get(5).setError("This Field is Required");
+                        et_studentarrlist.get(5).requestFocus();
+                        return;
+                    }
+                    if(et_studentarrlist.get(5).getText().toString().trim().equals(et_studentarrlist.get(4).getText().toString().trim())){
+                        Toast.makeText(SignupStudent.this,"Confirm Password Error",Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        //Register function here
+                        Register();
+                    }
                 }
             });
 
@@ -164,7 +171,6 @@ public class SignupStudent extends AppCompatActivity {
                     }
                 }
             });
-        }
     }
     private void layouts(){
 
@@ -193,6 +199,10 @@ public class SignupStudent extends AppCompatActivity {
         // 4 - Create Password
         // 5 - Confirm Password
 
+        //Pag naclick ang Register tanggalin natin ang button and ipasok ang progress bar
+        button_studentsignin.setVisibility(View.GONE);
+        pBar.setVisibility(View.VISIBLE);
+
         quiview.setStudentSurname(et_studentarrlist.get(0).getText().toString().trim());
         quiview.setStudentFirstname(et_studentarrlist.get(1).getText().toString().trim());
         quiview.setStudentEmail(et_studentarrlist.get(2).getText().toString().trim());
@@ -220,16 +230,22 @@ public class SignupStudent extends AppCompatActivity {
 
                             if(success.equals("1")){
                                 Toast.makeText(SignupStudent.this,jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                                pBar.setVisibility(View.GONE);
+                                button_studentsignin.setVisibility(View.VISIBLE);
 
                             }
                             else{
                                 //Another toast para dun sa error which is success = 0 and kuhanin na natin yung message
                                 Toast.makeText(SignupStudent.this,jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
+                                pBar.setVisibility(View.GONE);
+                                button_studentsignin.setVisibility(View.VISIBLE);
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            //Toast.makeText(SignupStudent.this,"Register Error! " + e.toString() , Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignupStudent.this,"Register Error!", Toast.LENGTH_SHORT).show();
+                            pBar.setVisibility(View.GONE);
+                            button_studentsignin.setVisibility(View.VISIBLE);
                         }
 
                     }
@@ -238,7 +254,9 @@ public class SignupStudent extends AppCompatActivity {
                     //Ito ay para sa Error kung sakaling di makapasok ang data
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(SignupStudent.this,"Register Error! " , Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignupStudent.this,"Register Error!" , Toast.LENGTH_SHORT).show();
+                        pBar.setVisibility(View.GONE);
+                        button_studentsignin.setVisibility(View.VISIBLE);
                     }
                 })
         {

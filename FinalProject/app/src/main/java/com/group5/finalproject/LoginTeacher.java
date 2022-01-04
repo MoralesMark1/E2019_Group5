@@ -140,12 +140,23 @@ public class LoginTeacher extends AppCompatActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("success");
-                            //JSONArray jsonArray = jsonObject.getJSONArray("login");
+                            JSONArray jsonArray = jsonObject.getJSONArray("login");
                             Log.i("tagconvertstr", "["+response+"]");
 
                             if(success.equals("1")){
-                                //So may problem pala kapag JSONArray ang gagamitin hayyyy
-                                /*
+                                /***************
+                                 * Sooo update lang nasolve ko na yung problem regarding JSONArray
+                                 * Ang problem is nandunn pala sa PHP file natin
+                                 * Grabe yung source ko regarding sa ganitong bagay hayy
+                                 *
+                                 * By observing the flow of code na gawa ko sa PHP napansin ko naaa
+                                 * hindi sakop ng json_encode ang login array dahil ang array ay hindi under ng
+                                 * if/else condition na ginawa ko kaya ang nangyayari which is also base
+                                 * sa observation ko imbes na maparse siya as a JSONObject na gagamitin sanaaa
+                                 * ng JSONArray kooo nababasa siya as HTML kung tawagin
+                                 */
+
+                                //Dalawa lang need ko ang firstname and lastname ng teacher
                                 for(int i = 0; i < jsonArray.length();i++) {
 
                                     //Kukuhanin ko yung array dun sa login sa php heheheh then pasok ko dito
@@ -157,10 +168,9 @@ public class LoginTeacher extends AppCompatActivity {
                                     //teach_firstname
                                     String t_fname = object.getString("teach_firstname").trim();
 
-                                    Toast.makeText(LoginTeacher.this, jsonObject.getString("message" + t_fname + " " + t_sname), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginTeacher.this, jsonObject.getString("message") +" " + t_fname + " " + t_sname, Toast.LENGTH_SHORT).show();
                                 }
-                                 */
-                                Toast.makeText(LoginTeacher.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+
                                 //Intent to Teacher Home Page Here
                             }
                             else{
@@ -171,7 +181,7 @@ public class LoginTeacher extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(LoginTeacher.this, "Login Error!",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginTeacher.this, "Login Error! " + e.toString(),Toast.LENGTH_SHORT).show();
                         }
                     }
                 },

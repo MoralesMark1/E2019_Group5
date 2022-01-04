@@ -8,12 +8,14 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.transition.Slide;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +44,7 @@ public class SignupTeacher extends AppCompatActivity {
     private AppCompatButton button_teachersignin; //Yung button sign in na color blue
     private ImageButton imb_back; //Yung Image button na back button para bumalik sa nakaraang activity
     private TextView textview_login; //Yung login din na color blue
+    private ProgressBar pBar;
 
     //Try ko ipasok yung component ng edit text sa arraylist para looping na hanapin lang
     ArrayList<EditText> et_teacherarrlist = new ArrayList<>();
@@ -60,6 +63,7 @@ public class SignupTeacher extends AppCompatActivity {
         button_teachersignin = (AppCompatButton) findViewById(R.id.button_teachersignin);
         imb_back = (ImageButton) findViewById(R.id.imb_back);
         textview_login = (TextView) findViewById(R.id.tv_login_here);
+        pBar = (ProgressBar) findViewById(R.id.progress_teacher);
 
         //Mga Edit Text natin hehehe
         et_teachersurname = (EditText) findViewById(R.id.et_teachersurname);
@@ -77,39 +81,6 @@ public class SignupTeacher extends AppCompatActivity {
         et_teacherarrlist.add(et_teachercreatepassword);
         et_teacherarrlist.add(et_teacherconfirmpassword);
 
-        button_teachersignin.setEnabled(false);
-
-        for (final EditText editText : et_teacherarrlist) { //need to be final daw eh
-            editText.addTextChangedListener(new TextWatcher() {
-
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    //Isa-isahin ko nalang sila dito
-                    button_teachersignin.setEnabled(
-                            et_teacherarrlist.get(0).getText().toString().trim().length() > 0
-                                    && et_teacherarrlist.get(1).getText().toString().trim().length() > 0
-                                    && et_teacherarrlist.get(2).getText().toString().trim().length() > 0
-                                    && et_teacherarrlist.get(3).getText().toString().trim().length() > 0
-                                    && et_teacherarrlist.get(4).getText().toString().trim().length() > 0
-                                    && et_teacherarrlist.get(5).getText().toString().trim().length() > 0
-                                    && et_teacherarrlist.get(4).getText().toString().trim().equals(
-                                        et_teacherarrlist.get(5).getText().toString().trim()
-                            )
-                    );
-                }
-            });
-
             //Yung back image button arrow pabalik dun sa sign up as class
             imb_back.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -124,7 +95,6 @@ public class SignupTeacher extends AppCompatActivity {
                         // Edi walang transition
                         startActivity(intent);
                     }
-
                 }
             });
 
@@ -132,9 +102,43 @@ public class SignupTeacher extends AppCompatActivity {
             button_teachersignin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //Toast.makeText(getApplicationContext(),"Sign-up Successfully", Toast.LENGTH_LONG).show();
-
-                    Register();
+                    //Check lahat ng EditText kung may laman ba sila
+                    if(TextUtils.isEmpty(et_teacherarrlist.get(0).getText().toString().trim())){
+                        et_teacherarrlist.get(0).setError("This Field is Required");
+                        et_teacherarrlist.get(0).requestFocus();
+                        return;
+                    }
+                    if(TextUtils.isEmpty(et_teacherarrlist.get(1).getText().toString().trim())){
+                        et_teacherarrlist.get(1).setError("This Field is Required");
+                        et_teacherarrlist.get(1).requestFocus();
+                        return;
+                    }
+                    if(TextUtils.isEmpty(et_teacherarrlist.get(2).getText().toString().trim())){
+                        et_teacherarrlist.get(2).setError("This Field is Required");
+                        et_teacherarrlist.get(2).requestFocus();
+                    }
+                    if(TextUtils.isEmpty(et_teacherarrlist.get(3).getText().toString().trim())){
+                        et_teacherarrlist.get(3).setError("This Field is Required");
+                        et_teacherarrlist.get(3).requestFocus();
+                        return;
+                    }
+                    if(TextUtils.isEmpty(et_teacherarrlist.get(4).getText().toString().trim())){
+                        et_teacherarrlist.get(4).setError("This Field is Required");
+                        et_teacherarrlist.get(4).requestFocus();
+                        return;
+                    }
+                    if(TextUtils.isEmpty(et_teacherarrlist.get(5).getText().toString().trim())){
+                        et_teacherarrlist.get(5).setError("This Field is Required");
+                        et_teacherarrlist.get(5).requestFocus();
+                        return;
+                    }
+                    if(et_teacherarrlist.get(5).getText().toString().trim().equals(et_teacherarrlist.get(4).getText().toString().trim())){
+                        Toast.makeText(SignupTeacher.this,"Confirm Password Error",Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        //Register function here
+                        Register();
+                    }
 
                 }
             });
@@ -157,8 +161,6 @@ public class SignupTeacher extends AppCompatActivity {
                     }
                 }
             });
-
-        }
     }
 
     private void layouts(){
@@ -186,6 +188,10 @@ public class SignupTeacher extends AppCompatActivity {
         // 3 - Username
         // 4 - Create Password
         // 5 - Confirm Password
+
+        //Pag naclick ang Register tanggalin natin ang button and ipasok ang progress bar
+        button_teachersignin.setVisibility(View.GONE);
+        pBar.setVisibility(View.VISIBLE);
 
         //Then pasok ko ulit sa setters hehehe
         quiview.setTeacherSurname(et_teacherarrlist.get(0).getText().toString().trim());
@@ -223,6 +229,8 @@ public class SignupTeacher extends AppCompatActivity {
 
                             if(success.equals("1")){
                                 Toast.makeText(SignupTeacher.this,jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                                button_teachersignin.setVisibility(View.VISIBLE);
+                                pBar.setVisibility(View.GONE);
 
                                 //Intent here papunta sa login teacher
 
@@ -230,10 +238,14 @@ public class SignupTeacher extends AppCompatActivity {
                             else {
                                 //Another toast para dun sa error which is success = 0 and kuhanin na natin yung message
                                 Toast.makeText(SignupTeacher.this,jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
+                                button_teachersignin.setVisibility(View.VISIBLE);
+                                pBar.setVisibility(View.GONE);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            //Toast.makeText(SignupTeacher.this,"Register Error! " + e.toString() , Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignupTeacher.this,"Register Error!", Toast.LENGTH_SHORT).show();
+                            button_teachersignin.setVisibility(View.VISIBLE);
+                            pBar.setVisibility(View.GONE);
                         }
 
                     }
@@ -242,7 +254,9 @@ public class SignupTeacher extends AppCompatActivity {
                     //Ito ay para sa Error kung sakaling di makapasok ang data
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(SignupTeacher.this,"Register Error! " + error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignupTeacher.this,"Register Error!", Toast.LENGTH_SHORT).show();
+                        button_teachersignin.setVisibility(View.VISIBLE);
+                        pBar.setVisibility(View.GONE);
                     }
                 })
         {

@@ -20,6 +20,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -133,14 +134,27 @@ public class LoginStudent extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            //Ipasok yung response sa ating JSONObject
                             JSONObject jsonObject = new JSONObject(response);
+                            //Gamitin ang JSONObject para makuha ang JSONArray
+                            JSONArray jsonArray = jsonObject.getJSONArray("login");
                             String success = jsonObject.getString("success");
-                            //JSONArray jsonArray = jsonObject.getJSONArray("login");
                             Log.i("tagconvertstr", "["+response+"]");
 
                             if(success.equals("1")){
-                                //So may problem pala kapag JSONArray ang gagamitin hayyyy
-                                /*
+                                /***************
+                                 * Sooo update lang nasolve ko na yung problem regarding JSONArray
+                                 * Ang problem is nandunn pala sa PHP file natin
+                                 * Grabe yung source ko regarding sa ganitong bagay hayy
+                                 *
+                                 * By observing the flow of code na gawa ko sa PHP napansin ko naaa
+                                 * hindi sakop ng json_encode ang login array dahil ang array ay hindi under ng
+                                 * if/else condition na ginawa ko kaya ang nangyayari which is also base
+                                 * sa observation ko imbes na maparse siya as a JSONObject na gagamitin sanaaa
+                                 * ng JSONArray kooo nababasa siya as HTML kung tawagin
+                                 */
+
+                                //Well Dalawang value lang need ko ang firstname and surname ng student
                                 for(int i = 0; i < jsonArray.length();i++) {
 
                                     //Kukuhanin ko yung array dun sa login sa php heheheh then pasok ko dito
@@ -152,9 +166,10 @@ public class LoginStudent extends AppCompatActivity {
                                     //teach_firstname
                                     String s_fname = object.getString("stud_firstname").trim();
 
+                                    Toast.makeText(LoginStudent.this, jsonObject.getString("message") +" "+ s_fname +" " + s_sname, Toast.LENGTH_SHORT).show();
+
                                 }
-                                 */
-                                Toast.makeText(LoginStudent.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+
                                 //Intent to Student Home Page Here
                             }
                             else{
@@ -165,7 +180,7 @@ public class LoginStudent extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(LoginStudent.this,"Login Error!",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginStudent.this,"Login Error! " +e.toString(),Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
