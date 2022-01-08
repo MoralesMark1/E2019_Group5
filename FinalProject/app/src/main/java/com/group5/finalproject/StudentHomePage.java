@@ -18,7 +18,7 @@ import java.util.List;
 
 public class StudentHomePage extends AppCompatActivity {
 
-    ImageView student_profile;
+    ImageView student_profile, join_classes;
 
     // Sample code palang to dun sa classes
     String []data = {"Mobile Programming", "Micro-controller", "Software Engineering"};
@@ -52,6 +52,17 @@ public class StudentHomePage extends AppCompatActivity {
             }
         });
 
+        /*
+        join_classes = (ImageView) findViewById(R.id.join_class); // Button Join class
+
+        join_classes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialog();
+            }
+        });
+        */
+
         // -------------------------------------------------------------------------------------------
         // sample code para sa classes
         List<String> items = new LinkedList<>();
@@ -63,10 +74,16 @@ public class StudentHomePage extends AppCompatActivity {
         ClassesAdapter adapter = new ClassesAdapter(items);
         recyclerView.setAdapter(adapter);
 
-        findViewById(R.id.join_class).setOnClickListener(view -> {
+        findViewById(R.id.et_joinLink).setOnClickListener(view -> {
             items.add(data[cntr%3]);
             cntr++;
             adapter.notifyItemInserted(items.size()-1);
         });
+    }
+
+    // May bugs pa! 
+    public void openDialog() {
+        JoinDialog joinDialog = new JoinDialog();
+        joinDialog.show(getSupportFragmentManager(), "join dialog");
     }
 }

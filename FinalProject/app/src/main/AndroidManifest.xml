@@ -23,7 +23,7 @@
         <activity
             android:name=".LoginStudent"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+             />
         <activity
             android:name=".TeacherHomePage"
             android:exported="false" />

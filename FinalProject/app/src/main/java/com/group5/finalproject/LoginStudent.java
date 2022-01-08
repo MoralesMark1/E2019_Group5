@@ -94,6 +94,9 @@ public class LoginStudent extends AppCompatActivity {
                 else if(!(TextUtils.isEmpty(stud_id.trim())) && !(TextUtils.isEmpty(stud_password.trim()))){
                     //Yung login function with student id and student password na parameter
                     Login(stud_id,stud_password);
+
+
+
                 }
             }
         });
@@ -176,6 +179,8 @@ public class LoginStudent extends AppCompatActivity {
                                 }
 
                                 //Intent to Student Home Page Here
+                                //Intent student_home_page = new Intent(getApplicationContext(),StudentHomePage.class);
+                                //startActivity(student_home_page);
                             }
                             else{
                                 //Then Pag invalid ito lalabas.. Honestly pwedeng wala na itong else eh
