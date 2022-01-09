@@ -120,7 +120,6 @@ public class LoginTeacher extends AppCompatActivity {
                     startActivity(intent);
                     finish(); //Para ngaa iwas balikkk sa activity na itooo
                 }
-
             }
         });
     }
