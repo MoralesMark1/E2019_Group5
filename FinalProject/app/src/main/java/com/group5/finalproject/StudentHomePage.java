@@ -55,6 +55,7 @@ public class StudentHomePage extends AppCompatActivity {
             }
         });
 
+
         /*
         join_classes = (ImageView) findViewById(R.id.join_class); // Button Join class
 
@@ -65,6 +66,8 @@ public class StudentHomePage extends AppCompatActivity {
             }
         });
         */
+
+
 
         // -------------------------------------------------------------------------------------------
         // sample code para sa classes

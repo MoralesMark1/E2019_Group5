@@ -20,6 +20,10 @@ public class LoginAs extends AppCompatActivity implements View.OnClickListener {
     ImageButton login_teacher,login_student;
     TextView signup;
 
+    Quiview quiview = new Quiview(); //Yung Quiview Class na andito student and teachers data
+
+    SessionManager sessionManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,33 @@ public class LoginAs extends AppCompatActivity implements View.OnClickListener {
         login_teacher.setOnClickListener(this); //Para maglogin as Teacher
         login_student.setOnClickListener(this); //Para maglogin as Student
         signup.setOnClickListener(this); //Para pumunta sa signup
+
+
+        /**********
+         *
+         * ito yun nilagay ko pacheck nalang kung working sa inyo hehehee :)
+         *
+        sessionManager.setLogin(false);
+        sessionManager.setUsername(quiview.getStudentId());
+        sessionManager.setEmail(quiview.getStudentEmail());
+        sessionManager.setSurname(quiview.getStudentSurname());
+        sessionManager.setFirstname(quiview.getStudentFirstname());
+
+        if(sessionManager.getLogin()){
+            Intent intent = new Intent(LoginAs.this, StudentHomePage.class);
+            //Kung ang build version daw ay more than lollipop "android 5.0" edi goods sa transition sabi sa docs ahh
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                // Activity transition dito hehehe
+                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(LoginAs.this).toBundle());
+                finish(); //Iwas balik sa activity hehehee
+            } else {
+                // Edi walang transition
+                startActivity(intent);
+                finish(); //PAra ngaa iwas balikkk sa activity na itooo
+            }
+        }
+
+         */
 
 
 

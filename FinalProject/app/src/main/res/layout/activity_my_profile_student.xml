@@ -13,14 +13,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="-18dp"
-        android:layout_marginBottom="23dp"
         android:src="@drawable/ic_rectangle_43"
-        app:layout_constraintBottom_toTopOf="@+id/imageView17"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/btn_profileback"
@@ -36,7 +33,7 @@
         android:id="@+id/acc_circle"
         android:layout_width="137dp"
         android:layout_height="150dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="60dp"
         android:src="@drawable/ic_baseline_account_circle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,16 +42,12 @@
     <ImageView
         android:id="@+id/namebg"
         android:layout_width="240dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginBottom="152dp"
+        android:layout_height="wrap_content"
         android:src="@drawable/ic_namebg"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView17"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/acc_circle"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/acc_circle" />
 
     <TextView
         android:id="@+id/student_fullname"
@@ -62,7 +55,7 @@
         android:layout_height="wrap_content"
         android:text="William Robert"
         android:textColor="#FFFF"
-        android:textSize="28sp"
+        android:textSize="20sp"
         android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="@+id/namebg"
         app:layout_constraintEnd_toEndOf="@+id/namebg"
@@ -73,11 +66,13 @@
         android:id="@+id/studentProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
         android:text="Student"
         android:textColor="#FFFF"
         android:textSize="24dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView11"
         app:layout_constraintEnd_toEndOf="@+id/namebg"
         app:layout_constraintStart_toStartOf="@+id/namebg"
         app:layout_constraintTop_toBottomOf="@+id/namebg" />
@@ -86,7 +81,7 @@
         android:id="@+id/imageView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:src="@drawable/ic_personalinfo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -105,6 +100,36 @@
         app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_margin="20dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@+id/student_username"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_margin="20dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@+id/student_email"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_margin="20dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        tools:layout_editor_absoluteX="20dp" />
+
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
@@ -113,21 +138,8 @@
         android:layout_marginTop="24dp"
         android:backgroundTint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8"
+        app:layout_constraintTop_toBottomOf="@+id/view"
         app:srcCompat="@drawable/ic_mail" />
-
-    <TextView
-        android:id="@+id/txt_contact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:textColor="#000000"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="@+id/imageView4"
-        tools:text="Contact No." />
 
     <TextView
         android:id="@+id/textView16"
@@ -139,7 +151,7 @@
         android:textColor="#000000"
         android:textSize="18dp"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/txt_contact" />
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -148,18 +160,8 @@
         android:layout_marginStart="44dp"
         android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView9"
+        app:layout_constraintTop_toBottomOf="@+id/view2"
         app:srcCompat="@drawable/ic_user_plus" />
-
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/student_username"
-        app:srcCompat="@drawable/ic_line" />
 
     <ImageView
         android:id="@+id/imageView7"
@@ -198,16 +200,6 @@
         app:layout_constraintStart_toEndOf="@+id/imageView7"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/student_email"
-        app:srcCompat="@drawable/ic_line" />
-
     <TextView
         android:id="@+id/student_email"
         android:layout_width="wrap_content"
@@ -220,38 +212,33 @@
         app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/email" />
 
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView16"
-        app:srcCompat="@drawable/ic_line" />
-
-    <ImageButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_btn_logout"
+        android:layout_width="220dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_background_blue"
+        android:text="Log-out"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView10"
-         />
+        app:layout_constraintTop_toBottomOf="@+id/view3" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Logout"
-        android:textColor="#FFFFFF"
-        android:textSize="16dp"
+        android:layout_marginStart="24dp"
+        android:text="Student No."
+        android:textColor="#000000"
+        android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_logout"
-        app:layout_constraintEnd_toEndOf="@+id/btn_logout"
-        app:layout_constraintStart_toStartOf="@+id/btn_logout"
-        app:layout_constraintTop_toTopOf="@+id/btn_logout" />
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
