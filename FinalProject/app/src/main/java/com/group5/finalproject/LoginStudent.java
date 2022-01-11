@@ -154,16 +154,18 @@ public class LoginStudent extends AppCompatActivity {
                                 /***************
                                  * Sooo update lang nasolve ko na yung problem regarding JSONArray
                                  * Ang problem is nandunn pala sa PHP file natin
-                                 * Grabe yung source ko regarding sa ganitong bagay hayy
+                                 * Grabe yung source ko regarding sa ganitong bagay hayy mali-mali
+                                 * need ko pa idebug
                                  *
                                  * By observing the flow of code na gawa ko sa PHP napansin ko naaa
                                  * hindi sakop ng json_encode ang login array dahil ang array ay hindi under ng
                                  * if/else condition na ginawa ko kaya ang nangyayari which is also base
                                  * sa observation ko imbes na maparse siya as a JSONObject na gagamitin sanaaa
-                                 * ng JSONArray kooo nababasa siya as HTML kung tawagin
+                                 * ng JSONArray kooo nababasa siya as HTML kung tawagin kaya nga Values <br of
+                                 * type string cannot be converted to object something ang stack trace natin
                                  */
 
-                                //Well Dalawang value lang need ko ang firstname and surname ng student
+                                //Kukunin natin ang values ng array na associated dun sa username and password sa php
                                 for(int i = 0; i < jsonArray.length();i++) {
 
                                     //Kukuhanin ko yung array dun sa login sa php heheheh then pasok ko dito
@@ -189,26 +191,29 @@ public class LoginStudent extends AppCompatActivity {
                                 }
                                 Toast.makeText(LoginStudent.this,jsonObject.getString("message") + " " + quiview.getStudentFirstname() + " " + quiview.getStudentSurname(),Toast.LENGTH_SHORT).show();
 
+                                //Session Manager ng Student natin using Shared Preference
                                 sessionManager.setLogin(true);
+                                sessionManager.setUser("student");
                                 sessionManager.setUsername(quiview.getStudentId());
                                 sessionManager.setEmail(quiview.getStudentEmail());
                                 sessionManager.setSurname(quiview.getStudentSurname());
                                 sessionManager.setFirstname(quiview.getStudentFirstname());
 
-                                if(sessionManager.getLogin()){
+                                if(sessionManager.getLogin() && sessionManager.getUser().trim().equals("student")){
                                     Intent intent = new Intent(LoginStudent.this, StudentHomePage.class);
                                     //Kung ang build version daw ay more than lollipop "android 5.0" edi goods sa transition sabi sa docs ahh
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                                         // Activity transition dito hehehe
+
                                         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(LoginStudent.this).toBundle());
                                         finish(); //Iwas balik sa activity hehehee
                                     } else {
                                         // Edi walang transition
+
                                         startActivity(intent);
                                         finish(); //PAra ngaa iwas balikkk sa activity na itooo
                                     }
                                 }
-
                             }
                             else{
                                 //Then Pag invalid ito lalabas.. Honestly pwedeng wala na itong else eh

@@ -58,11 +58,16 @@ public class LoginTeacher extends AppCompatActivity {
 
     String URL_teacherlogin= "http://e2019cc107group5.000webhostapp.com/finalproject/teacher_login.php"; //URL sa webhost para makalogin
 
+    SessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         layouts(); //Eh saaa gusto ko tanggalin yung status bar sa taas ahahaha
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_teacher);
+
+        //Kapag wala ito magkakaroon ng Null Pointer Exception base sa debugging ko
+        sessionManager = new SessionManager(this);
 
         //Need natin kunin yung id dun sa xml file natin
         teacherlogin = (ImageButton) findViewById(R.id.login); //ImageButton natin
@@ -151,16 +156,18 @@ public class LoginTeacher extends AppCompatActivity {
                                 /***************
                                  * Sooo update lang nasolve ko na yung problem regarding JSONArray
                                  * Ang problem is nandunn pala sa PHP file natin
-                                 * Grabe yung source ko regarding sa ganitong bagay hayy
+                                 * Grabe yung source ko regarding sa ganitong bagay hayy mali-mali
+                                 * need ko pa idebug
                                  *
                                  * By observing the flow of code na gawa ko sa PHP napansin ko naaa
                                  * hindi sakop ng json_encode ang login array dahil ang array ay hindi under ng
                                  * if/else condition na ginawa ko kaya ang nangyayari which is also base
                                  * sa observation ko imbes na maparse siya as a JSONObject na gagamitin sanaaa
-                                 * ng JSONArray kooo nababasa siya as HTML kung tawagin
+                                 * ng JSONArray kooo nababasa siya as HTML kung tawagin kaya nga Values <br of
+                                 * type string cannot be converted to object something ang stack trace natin
                                  */
 
-                                //Dalawa lang need ko ang firstname and lastname ng teacher
+                                //Kukunin natin ang values ng array na associated dun sa student id and password sa php
                                 for(int i = 0; i < jsonArray.length();i++) {
 
                                     //Kukuhanin ko yung array dun sa login sa php heheheh then pasok ko dito
@@ -172,10 +179,57 @@ public class LoginTeacher extends AppCompatActivity {
                                     //teach_firstname
                                     String t_fname = object.getString("teach_firstname").trim();
 
-                                    Toast.makeText(LoginTeacher.this, jsonObject.getString("message") +" " + t_fname + " " + t_sname, Toast.LENGTH_SHORT).show();
+                                    //teach_username
+                                    String t_uname = object.getString("teach_username").trim();
+
+                                    //teach_email
+                                    String t_email = object.getString("teach_email").trim();
+
+                                    //Ipasok sila sa ating getters and setters
+                                    quiview.setTeacherUsername(t_uname);
+                                    quiview.setTeacherEmail(t_email);
+                                    quiview.setTeacherSurname(t_sname);
+                                    quiview.setTeacherFirstname(t_fname);
+
                                 }
 
                                 //Intent to Teacher Home Page Here
+                                Toast.makeText(LoginTeacher.this, jsonObject.getString("message") +" " + quiview.getTeacherFirstname() + " " + quiview.getTeacherSurname(), Toast.LENGTH_SHORT).show();
+
+                                //Session Manager ng teacher natin using shared preference
+                                /**********************************************************
+                                 *
+                                 * Uncomment lang natin itong ating mga session manager and if condition kapag may profile na ang teacher
+                                 * Kasi kapag naipasok na ang mga key values sa shared preferences natin tapos wala tayong
+                                 * logout sa may profile ng teacher di na makakabalik sa login activity ang app natin which is awkward
+                                 * And yeahhh nakakairita pag ganun ahahahahha
+                                 *
+                                 *
+
+                                sessionManager.setLogin(true);
+                                sessionManager.setUser("teacher");
+                                sessionManager.setUsername(quiview.getTeacherUsername());
+                                sessionManager.setEmail(quiview.getTeacherEmail());
+                                sessionManager.setSurname(quiview.getTeacherSurname());
+                                sessionManager.setFirstname(quiview.getTeacherFirstname());
+
+                                if(sessionManager.getLogin() && sessionManager.getUser().trim().equals("teacher")){
+                                    Intent intent = new Intent(LoginTeacher.this, TeacherHomePage.class);
+
+                                    /*
+                                    //Kung ang build version daw ay more than lollipop "android 5.0" edi goods sa transition sabi sa docs ahh
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                        // Activity transition dito hehehe
+                                        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(LoginTeacher.this).toBundle());
+                                        finish(); //Iwas balik sa activity hehehee
+                                    } else {
+                                        // Edi walang transition
+                                        startActivity(intent);
+                                        finish(); //PAra ngaa iwas balikkk sa activity na itooo
+                                    }
+                                }
+                                 */
+                                //End of comment ng ating teacher session manager and intent papasok ng homepage
                             }
                             else{
                                 //Then Pag invalid ito lalabas.. Honestly pwedeng wala na itong else eh
@@ -185,14 +239,14 @@ public class LoginTeacher extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(LoginTeacher.this, "Login Error! " + e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginTeacher.this, "Login Error!",Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(LoginTeacher.this,"Login Error: " + error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginTeacher.this,"Login Error!",Toast.LENGTH_SHORT).show();
                     }
                 })
         {

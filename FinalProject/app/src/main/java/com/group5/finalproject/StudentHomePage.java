@@ -8,7 +8,9 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.transition.Slide;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -31,9 +33,10 @@ public class StudentHomePage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        layouts();
         setContentView(R.layout.activity_student_home_page);
 
-        sessionManager = new SessionManager(this);
+        //sessionManager = new SessionManager(this);
 
         student_profile = (ImageView) findViewById(R.id.image_profile_student); //Image natin
 
@@ -81,7 +84,15 @@ public class StudentHomePage extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
     }
+    private void layouts(){
 
+        //Lagay ako transition para maganda
+        // Dito ko ito ilalagay ayoko sa theme eh
+        getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
+
+        // Exit Transition natin para maangas
+        getWindow().setExitTransition(new Slide());
+    }
     // May bugs pa! 
     public void openDialog() {
         JoinDialog joinDialog = new JoinDialog();
