@@ -11,9 +11,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        >
+        android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/imageView11"
@@ -107,17 +105,17 @@
         app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_margin="20dp"
-        android:layout_marginTop="8dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintTop_toBottomOf="@+id/student_username"
-        tools:layout_editor_absoluteX="20dp" />
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_margin="20dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintTop_toBottomOf="@+id/student_username"
+            tools:layout_editor_absoluteX="20dp" />
 
-    <View
+        <View
         android:id="@+id/view2"
         android:layout_width="match_parent"
         android:layout_height="2dp"
@@ -187,7 +185,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="Username"
+        android:text="Student Id"
         android:textColor="#000000"
         android:textSize="18dp"
         android:textStyle="bold"
@@ -243,7 +241,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="Student No."
+        android:text="Contact No."
         android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold"
