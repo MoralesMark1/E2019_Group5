@@ -36,7 +36,7 @@ public class StudentHomePage extends AppCompatActivity {
         layouts();
         setContentView(R.layout.activity_student_home_page);
 
-        //sessionManager = new SessionManager(this);
+        sessionManager = new SessionManager(this);
 
         student_profile = (ImageView) findViewById(R.id.image_profile_student); //Image natin
 

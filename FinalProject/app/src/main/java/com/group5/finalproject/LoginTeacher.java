@@ -197,15 +197,6 @@ public class LoginTeacher extends AppCompatActivity {
                                 Toast.makeText(LoginTeacher.this, jsonObject.getString("message") +" " + quiview.getTeacherFirstname() + " " + quiview.getTeacherSurname(), Toast.LENGTH_SHORT).show();
 
                                 //Session Manager ng teacher natin using shared preference
-                                /**********************************************************
-                                 *
-                                 * Uncomment lang natin itong ating mga session manager and if condition kapag may profile na ang teacher
-                                 * Kasi kapag naipasok na ang mga key values sa shared preferences natin tapos wala tayong
-                                 * logout sa may profile ng teacher di na makakabalik sa login activity ang app natin which is awkward
-                                 * And yeahhh nakakairita pag ganun ahahahahha
-                                 *
-                                 *
-
                                 sessionManager.setLogin(true);
                                 sessionManager.setUser("teacher");
                                 sessionManager.setUsername(quiview.getTeacherUsername());
@@ -216,7 +207,6 @@ public class LoginTeacher extends AppCompatActivity {
                                 if(sessionManager.getLogin() && sessionManager.getUser().trim().equals("teacher")){
                                     Intent intent = new Intent(LoginTeacher.this, TeacherHomePage.class);
 
-                                    /*
                                     //Kung ang build version daw ay more than lollipop "android 5.0" edi goods sa transition sabi sa docs ahh
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                                         // Activity transition dito hehehe
@@ -228,8 +218,6 @@ public class LoginTeacher extends AppCompatActivity {
                                         finish(); //PAra ngaa iwas balikkk sa activity na itooo
                                     }
                                 }
-                                 */
-                                //End of comment ng ating teacher session manager and intent papasok ng homepage
                             }
                             else{
                                 //Then Pag invalid ito lalabas.. Honestly pwedeng wala na itong else eh

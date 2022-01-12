@@ -22,7 +22,7 @@ public class MyProfileStudent extends AppCompatActivity {
 
     ImageButton btn_profileback;
     TextView student_username, student_fullname,student_email;
-    AppCompatButton btn_logout;
+    AppCompatButton btn_studentlogout;
 
     SessionManager sessionManager;
 
@@ -34,7 +34,7 @@ public class MyProfileStudent extends AppCompatActivity {
 
         sessionManager = new SessionManager(this);
 
-        btn_logout = (AppCompatButton) findViewById(R.id.btn_logout);
+        btn_studentlogout = (AppCompatButton) findViewById(R.id.btn_studentlogout);
         btn_profileback = (ImageButton) findViewById(R.id.btn_profileback);
         student_username = (TextView) findViewById(R.id.student_username);
         student_email = (TextView) findViewById(R.id.student_email);
@@ -53,13 +53,6 @@ public class MyProfileStudent extends AppCompatActivity {
                 //Kung ang build version daw ay more than lollipop "android 5.0" edi goods sa transition sabi sa docs ahh
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     // Activity transition dito hehehe
-
-                    // Closing all the Activities
-                    back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-                    // Add new Flag to start new Activity
-                    back.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
                     startActivity(back, ActivityOptions.makeSceneTransitionAnimation(MyProfileStudent.this).toBundle());
                 } else {
                     // Edi walang transition
@@ -68,13 +61,15 @@ public class MyProfileStudent extends AppCompatActivity {
             }
         });
 
-        btn_logout.setOnClickListener(new View.OnClickListener() {
+        btn_studentlogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                //Set natina ng login sa false then clear lahat ng laman ng shared preference them commit natin ang changes
                 sessionManager.setLogin(false);
                 sessionManager.editor.clear();
                 sessionManager.editor.commit();
+
                 Intent logout = new Intent(MyProfileStudent.this, LoginStudent.class);
 
                 //Kung ang build version daw ay more than lollipop "android 5.0" edi goods sa transition sabi sa docs ahh

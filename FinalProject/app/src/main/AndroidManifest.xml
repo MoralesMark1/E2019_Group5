@@ -17,6 +17,9 @@
             android:name=".MyProfileStudent"
             android:exported="false" />
         <activity
+            android:name=".MyProfileTeacher"
+            android:exported="false"/>
+        <activity
             android:name=".LoginTeacher"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />

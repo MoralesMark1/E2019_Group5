@@ -25,7 +25,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/btn_profileback"
+            android:id="@+id/btn_teacherprofileback"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
@@ -55,7 +55,7 @@
             app:layout_constraintTop_toBottomOf="@+id/acc_circle" />
 
         <TextView
-            android:id="@+id/student_fullname"
+            android:id="@+id/teacher_fullname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ezekiel Roswell"
@@ -68,7 +68,7 @@
             app:layout_constraintTop_toTopOf="@+id/namebg" />
 
         <TextView
-            android:id="@+id/studentProfile"
+            android:id="@+id/teacherProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -112,7 +112,7 @@
             android:layout_margin="20dp"
             android:layout_marginTop="8dp"
             android:background="@android:color/darker_gray"
-            app:layout_constraintTop_toBottomOf="@+id/student_username"
+            app:layout_constraintTop_toBottomOf="@+id/teacher_username"
             tools:layout_editor_absoluteX="20dp" />
 
         <View
@@ -122,7 +122,7 @@
             android:layout_margin="20dp"
             android:layout_marginTop="8dp"
             android:background="@android:color/darker_gray"
-            app:layout_constraintTop_toBottomOf="@+id/student_email"
+            app:layout_constraintTop_toBottomOf="@+id/teacher_email"
             tools:layout_editor_absoluteX="20dp" />
 
         <View
@@ -194,7 +194,7 @@
             app:layout_constraintTop_toTopOf="@+id/imageView7" />
 
         <TextView
-            android:id="@+id/student_username"
+            android:id="@+id/teacher_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -206,7 +206,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
         <TextView
-            android:id="@+id/student_email"
+            android:id="@+id/teacher_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -218,7 +218,7 @@
             app:layout_constraintTop_toBottomOf="@+id/email" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_logout"
+            android:id="@+id/btn_teacherlogout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="50dp"
