@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:rotation="0"
+    android:rotationX="0">
+
+    <TextView
+        android:id="@+id/CreateQuiz"
+        android:layout_width="200dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="28dp"
+        android:text="Create Quiz"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_eva_arrow_back_fill"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_linearlayout"
+        tools:layout_editor_absoluteX="12dp"
+        tools:layout_editor_absoluteY="82dp" />
+
+    <TextView
+        android:id="@+id/Cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_cq_cancel_button"
+        android:text="Cancel"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="538dp" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_rectangle_58"
+        android:text="Next"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="225dp"
+        tools:layout_editor_absoluteY="538dp" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_margin="20dp"
+        android:background="@android:color/black"
+        tools:layout_editor_absoluteX="12dp"
+        tools:layout_editor_absoluteY="606dp" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quiz Setting"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="12dp"
+        tools:layout_editor_absoluteY="618dp" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shuffle Questions"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        tools:layout_editor_absoluteX="65dp"
+        tools:layout_editor_absoluteY="653dp" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_margin="20dp"
+        android:background="@android:color/black"
+        tools:layout_editor_absoluteX="65dp"
+        tools:layout_editor_absoluteY="680dp" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Duration"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        tools:layout_editor_absoluteX="12dp"
+        tools:layout_editor_absoluteY="691dp" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Per Question"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        tools:layout_editor_absoluteX="65dp"
+        tools:layout_editor_absoluteY="720dp" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Whole Quiz"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        tools:layout_editor_absoluteX="65dp"
+        tools:layout_editor_absoluteY="750dp" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_margin="20dp"
+        android:background="@android:color/black"
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="779dp" />
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Point(s)"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        tools:layout_editor_absoluteX="22dp"
+        tools:layout_editor_absoluteY="789dp" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="All item:"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        tools:layout_editor_absoluteX="238dp"
+        tools:layout_editor_absoluteY="789dp" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_margin="20dp"
+        android:background="@android:color/black"
+        tools:layout_editor_absoluteX="58dp"
+        tools:layout_editor_absoluteY="816dp" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Time"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        tools:layout_editor_absoluteX="22dp"
+        tools:layout_editor_absoluteY="827dp" />
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Anytime:"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        tools:layout_editor_absoluteX="274dp"
+        tools:layout_editor_absoluteY="828dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
