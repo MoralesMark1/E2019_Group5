@@ -30,6 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginTop="10dp"
+        android:minWidth="40dp"
+        android:minHeight="40dp"
         android:background="@drawable/ic_eva_arrow_back_fill"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/imageView11" />
