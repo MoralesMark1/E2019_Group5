@@ -4,21 +4,31 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
 import android.media.Session2Command;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.transition.Slide;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.FileFilter;
+import java.io.FilenameFilter;
 import java.util.LinkedList;
 import java.util.List;
 
 public class TeacherHomePage extends AppCompatActivity {
+
+
 
     String []data = {"Mobile Programming", "Micro-controller", "Software Engineering"};
     int cntr = 0;
@@ -33,6 +43,10 @@ public class TeacherHomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         layouts();
         setContentView(R.layout.activity_teacher_home_page);
+
+
+
+
 
         //sessionManager = new SessionManager(this);
 
@@ -63,6 +77,7 @@ public class TeacherHomePage extends AppCompatActivity {
                 }
             }
         });
+
     }
     private void layouts(){
 
@@ -73,4 +88,37 @@ public class TeacherHomePage extends AppCompatActivity {
         // Exit Transition natin para maangas
         getWindow().setExitTransition(new Slide());
     }
+//  ----------------------------- Excel Import Code -------------------------------
+//  --------------- Mga Pre Eto yung Code para sa importing @-Charlie -------------
+    int requestcode = 1;
+
+    public void onActivityResult(int requestcode, int resultcode, Intent data){
+
+        super.onActivityResult(requestcode,resultcode,data);
+        Context context = getApplicationContext();
+
+        if(requestcode == requestcode && resultcode == Activity.RESULT_OK){
+
+
+            if(data == null){
+
+                return;
+            }
+            Uri uri = data.getData();
+            Toast.makeText(context,"The File was Imported and Ready!",Toast.LENGTH_SHORT).show();
+
+
+        }
+
+    }
+    public void excelImport(View view){
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("*/*");
+        startActivityForResult(intent,requestcode);
+
+
+    }
+// ----------------------------- End of Import Excel Code---------------------------------
+
+
 }

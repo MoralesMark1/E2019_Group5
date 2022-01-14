@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StudentHomePage">
+    tools:context=".TeacherHomePage">
 
     <ImageButton
         android:id="@+id/image_profileteacher"
@@ -41,14 +41,16 @@
         app:srcCompat="@drawable/ic_button_quiz" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/import_excel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:srcCompat="@drawable/ic_button_export_excell" />
+        app:srcCompat="@drawable/ic_button_export_excell"
+        android:onClick="excelImport"
+        />
 
     <ImageView
         android:id="@+id/new_class"
@@ -71,7 +73,7 @@
         android:textSize="28sp"
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+        app:layout_constraintTop_toBottomOf="@+id/import_excel" />
 
     <LinearLayout
         android:layout_width="match_parent"

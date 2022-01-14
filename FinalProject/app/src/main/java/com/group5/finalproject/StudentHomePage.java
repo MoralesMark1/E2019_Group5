@@ -98,4 +98,6 @@ public class StudentHomePage extends AppCompatActivity {
         JoinDialog joinDialog = new JoinDialog();
         joinDialog.show(getSupportFragmentManager(), "join dialog");
     }
+
+
 }
