@@ -122,50 +122,72 @@
         app:layout_constraintTop_toBottomOf="@+id/et_studentEmail"
         tools:ignore="MissingConstraints" />
 
+<com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/til_studentcreatepass"
+    android:layout_width="360dp"
+    android:layout_height="56dp"
+    android:layout_marginTop="24dp"
+    app:hintAnimationEnabled="false"
+    app:hintEnabled="false"
+    app:boxStrokeWidth="0dp"
+    app:boxStrokeWidthFocused="0dp"
+    app:passwordToggleEnabled="true"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/et_studentschoolID"
+    android:elevation="4dp">
 
     <EditText
         android:id="@+id/et_studentcreatePassword"
-        android:layout_width="360dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="0dp"
         android:background="@drawable/edit_text_background"
         android:ems="10"
         android:inputType="textPassword"
-        android:paddingLeft="36sp"
-        android:paddingRight="36sp"
+        android:paddingStart="36sp"
+        android:paddingEnd="36sp"
         android:hint="Create Password"
         android:textColor="#454545"
-        android:elevation="4dp"
-         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_studentschoolID"
         tools:ignore="MissingConstraints" />
+</com.google.android.material.textfield.TextInputLayout>
 
+<com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/til_studentconfirmpass"
+    android:layout_width="360dp"
+    android:layout_height="56dp"
+    android:layout_marginTop="24dp"
+    app:passwordToggleEnabled="true"
+    app:hintAnimationEnabled="false"
+    app:hintEnabled="false"
+    app:boxStrokeWidth="0dp"
+    app:boxStrokeWidthFocused="0dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/til_studentcreatepass"
+    android:elevation="4dp">
 
     <EditText
         android:id="@+id/et_studentconfirmPassword"
-        android:layout_width="360dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="0dp"
         android:background="@drawable/edit_text_background"
         android:ems="10"
         android:inputType="textPassword"
-        android:paddingLeft="36sp"
-        android:paddingRight="36sp"
+        android:paddingStart="36sp"
+        android:paddingEnd="36sp"
         android:hint="Confirm Password"
         android:textColor="#454545"
-        android:elevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_studentcreatePassword"
         tools:ignore="MissingConstraints" />
+</com.google.android.material.textfield.TextInputLayout>
 
     <ProgressBar
         android:id = "@+id/progress_student"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/et_studentconfirmPassword"
+        app:layout_constraintTop_toBottomOf="@id/til_studentconfirmpass"
         app:layout_constraintBottom_toTopOf="@id/button_studentsignin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -187,7 +209,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_studentconfirmPassword"
+        app:layout_constraintTop_toBottomOf="@+id/til_studentconfirmpass"
         app:layout_constraintVertical_bias="0.187" />
 
     <TextView

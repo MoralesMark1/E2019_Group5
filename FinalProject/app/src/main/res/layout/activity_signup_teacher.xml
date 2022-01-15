@@ -122,48 +122,75 @@
         app:layout_constraintTop_toBottomOf="@+id/et_teacheremail"
         tools:ignore="MissingConstraints" />
 
-    <EditText
-        android:id="@+id/et_teachercreatePassword"
-        android:layout_width="360dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/edit_text_background"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:paddingLeft="36sp"
-        android:paddingRight="36sp"
-        android:hint="Create Password"
-        android:textColor="#454545"
-        android:elevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_teacherusername"
-        tools:ignore="MissingConstraints" />
+<com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/til_createpass"
+    android:layout_width="360dp"
+    android:layout_height="56dp"
+    android:layout_marginTop="24dp"
+    app:passwordToggleEnabled="true"
+    app:hintAnimationEnabled="false"
+    app:hintEnabled="false"
+    app:boxStrokeWidth="0dp"
+    app:boxStrokeWidthFocused="0dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/et_teacherusername"
+    android:elevation="4dp">
 
     <EditText
-        android:id="@+id/et_teacherconfirmPassword"
-        android:layout_width="360dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="24dp"
+        android:id="@+id/et_teachercreatePassword"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="Create Password"
+        android:padding="0dp"
         android:background="@drawable/edit_text_background"
         android:ems="10"
+        android:paddingStart="36sp"
+        android:paddingEnd="36sp"
         android:inputType="textPassword"
-        android:paddingLeft="36sp"
-        android:paddingRight="36sp"
-        android:hint="Confirm Password"
         android:textColor="#454545"
-        android:elevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_teachercreatePassword"
+        tools:ignore="MissingConstraints"
+        />
+
+</com.google.android.material.textfield.TextInputLayout>
+
+<com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/til_confirmpass"
+    android:layout_width="360dp"
+    android:layout_height="56dp"
+    android:layout_marginTop="24dp"
+    app:passwordToggleEnabled="true"
+    app:hintAnimationEnabled="false"
+    app:hintEnabled="false"
+    app:boxStrokeWidth="0dp"
+    app:boxStrokeWidthFocused="0dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/til_createpass"
+    android:elevation="4dp"
+    >
+    <EditText
+        android:id="@+id/et_teacherconfirmPassword"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="0dp"
+        android:background="@drawable/edit_text_background"
+        android:ems="10"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        android:paddingStart="36sp"
+        android:paddingEnd="36sp"
+        android:textColor="#454545"
         tools:ignore="MissingConstraints" />
+
+</com.google.android.material.textfield.TextInputLayout>
 
     <ProgressBar
         android:id = "@+id/progress_teacher"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/et_teacherconfirmPassword"
+        app:layout_constraintTop_toBottomOf="@id/til_confirmpass"
         app:layout_constraintBottom_toTopOf="@id/button_teachersignin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -185,7 +212,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_teacherconfirmPassword"
+            app:layout_constraintTop_toBottomOf="@+id/til_confirmpass"
             app:layout_constraintVertical_bias="0.187" />
 
     <TextView
@@ -218,5 +245,6 @@
         app:layout_constraintStart_toEndOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@id/button_teachersignin"
         />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
