@@ -82,10 +82,12 @@
         <entry key="..\:/Users/maricar/E2019_Group5/FinalProject/app/src/main/res/drawable/ic_logout.xml" value="0.13651315789473684" />
         <entry key="..\:/Users/maricar/E2019_Group5/FinalProject/app/src/main/res/drawable/ic_rectangle_43.xml" value="0.13651315789473684" />
         <entry key="..\:/Users/maricar/E2019_Group5/FinalProject/app/src/main/res/drawable/ic_user_plus.xml" value="0.13651315789473684" />
+        <entry key="..\:/Users/maricar/E2019_Group5/FinalProject/app/src/main/res/layout/activity_create_quiz.xml" value="0.22" />
         <entry key="..\:/Users/maricar/E2019_Group5/FinalProject/app/src/main/res/layout/activity_login_as.xml" value="0.12631578947368421" />
         <entry key="..\:/Users/maricar/E2019_Group5/FinalProject/app/src/main/res/layout/activity_login_student.xml" value="0.2" />
         <entry key="..\:/Users/maricar/E2019_Group5/FinalProject/app/src/main/res/layout/activity_login_teacher.xml" value="0.2" />
-        <entry key="..\:/Users/maricar/E2019_Group5/FinalProject/app/src/main/res/layout/activity_my_profile_student.xml" value="0.22" />
+        <entry key="..\:/Users/maricar/E2019_Group5/FinalProject/app/src/main/res/layout/activity_my_profile_student.xml" value="0.14" />
+        <entry key="..\:/Users/maricar/E2019_Group5/FinalProject/app/src/main/res/layout/activity_my_profile_teacher.xml" value="0.22" />
         <entry key="..\:/Users/maricar/E2019_Group5/FinalProject/app/src/main/res/layout/activity_signup_as.xml" value="0.2" />
         <entry key="..\:/Users/maricar/E2019_Group5/FinalProject/app/src/main/res/layout/activity_signup_student.xml" value="0.12" />
         <entry key="..\:/Users/maricar/E2019_Group5/FinalProject/app/src/main/res/layout/activity_student_home_page.xml" value="0.12631578947368421" />

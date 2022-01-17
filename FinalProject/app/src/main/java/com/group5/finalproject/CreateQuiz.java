@@ -1,4 +1,4 @@
 package com.group5.finalproject;
 
-public class CreateQuiz {
+public class CreateQuiz   {
 }

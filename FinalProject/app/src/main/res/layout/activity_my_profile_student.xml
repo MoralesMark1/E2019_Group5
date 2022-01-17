@@ -46,15 +46,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/namebg"
-        android:layout_width="240dp"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_namebg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/acc_circle" />
+        <ImageView
+            android:id="@+id/namebg"
+            android:layout_width="343dp"
+            android:layout_height="42dp"
+            android:src="@drawable/ic_namebg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/acc_circle" />
 
     <TextView
         android:id="@+id/student_fullname"
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:text="William Robert"
         android:textColor="#FFFF"
-        android:textSize="20sp"
+        android:textSize="26sp"
         android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="@+id/namebg"
         app:layout_constraintEnd_toEndOf="@+id/namebg"
@@ -84,15 +84,15 @@
         app:layout_constraintStart_toStartOf="@+id/namebg"
         app:layout_constraintTop_toBottomOf="@+id/namebg" />
 
-    <ImageView
-        android:id="@+id/imageView17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/ic_personalinfo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView11" />
+        <ImageView
+            android:id="@+id/imageView17"
+            android:layout_width="335dp"
+            android:layout_height="51dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_personalinfo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView11" />
 
     <TextView
         android:id="@+id/email"
