@@ -233,7 +233,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5"></LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"/>
 
     <CheckBox
         android:id="@+id/checkBox3"
@@ -246,6 +246,5 @@
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="@+id/checkBox2"
         app:layout_constraintTop_toBottomOf="@+id/imageView18" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
