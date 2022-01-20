@@ -6,42 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".TeacherHomePage">
 
-    <ImageButton
-        android:id="@+id/image_profileteacher"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="26dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/ic_baseline_account_circle" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="32dp"
-        android:text="Welcome!"
+        android:text="Subject Name here"
         android:textColor="@color/black"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toBottomOf="@+id/imageView22" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="16dp"
-        android:text="Classes"
+        android:layout_marginTop="24dp"
+        android:text="Quizzes"
         android:textColor="@color/black"
         android:textSize="28sp"
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView23" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView20" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -63,14 +52,34 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/imageView23"
+        android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_profileteacher"
-        app:srcCompat="@drawable/ic_btn_new_class" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:srcCompat="@drawable/ic_button_quiz" />
+
+    <ImageView
+        android:id="@+id/imageView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:srcCompat="@drawable/ic_button_import_excel" />
+
+    <ImageView
+        android:id="@+id/imageView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_eva_arrow_back_fill" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

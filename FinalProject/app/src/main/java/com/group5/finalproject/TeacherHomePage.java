@@ -46,8 +46,6 @@ public class TeacherHomePage extends AppCompatActivity {
 
 
 
-
-
         //sessionManager = new SessionManager(this);
 
         teacher_profile = (ImageButton) findViewById(R.id.image_profileteacher);
@@ -88,6 +86,7 @@ public class TeacherHomePage extends AppCompatActivity {
         // Exit Transition natin para maangas
         getWindow().setExitTransition(new Slide());
     }
+
 //  ----------------------------- Excel Import Code -------------------------------
 //  --------------- Mga Pre Eto yung Code para sa importing @-Charlie -------------
     int requestcode = 1;

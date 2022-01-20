@@ -14,11 +14,14 @@
         android:theme="@style/Theme.FinalProject"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".TeacherClasses"
+            android:exported="false" />
+        <activity
             android:name=".MyProfileStudent"
             android:exported="false" />
         <activity
             android:name=".MyProfileTeacher"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".LoginTeacher"
             android:exported="false"

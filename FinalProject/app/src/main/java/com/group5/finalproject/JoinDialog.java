@@ -11,10 +11,17 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class JoinDialog extends AppCompatDialogFragment {
 
     EditText et_joinLinkClass;
+
+
 
     @Override
     public Dialog onCreateDialog( Bundle savedInstanceState) {
@@ -22,6 +29,7 @@ public class JoinDialog extends AppCompatDialogFragment {
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.layout_dialog_join, null);
+
 
         builder.setView(view)
                 .setTitle("Quiz Link")

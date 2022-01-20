@@ -19,5 +19,5 @@
     </style>
 
     <!-- Color for Back Arrow -->
-    <color name="colorArrow" tools:ignore="MissingDefaultResource">@color/white</color>
+    <color name="colorArrow">@color/white</color>
 </resources>

@@ -24,11 +24,11 @@ public class StudentHomePage extends AppCompatActivity {
 
     SessionManager sessionManager;
 
-    // Sample code palang to dun sa classes
+    // Sample code palang to dun sa classes -------------------------------------------------------
     String []data = {"Mobile Programming", "Micro-controller", "Software Engineering"};
     int cntr = 0;
 
-    // ------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------------
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,22 +58,19 @@ public class StudentHomePage extends AppCompatActivity {
             }
         });
 
-
-        /*
+//--------------- Custom Dialog for Class Link ----------------------------------------------------
         join_classes = (ImageView) findViewById(R.id.join_class); // Button Join class
 
         join_classes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDialog();
+                openDialog(); //
             }
         });
-        */
+//--------end of Custom Dialog --------------------------------------------------------------------
 
 
-
-        // -------------------------------------------------------------------------------------------
-        // sample code para sa classes
+//-------- sample code para sa classes ------------------------------------------------------------
         List<String> items = new LinkedList<>();
         items.add("Code here");
 
@@ -82,6 +79,9 @@ public class StudentHomePage extends AppCompatActivity {
 
         ClassesAdapter adapter = new ClassesAdapter(items);
         recyclerView.setAdapter(adapter);
+
+
+//----- end of classes ----------------------------------------------------------------------------
 
     }
     private void layouts(){
@@ -93,6 +93,7 @@ public class StudentHomePage extends AppCompatActivity {
         // Exit Transition natin para maangas
         getWindow().setExitTransition(new Slide());
     }
+
     // May bugs pa! 
     public void openDialog() {
         JoinDialog joinDialog = new JoinDialog();

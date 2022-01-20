@@ -8,8 +8,8 @@
         android:id="@+id/et_joinLink"
         android:hint="Enter Link"
         android:layout_width="match_parent"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:layout_height="wrap_content"/>
 
 
