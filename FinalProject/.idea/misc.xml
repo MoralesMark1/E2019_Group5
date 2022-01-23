@@ -26,6 +26,7 @@
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/drawable/ic_cancel_btn.xml" value="0.12777777777777777" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/drawable/ic_choices_btn.xml" value="0.12777777777777777" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/drawable/ic_choices_green.xml" value="0.12777777777777777" />
+        <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/drawable/ic_cursorcolor.xml" value="0.12368421052631579" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/drawable/ic_eva_arrow_back_fill.xml" value="0.14104234527687295" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/drawable/ic_icon.xml" value="0.14104234527687295" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/drawable/ic_launcher_background.xml" value="0.14104234527687295" />
@@ -57,7 +58,7 @@
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/activity_create_quiz.xml" value="0.12" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/activity_login_as.xml" value="0.11348684210526316" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/activity_login_student.xml" value="0.16" />
-        <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/activity_login_teacher.xml" value="0.30796460176991153" />
+        <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/activity_login_teacher.xml" value="0.1" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/activity_main2.xml" value="0.11348684210526316" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/activity_my_profile_student.xml" value="0.16666666666666666" />
@@ -66,7 +67,7 @@
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/activity_signup_as.xml" value="0.16666666666666666" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/activity_signup_student.xml" value="0.13333333333333333" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/activity_signup_teacher.xml" value="0.14666666666666667" />
-        <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/activity_student_home_page.xml" value="0.14666666666666667" />
+        <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/activity_student_home_page.xml" value="0.12" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/activity_teacher_classes.xml" value="0.16" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/activity_teacher_home_page.xml" value="0.13223684210526315" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/classes.xml" value="0.1675925925925926" />

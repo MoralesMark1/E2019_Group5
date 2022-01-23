@@ -233,6 +233,16 @@ public class SignupStudent extends AppCompatActivity {
                                 pBar.setVisibility(View.GONE);
                                 button_studentsignin.setVisibility(View.VISIBLE);
 
+                                //Intent papuntang login ng student
+                                Intent intent_studentlogin = new Intent(SignupStudent.this, LoginStudent.class);
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                    // Activity transition dito hehehe
+                                    startActivity(intent_studentlogin, ActivityOptions.makeSceneTransitionAnimation(SignupStudent.this).toBundle());
+                                } else {
+                                    // Edi walang transition
+                                    startActivity(intent_studentlogin);
+                                }
+                                //End ng intent papuntang student login
                             }
                             else{
                                 //Another toast para dun sa error which is success = 0 and kuhanin na natin yung message
