@@ -24,8 +24,7 @@
             android:exported="false" />
         <activity
             android:name=".LoginTeacher"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:exported="false" />
         <activity
             android:name=".LoginStudent"
             android:exported="false" />
