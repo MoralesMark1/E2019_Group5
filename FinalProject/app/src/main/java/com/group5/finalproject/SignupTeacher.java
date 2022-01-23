@@ -232,8 +232,16 @@ public class SignupTeacher extends AppCompatActivity {
                                 button_teachersignin.setVisibility(View.VISIBLE);
                                 pBar.setVisibility(View.GONE);
 
-                                //Intent here papunta sa login teacher
-
+                                //Intent here papunta sa login teacher after mag you know login
+                                Intent intent_teacherlogin = new Intent(SignupTeacher.this, LoginTeacher.class);
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                    // Activity transition dito hehehe
+                                    startActivity(intent_teacherlogin, ActivityOptions.makeSceneTransitionAnimation(SignupTeacher.this).toBundle());
+                                } else {
+                                    // Edi walang transition
+                                    startActivity(intent_teacherlogin);
+                                }
+                                //End ng intent code hahhaha
                             }
                             else {
                                 //Another toast para dun sa error which is success = 0 and kuhanin na natin yung message
