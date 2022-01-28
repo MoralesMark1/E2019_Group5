@@ -36,12 +36,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="16dp"
-        android:text="Classes"
+        android:text="Recent Quiz"
         android:textColor="@color/black"
         android:textSize="28sp"
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView23" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView_create_quiz" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -63,14 +63,14 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/imageView23"
-        android:layout_width="370dp"
-        android:layout_height="160dp"
+        android:id="@+id/imageView_create_quiz"
+        android:layout_width="380dp"
+        android:layout_height="170dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_profileteacher"
-        app:srcCompat="@drawable/ic_btn_new_class" />
+        app:srcCompat="@drawable/ic_btn_new_quiz" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
