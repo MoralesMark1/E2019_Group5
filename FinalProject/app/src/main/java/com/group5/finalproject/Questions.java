@@ -1,7 +1,7 @@
 package com.group5.finalproject;
 
+//Ito ay para sa pagretrieve ng data galing sa excel
 public class Questions {
-
 
         private String question;
         private String choiceA;
@@ -10,8 +10,6 @@ public class Questions {
         private String choiceD;
         private String answer;
 
-
-
         public Questions(String question,String choiceA,String choiceB,String choiceC,String choiceD,String answer){
             this.question = question;
             this.choiceA = choiceA;
@@ -19,7 +17,6 @@ public class Questions {
             this.choiceC = choiceC;
             this.choiceD = choiceD;
             this.answer = answer;
-
 
         }
 
