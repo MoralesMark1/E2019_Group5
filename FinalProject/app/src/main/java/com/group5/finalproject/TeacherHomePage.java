@@ -1,5 +1,6 @@
 package com.group5.finalproject;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 
 import java.io.FileFilter;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -35,6 +37,8 @@ public class TeacherHomePage extends AppCompatActivity {
 
     //Initialize yung ating mga components for onClickListener dito ahhh
     ImageButton teacher_profile;
+    Intent myfileIntent;
+    String path; // Dito mai-istore yung file na napili ng user
 
     SessionManager sessionManager;
 
@@ -47,7 +51,6 @@ public class TeacherHomePage extends AppCompatActivity {
 
 
         //sessionManager = new SessionManager(this);
-
         teacher_profile = (ImageButton) findViewById(R.id.image_profileteacher);
 
         List<String> items = new LinkedList<>();
@@ -63,6 +66,13 @@ public class TeacherHomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                myfileIntent=new Intent(Intent.ACTION_GET_CONTENT);
+                myfileIntent.setType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"); // Specific FIle format
+                myfileIntent.addCategory(Intent.CATEGORY_OPENABLE); // to open the file
+                startActivityForResult(myfileIntent, 10);
+
+
+                /*
                 Intent teacher_profile = new Intent(TeacherHomePage.this, MyProfileTeacher.class);
 
                 //Kung ang build version daw ay more than lollipop edi goods sa transition sabi ni docs ehh
@@ -73,10 +83,32 @@ public class TeacherHomePage extends AppCompatActivity {
                     // Edi walang transition
                     startActivity(teacher_profile);
                 }
+                */
             }
         });
 
     }
+
+    //  ----------------------------- Excel Import Code -------------------------------
+//  --------------- Mga Pre Eto yung Code para sa importing @-Charlie -------------
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+
+            case 10:
+                if (resultCode == RESULT_OK) {
+                    path = data.getData().getPath(); // dito lang naka store yung file
+
+                }
+                break;
+        }
+    }
+
+// ----------------------------- End of Import Excel Code---------------------------------
+
     private void layouts(){
 
         //Lagay ako transition para maganda
@@ -87,37 +119,9 @@ public class TeacherHomePage extends AppCompatActivity {
         getWindow().setExitTransition(new Slide());
     }
 
-//  ----------------------------- Excel Import Code -------------------------------
-//  --------------- Mga Pre Eto yung Code para sa importing @-Charlie -------------
-    int requestcode = 1;
-
-    public void onActivityResult(int requestcode, int resultcode, Intent data){
-
-        super.onActivityResult(requestcode,resultcode,data);
-        Context context = getApplicationContext();
-
-        if(requestcode == requestcode && resultcode == Activity.RESULT_OK){
 
 
-            if(data == null){
 
-                return;
-            }
-            Uri uri = data.getData();
-            Toast.makeText(context,"The File was Imported and Ready!",Toast.LENGTH_SHORT).show();
-
-
-        }
-
-    }
-    public void excelImport(View view){
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("*/*");
-        startActivityForResult(intent,requestcode);
-
-
-    }
-// ----------------------------- End of Import Excel Code---------------------------------
 
 
 }

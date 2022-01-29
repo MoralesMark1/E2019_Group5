@@ -10,6 +10,7 @@
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/drawable/gradient.xml" value="0.19583333333333333" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/drawable/ic_baseline_account_circle.xml" value="0.14104234527687295" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/drawable/ic_baseline_close_.xml" value="0.1424342105263158" />
+        <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/drawable/ic_baseline_more.xml" value="0.1424342105263158" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/drawable/ic_blue_bg_gradient.xml" value="0.1606837606837607" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/drawable/ic_btn_logout.xml" value="0.14104234527687295" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/drawable/ic_btn_new_class.xml" value="0.1424342105263158" />
@@ -70,7 +71,7 @@
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/activity_signup_teacher.xml" value="0.14666666666666667" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/activity_student_home_page.xml" value="0.14" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/activity_teacher_classes.xml" value="0.16" />
-        <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/activity_teacher_home_page.xml" value="0.18" />
+        <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/activity_teacher_home_page.xml" value="0.2" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/classes.xml" value="0.1675925925925926" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/layout_dialog_join.xml" value="0.25" />
         <entry key="..\:/E2019_Group5/FinalProject/app/src/main/res/layout/light_theme_start_login.xml" value="0.12" />
