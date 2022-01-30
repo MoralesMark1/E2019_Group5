@@ -58,7 +58,7 @@ public class StudentHomePage extends AppCompatActivity {
             }
         });
 
-//--------------- Custom Dialog for Class Link ----------------------------------------------------
+/*--------------- Custom Dialog for Class Link ----------------------------------------------------
         join_classes = (ImageView) findViewById(R.id.join_class); // Button Join class
 
         join_classes.setOnClickListener(new View.OnClickListener() {
@@ -67,8 +67,8 @@ public class StudentHomePage extends AppCompatActivity {
                 openDialog(); //
             }
         });
-//--------end of Custom Dialog --------------------------------------------------------------------
-
+*//*--------end of Custom Dialog --------------------------------------------------------------------
+*/
 
 //-------- sample code para sa classes ------------------------------------------------------------
         List<String> items = new LinkedList<>();
