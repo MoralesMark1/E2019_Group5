@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.transition.Slide;
 import android.util.Log;
 import android.view.View;
@@ -20,24 +21,36 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
+import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.xmlbeans.XmlException;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class TeacherHomePage extends AppCompatActivity {
 
     String[] data = {"Mobile Programming", "Micro-controller", "Software Engineering"};
@@ -62,6 +75,11 @@ public class TeacherHomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         layouts();
         setContentView(R.layout.activity_teacher_home_page);
+
+        System.setProperty("org.apache.poi.javax.xml.stream.XMLInputFactory", "com.fasterxml.aalto.stax.InputFactoryImpl");
+        System.setProperty("org.apache.poi.javax.xml.stream.XMLOutputFactory", "com.fasterxml.aalto.stax.OutputFactoryImpl");
+        System.setProperty("org.apache.poi.javax.xml.stream.XMLEventFactory", "com.fasterxml.aalto.stax.EventFactoryImpl");
+
 
         //sessionManager = new SessionManager(this);
         teacher_profile = (ImageButton) findViewById(R.id.image_profileteacher);
@@ -95,6 +113,8 @@ public class TeacherHomePage extends AppCompatActivity {
                myfileIntent = new Intent(Intent.ACTION_GET_CONTENT);
                myfileIntent.setType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
                myfileIntent.putExtra(Intent.EXTRA_LOCAL_ONLY,true);
+               myfileIntent.addCategory(Intent.CATEGORY_OPENABLE);
+               myfileIntent.addCategory(Intent.CATEGORY_DEFAULT);
                myfileIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); //Read lang poo walang write
                 //Then yung ating hayyy yungggg activity results launcher
                 excelReader.launch(myfileIntent); //Para daw hindi deprecated tulad nung nakacomment sa taas
@@ -148,19 +168,24 @@ public class TeacherHomePage extends AppCompatActivity {
         *******************************************************/
     private ActivityResultLauncher<Intent> excelReader = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
+            result-> {
                     if(result.getResultCode() == Activity.RESULT_OK){
                         Intent data = result.getData();
-                        Uri path_describer = data.getData();
+                        Uri path_describer = null;
+                        if (data != null) {
+                            path_describer = data.getData();
+                        }
                         //Tingnan ko kung magkakaroon ba ng path using Log
-                        Log.d("ExcelPath: ", path_describer.getPath());
+                        assert path_describer != null;
+                        Log.i("ExcelPath: ", path_describer.getPath());
+                        //Ito ang pinakamahalaga ang pagreplace sana dun sa document raw kung sakaling meron
                         String source = path_describer.getPath();
                         File excelFile = new File(source); // Sana makuha na ang source absolute na directory or path
-                        Log.d("Source Path: ",excelFile.toString()); //Eh masaya magdebug sa logcat ehh mas madali
-                        String filename = path_describer.getLastPathSegment();
-                        Log.d("Excel Filename is ",filename); //Filename nung excel na naglalaman ng questions nandito sanaa ngaa
+                        boolean r = excelFile.setReadOnly();
+                        Log.i("Source Path: ",excelFile.getAbsolutePath()); //Eh masaya magdebug sa logcat ehh mas madali
+                        Log.i("Readable: ", String.valueOf(excelFile.exists()));
+                        String filename = excelFile.getAbsolutePath();
+                        Log.i("Excel Filename is ",filename); //Filename nung excel na naglalaman ng questions nandito sanaa ngaa
 
                         //Then next is ang pagkuha nung file papunta saaa workbook
                         /************************
@@ -169,10 +194,21 @@ public class TeacherHomePage extends AppCompatActivity {
                          * since dito ang excelFile is may source path na siya which is sana... Absolute na
                          */
                         try {
-                            FileInputStream excelStream = new FileInputStream(excelFile.getAbsolutePath());
+                            questions.clear();
+
+                            //May mga tatanggalin lang ako na paepal sa path natin kasi nakakainis ehh two days of debugging
+                            if(filename.contains("/document/primary:")){
+                                filename = filename.replace("/document/primary:","/storage/emulated/0/");
+                            }
+                            else if(filename.contains("/document/raw:")){
+                                filename = filename.replace("/document/raw:","");
+                            }
+
+                            FileInputStream inputStream = new FileInputStream(filename);
                             //Hahaha pwede pala mag absolute path mismo dun sa FileInputStream ahhahaha nakakabaliw
 
-                            XSSFWorkbook workbook = new XSSFWorkbook(excelStream);
+                            //OPCPackage opc = OPCPackage.open(excelFile.toPath().toFile().getAbsolutePath());
+                            XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
 
                             XSSFSheet sheet = workbook.getSheetAt(0); //Sheetname sa baba ahh
 
@@ -184,11 +220,11 @@ public class TeacherHomePage extends AppCompatActivity {
                             for(int i = 0; i < nrow+1; i++){
                                 XSSFRow row = sheet.getRow(i);
                                 XSSFCell cellq = row.getCell(0); //Question
-                                XSSFCell cellqa = row.getCell(0); //Question Choice 1
-                                XSSFCell cellqb = row.getCell(0); //Question Choice 2
-                                XSSFCell cellqc = row.getCell(0); //Question Choice 3
-                                XSSFCell cellqd = row.getCell(0); //Question Choice 4
-                                XSSFCell cellans = row.getCell(0); //Question Answer Key
+                                XSSFCell cellqa = row.getCell(1); //Question Choice 1
+                                XSSFCell cellqb = row.getCell(2); //Question Choice 2
+                                XSSFCell cellqc = row.getCell(3); //Question Choice 3
+                                XSSFCell cellqd = row.getCell(4); //Question Choice 4
+                                XSSFCell cellans = row.getCell(5); //Question Answer Key
 
                                 //Then pasok sila every string natin na maghahawak ng value every for loop incrementation
                                 String q = String.valueOf(cellq);
@@ -201,81 +237,31 @@ public class TeacherHomePage extends AppCompatActivity {
                                 //Then ipapasok natin siya sa ating custom arraylist hayyyyy buhayyyyyyy
                                 questions.add(new Questions(q,qa,qb,qc,qd,ans));
 
-                                for(Questions que: questions){
-
-                                    Log.i("TAG",que.getQuestion() + " | "
-                                            + que.getChoiceA() + " | " + que.getChoiceB() + " | "
-                                            + que.getChoiceC() + " | " + que.getChoiceD() + " | "
-                                            + que.getAnswer()
-                                    );
-                                }
+                            };
+                            for(Questions que: questions){
+                                Log.i("TAG",que.getQuestion() + " | "
+                                        + que.getChoiceA() + " | " + que.getChoiceB() + " | "
+                                        + que.getChoiceC() + " | " + que.getChoiceD() + " | "
+                                        + que.getAnswer()
+                                );
+                                Toast.makeText(this,que.getQuestion() + " | "
+                                        + que.getChoiceA() + " | " + que.getChoiceB() + " | "
+                                        + que.getChoiceC() + " | " + que.getChoiceD() + " | "
+                                        + que.getAnswer(),Toast.LENGTH_LONG).show();
                             }
                         }
                         catch (FileNotFoundException e){
                             e.printStackTrace();
+                            Toast.makeText(this, excelFile.getAbsolutePath(),Toast.LENGTH_LONG).show();
                         }
                         catch (IOException e) {
                             e.printStackTrace();
+                            Toast.makeText(this, excelFile.getAbsolutePath(),Toast.LENGTH_LONG).show();
                         }
                     }
-                }
-            });
+                });
 
 // ----------------------------- End of Import Excel Code---------------------------------
-
-        //Function for getting the excel file and everything inside it
-        //private void newQuiz(){
-    /*
-        //Excel path po dito base dun sa onActivityResult
-        FileInputStream inputStream = new FileInputStream(path);
-
-        //Ipapasok ko dito sa XSSF ang file input stream para maacess yung laman loob
-        XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
-
-        //Then yung sheet index yung A1 sa excel
-        XSSFSheet sheet = workbook.getSheetAt(0); //Sheet sa baba nung excel which is awkward hayy
-
-        //Then susunod yung sa row number natin to get yung last row para makuha
-        // sila lahat na ipapasok sa ating custom arraylist object then pag may null value then stop siya
-        // which is obvious naman na ang null ay nandun sa dulo hayyy
-        int nrow = sheet.getLastRowNum();
-
-        //+1 daw kasi zero based siya
-        for(int i = 0;i < nrow+1;i++){
-
-            XSSFRow row = sheet.getRow(i);
-            XSSFCell cellq = row.getCell(0); //Question
-            XSSFCell cellqa = row.getCell(0); //Question Choice 1
-            XSSFCell cellqb = row.getCell(0); //Question Choice 2
-            XSSFCell cellqc = row.getCell(0); //Question Choice 3
-            XSSFCell cellqd = row.getCell(0); //Question Choice 4
-            XSSFCell cellans = row.getCell(0); //Question Answer Key
-
-            //Then pasok sila every string natin na maghahawak ng value every for loop incrementation
-            String q = String.valueOf(cellq);
-            String qa = String.valueOf(cellqa);
-            String qb = String.valueOf(cellqb);
-            String qc = String.valueOf(cellqc);
-            String qd = String.valueOf(cellqd);
-            String ans = String.valueOf(cellans);
-
-            //Then ipapasok natin siya sa ating custom arraylist hayyyyy buhayyyyyyy
-            questions.add(new Questions(q,qa,qb,qc,qd,ans));
-
-            //Ang pagkuha natin ay by row kaya ayan then next is kung paano siya ipapasok sa database
-
-            /*******
-             *  Checking lang natin print ko laman nung arraylist sa ano ko logcat
-             *  parang System.out.println siya ahahhaahhaha :) :) :)
-             *
-            for(Questions que: questions){
-
-                Log.i("TAG",que.getQuestion() + " | "
-                        + que.getChoiceA() + " | " + que.getChoiceB() + " | "
-                        + que.getChoiceC() + " | " + que.getChoiceD() + " | "
-                        + que.getAnswer()
-                );
-            }*/
     private void layouts(){
 
         //Lagay ako transition para maganda
