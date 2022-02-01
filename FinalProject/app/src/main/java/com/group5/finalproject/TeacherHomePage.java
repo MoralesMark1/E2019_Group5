@@ -119,6 +119,8 @@ public class TeacherHomePage extends AppCompatActivity {
                 //Then yung ating hayyy yungggg activity results launcher
                 excelReader.launch(myfileIntent); //Para daw hindi deprecated tulad nung nakacomment sa taas
 
+                generatelink();
+
             }
         });
 
@@ -244,10 +246,13 @@ public class TeacherHomePage extends AppCompatActivity {
                                         + que.getChoiceC() + " | " + que.getChoiceD() + " | "
                                         + que.getAnswer()
                                 );
+                                /*
                                 Toast.makeText(this,que.getQuestion() + " | "
                                         + que.getChoiceA() + " | " + que.getChoiceB() + " | "
                                         + que.getChoiceC() + " | " + que.getChoiceD() + " | "
                                         + que.getAnswer(),Toast.LENGTH_LONG).show();
+
+                                 */
                             }
                         }
                         catch (FileNotFoundException e){
@@ -261,6 +266,7 @@ public class TeacherHomePage extends AppCompatActivity {
                     }
                 });
 
+
 // ----------------------------- End of Import Excel Code---------------------------------
     private void layouts(){
 
@@ -270,5 +276,13 @@ public class TeacherHomePage extends AppCompatActivity {
 
         // Exit Transition natin para maangas
         getWindow().setExitTransition(new Slide());
+    }
+
+    private void generatelink() {
+        RandomString link = new RandomString();
+
+        String result = link.generateAlphaNumeric(6);
+        Log.i("Generated Link: ", result);
+
     }
 }
