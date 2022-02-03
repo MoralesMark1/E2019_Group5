@@ -97,29 +97,23 @@ public class TeacherHomePage extends AppCompatActivity {
         teacher_newquiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                /*
-                //newQuiz function po ditoooo
-                myfileIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                myfileIntent.setType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"); // Specific FIle format
-                myfileIntent.addCategory(Intent.CATEGORY_OPENABLE); // to open the file
-                startActivityForResult(myfileIntent, 10);
-                */
+                /***********************8
+                 * Tinanggal ko yung startActivityForResult kasi deprecated na siya
+                 */
 
                 //Gagamit ako ng bagong startActivityForResult since deprecated na siya hayy kainis
                 //Pang open ito ng files natin
                 //Say Hello to Activity Results Launcher hayyyy Research pa moreeeee
 
-               myfileIntent = new Intent(Intent.ACTION_GET_CONTENT);
-               myfileIntent.setType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+               myfileIntent = new Intent(Intent.ACTION_GET_CONTENT); //Para makuha ang content
+               myfileIntent.setType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"); //Excel only please
                myfileIntent.putExtra(Intent.EXTRA_LOCAL_ONLY,true);
-               myfileIntent.addCategory(Intent.CATEGORY_OPENABLE);
-               myfileIntent.addCategory(Intent.CATEGORY_DEFAULT);
+               myfileIntent.addCategory(Intent.CATEGORY_OPENABLE); //Para maopen ang file explorer something ganun
                myfileIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); //Read lang poo walang write
                 //Then yung ating hayyy yungggg activity results launcher
-                excelReader.launch(myfileIntent); //Para daw hindi deprecated tulad nung nakacomment sa taas
+                excelReader.launch(myfileIntent); //Para daw hindi deprecated tulad nung nakacomment sa taas kaso tinanggal ko na ahahaha
 
-                generatelink();
+                generatelink(); //Yung para sa link ng mga ipapasok nating questions sa database
 
             }
         });
@@ -178,22 +172,24 @@ public class TeacherHomePage extends AppCompatActivity {
                             path_describer = data.getData();
                         }
                         //Tingnan ko kung magkakaroon ba ng path using Log
-                        assert path_describer != null;
+                        assert path_describer != null; //Di ako papayag na null ang path nung excel noo wayy
                         Log.i("ExcelPath: ", path_describer.getPath());
                         //Ito ang pinakamahalaga ang pagreplace sana dun sa document raw kung sakaling meron
                         String source = path_describer.getPath();
                         File excelFile = new File(source); // Sana makuha na ang source absolute na directory or path
                         boolean r = excelFile.setReadOnly();
-                        Log.i("Source Path: ",excelFile.getAbsolutePath()); //Eh masaya magdebug sa logcat ehh mas madali
-                        Log.i("Readable: ", String.valueOf(excelFile.exists()));
+                        Log.i("Source Path: ",excelFile.toPath().getFileName().toString()); //Eh masaya magdebug sa logcat ehh mas madali
                         String filename = excelFile.getAbsolutePath();
                         Log.i("Excel Filename is ",filename); //Filename nung excel na naglalaman ng questions nandito sanaa ngaa
 
                         //Then next is ang pagkuha nung file papunta saaa workbook
                         /************************
-                         * Dito sa part na ito may function sa baba siguro
-                         * gagmaitin ko yun then ipapass ko yung File excel as parameter para makuha natin
-                         * since dito ang excelFile is may source path na siya which is sana... Absolute na
+                         * Dito sa part na ito magpapasok ako ng try catch kasi definitely mag-iinarte ang ating mga streams and workbooks
+                         * though sana function nalang yung may parameter na String filename para yun ipasa ko nalang dun sa function pero
+                         * nevermind hayy siguro saka nalang??? Gusto ko kasi maayos ang mga functions ko dito ehh
+                         * Orrr wag nalang... Bahala na si Batman... Ahahaha
+                         *
+                         * Hey yowww, Feb 3 na palaaa
                          */
                         try {
                             questions.clear();
@@ -201,13 +197,15 @@ public class TeacherHomePage extends AppCompatActivity {
                             //May mga tatanggalin lang ako na paepal sa path natin kasi nakakainis ehh two days of debugging
                             if(filename.contains("/document/primary:")){
                                 filename = filename.replace("/document/primary:","/storage/emulated/0/");
+                                Log.i("Readable: ", filename); //Check na natin kung readable siya
                             }
                             else if(filename.contains("/document/raw:")){
                                 filename = filename.replace("/document/raw:","");
+                                Log.i("Readable: ", filename); //Check na natin kung readable siya
                             }
 
+                            //Ipasok yung String dito sa ating file input stream which is actually pwedeng diretso file na
                             FileInputStream inputStream = new FileInputStream(filename);
-                            //Hahaha pwede pala mag absolute path mismo dun sa FileInputStream ahhahaha nakakabaliw
 
                             //OPCPackage opc = OPCPackage.open(excelFile.toPath().toFile().getAbsolutePath());
                             XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
@@ -281,6 +279,7 @@ public class TeacherHomePage extends AppCompatActivity {
     private void generatelink() {
         RandomString link = new RandomString();
 
+        //Ang galing nito combination ng String and Integer pinagsama using random
         String result = link.generateAlphaNumeric(6);
         Log.i("Generated Link: ", result);
 

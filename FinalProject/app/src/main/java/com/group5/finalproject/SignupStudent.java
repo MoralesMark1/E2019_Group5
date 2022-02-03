@@ -21,9 +21,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -238,9 +242,11 @@ public class SignupStudent extends AppCompatActivity {
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                                     // Activity transition dito hehehe
                                     startActivity(intent_studentlogin, ActivityOptions.makeSceneTransitionAnimation(SignupStudent.this).toBundle());
+                                    finish();
                                 } else {
                                     // Edi walang transition
                                     startActivity(intent_studentlogin);
+                                    finish();
                                 }
                                 //End ng intent papuntang student login
                             }
@@ -267,6 +273,20 @@ public class SignupStudent extends AppCompatActivity {
                         Toast.makeText(SignupStudent.this,"Register Error!" , Toast.LENGTH_SHORT).show();
                         pBar.setVisibility(View.GONE);
                         button_studentsignin.setVisibility(View.VISIBLE);
+
+                        if (error instanceof NetworkError) {
+                            Toast.makeText(SignupStudent.this,"Cannot connect to Internet...Please check your connection!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof ServerError) {
+                            Toast.makeText(SignupStudent.this,"The server could not be found. Please try again after some time!!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof AuthFailureError) {
+                            Toast.makeText(SignupStudent.this,"Cannot connect to Internet...Please check your connection!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof ParseError) {
+                            Toast.makeText(SignupStudent.this,"Parsing error! Please try again after some time!!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof TimeoutError) {
+                            Toast.makeText(SignupStudent.this,"Connection TimeOut! Please check your internet connection",Toast.LENGTH_SHORT).show();
+                        } else{
+                            Toast.makeText(SignupStudent.this,"Login Error!",Toast.LENGTH_SHORT).show();
+                        }
                     }
                 })
         {

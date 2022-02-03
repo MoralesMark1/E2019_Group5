@@ -17,9 +17,13 @@ import android.widget.Toast;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -234,9 +238,23 @@ public class LoginTeacher extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(LoginTeacher.this,"Login Error!",Toast.LENGTH_SHORT).show();
+                        if (error instanceof NetworkError) {
+                            Toast.makeText(LoginTeacher.this,"Cannot connect to Internet...Please check your connection!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof ServerError) {
+                            Toast.makeText(LoginTeacher.this,"The server could not be found. Please try again after some time!!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof AuthFailureError) {
+                            Toast.makeText(LoginTeacher.this,"Cannot connect to Internet...Please check your connection!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof ParseError) {
+                            Toast.makeText(LoginTeacher.this,"Parsing error! Please try again after some time!!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof TimeoutError) {
+                            Toast.makeText(LoginTeacher.this,"Connection TimeOut! Please check your internet connection",Toast.LENGTH_SHORT).show();
+                        } else{
+                            Toast.makeText(LoginTeacher.this,"Login Error!",Toast.LENGTH_SHORT).show();
+                        }
                     }
-                })
+                }) //End of Volley Error Response
+
+            //Start of putting data in the hashmap for insertion into the database
         {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {

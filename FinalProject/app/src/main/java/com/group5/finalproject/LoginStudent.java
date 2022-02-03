@@ -18,9 +18,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
@@ -211,7 +216,7 @@ public class LoginStudent extends AppCompatActivity {
                                         // Edi walang transition
 
                                         startActivity(intent);
-                                        finish(); //PAra ngaa iwas balikkk sa activity na itooo
+                                        finish(); //Para ngaa iwas balikkk sa activity na itooo
                                     }
                                 }
                             }
@@ -230,9 +235,22 @@ public class LoginStudent extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(LoginStudent.this,"Login Error",Toast.LENGTH_SHORT).show();
-                    }
-                })
+                        if (error instanceof NetworkError) {
+                            Toast.makeText(LoginStudent.this,"Cannot connect to Internet...Please check your connection!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof ServerError) {
+                            Toast.makeText(LoginStudent.this,"The server could not be found. Please try again after some time!!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof AuthFailureError) {
+                            Toast.makeText(LoginStudent.this,"Cannot connect to Internet...Please check your connection!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof ParseError) {
+                            Toast.makeText(LoginStudent.this,"Parsing error! Please try again after some time!!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof TimeoutError) {
+                            Toast.makeText(LoginStudent.this,"Connection TimeOut! Please check your internet connection",Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(LoginStudent.this,"Login Error!",Toast.LENGTH_SHORT).show();
+                        }
+                }}) //End of Volley Error Response
+
+            //Start of putting data in hashmap for getting ready in inserting to database
         {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
