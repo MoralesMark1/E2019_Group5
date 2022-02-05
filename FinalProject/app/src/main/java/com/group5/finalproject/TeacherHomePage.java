@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.transition.Slide;
 import android.util.Log;
 import android.view.View;
@@ -15,40 +14,25 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
-import org.apache.poi.openxml4j.opc.OPCPackage;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.xmlbeans.XmlException;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class TeacherHomePage extends AppCompatActivity {
@@ -111,7 +95,9 @@ public class TeacherHomePage extends AppCompatActivity {
                myfileIntent.addCategory(Intent.CATEGORY_OPENABLE); //Para maopen ang file explorer something ganun
                myfileIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); //Read lang poo walang write
                 //Then yung ating hayyy yungggg activity results launcher
-                excelReader.launch(myfileIntent); //Para daw hindi deprecated tulad nung nakacomment sa taas kaso tinanggal ko na ahahaha
+               excelReader.launch(myfileIntent); //Para daw hindi deprecated tulad nung nakacomment sa taas kaso tinanggal ko na ahahaha
+
+
 
                 generatelink(); //Yung para sa link ng mga ipapasok nating questions sa database
 
@@ -204,6 +190,14 @@ public class TeacherHomePage extends AppCompatActivity {
                                 Log.i("Readable: ", filename); //Check na natin kung readable siya
                             }
 
+                             else if (Build.VERSION.SDK_INT == Build.VERSION_CODES.R) {
+                                if(filename.contains("/document/primary:")){
+                                    filename = filename.replace("/document/primary:","/storage/emulated/0/");
+                                    Log.i("Readable: ", filename); //Check na natin kung readable siya
+                                }
+                            }
+
+
                             //Ipasok yung String dito sa ating file input stream which is actually pwedeng diretso file na
                             FileInputStream inputStream = new FileInputStream(filename);
 
@@ -262,6 +256,8 @@ public class TeacherHomePage extends AppCompatActivity {
                             Toast.makeText(this, excelFile.getAbsolutePath(),Toast.LENGTH_LONG).show();
                         }
                     }
+                openDialog();
+
                 });
 
 
@@ -283,5 +279,10 @@ public class TeacherHomePage extends AppCompatActivity {
         String result = link.generateAlphaNumeric(6);
         Log.i("Generated Link: ", result);
 
+    }
+
+    public void openDialog() {
+        CreateQuizDialog createQuizDialog = new CreateQuizDialog();
+        createQuizDialog.show(getSupportFragmentManager(), "create quiz dialog");
     }
 }
