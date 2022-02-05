@@ -21,18 +21,31 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class TeacherHomePage extends AppCompatActivity {
@@ -52,6 +65,7 @@ public class TeacherHomePage extends AppCompatActivity {
     ArrayList<Questions> questions = new ArrayList<>();
 
     //URL ng quiz php natin kung san ilalagay ang mga yan
+    String URL_quiz = "http://e2019cc107group5.000webhostapp.com/finalproject/create_quiz.php"; //URL ng create quiz php file natin sa webhost
 
 
     @Override
@@ -211,6 +225,8 @@ public class TeacherHomePage extends AppCompatActivity {
                             // which is obvious naman na ang null ay nandun sa dulo hayyy
                             int nrow = sheet.getLastRowNum();
 
+                            String qlink = generatelink().toString();
+
                             for(int i = 0; i < nrow+1; i++){
                                 XSSFRow row = sheet.getRow(i);
                                 XSSFCell cellq = row.getCell(0); //Question
@@ -229,11 +245,12 @@ public class TeacherHomePage extends AppCompatActivity {
                                 String ans = String.valueOf(cellans);
 
                                 //Then ipapasok natin siya sa ating custom arraylist hayyyyy buhayyyyyyy
-                                questions.add(new Questions(q,qa,qb,qc,qd,ans));
+                                questions.add(new Questions(qlink,q,qa,qb,qc,qd,ans));
 
                             };
                             for(Questions que: questions){
-                                Log.i("TAG",que.getQuestion() + " | "
+                                Log.i("TAG",que.getQuizlink() + " | "
+                                        + que.getQuestion() + " | "
                                         + que.getChoiceA() + " | " + que.getChoiceB() + " | "
                                         + que.getChoiceC() + " | " + que.getChoiceD() + " | "
                                         + que.getAnswer()
@@ -272,17 +289,71 @@ public class TeacherHomePage extends AppCompatActivity {
         getWindow().setExitTransition(new Slide());
     }
 
-    private void generatelink() {
+    private String generatelink() {
         RandomString link = new RandomString();
 
         //Ang galing nito combination ng String and Integer pinagsama using random
         String result = link.generateAlphaNumeric(6);
         Log.i("Generated Link: ", result);
 
+        return result;
+
     }
 
     public void openDialog() {
         CreateQuizDialog createQuizDialog = new CreateQuizDialog();
         createQuizDialog.show(getSupportFragmentManager(), "create quiz dialog");
+    }
+
+    // Function para maipasok ang mga questions custom arraylist objects sa database
+    private void createQuestion() throws JSONException {
+        JSONObject que = new JSONObject();
+        JSONArray que_array = new JSONArray();
+        JSONObject ok = new JSONObject();
+
+        //Dito ipapasok natin ang mga data mula sa ating custom arraylist objects.
+        for(Questions quest:questions){
+            ok.accumulate("quizlink",quest.getQuizlink());
+            ok.accumulate("question",quest.getQuestion());
+            ok.accumulate("choiceA",quest.getChoiceA());
+            ok.accumulate("choiceB",quest.getChoiceB());
+            ok.accumulate("choiceC",quest.getChoiceC());
+            ok.accumulate("choiceD",quest.getChoiceD());
+            ok.accumulate("answer",quest.getAnswer());
+        }
+        //After siya mag accumulate sa ating JSON Object ipapasok na natin siya sa JSON Array
+        que_array.put(ok); //Lahat ng na accumulate na values andito
+        try {
+            que.accumulate("Questions",que_array); //Then ipasok ko ulit ang array sa ating JSON Object
+        }
+        catch (JSONException e){
+            Log.d("JSON EXCEPTION: ",e.toString()); //Print ko lang sa logcat kung may error sana walaaa hayyyy
+        }
+
+        //Then ang ating String Request ulit... Though sana gumana siya kasi JSON Object na siya pero baka gagana dahil sa String function valueOf
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_quiz, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+
+
+            }}) //End of Error Response Listener
+        {
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("question",String.valueOf(que)); //Sana gumana itoooo grrrr
+
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 }
