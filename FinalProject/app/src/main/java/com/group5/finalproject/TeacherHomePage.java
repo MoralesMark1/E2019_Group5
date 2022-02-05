@@ -11,8 +11,10 @@ import android.transition.Slide;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -42,6 +44,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -63,6 +66,9 @@ public class TeacherHomePage extends AppCompatActivity {
     ImageButton teacher_profile;
     ImageView teacher_newquiz; //Para sa pagcreate ng new quiz excel ang bubuksan
     Intent myfileIntent;
+    TextView file_path,quiz_link;
+    Button btn_createquiz, btn_dialogcancel; //Yung mga buttons sa ating create dialog something
+
     String path; // Dito mai-istore yung file na napili ng user
 
     SessionManager sessionManager;
@@ -229,6 +235,8 @@ public class TeacherHomePage extends AppCompatActivity {
 
                             };
 
+                            openDialog(filename,qlink); //Ipass ko lang dito para maipasok dun sa textview
+
                             for(Questions que: questions){
                                 Log.i("TAG",que.getQuizlink() + " | "
                                         + que.getQuestion() + " | "
@@ -236,6 +244,7 @@ public class TeacherHomePage extends AppCompatActivity {
                                         + que.getChoiceC() + " | " + que.getChoiceD() + " | "
                                         + que.getAnswer()
                                 );
+
                                 /*
                                 Toast.makeText(this,que.getQuestion() + " | "
                                         + que.getChoiceA() + " | " + que.getChoiceB() + " | "
@@ -279,11 +288,40 @@ public class TeacherHomePage extends AppCompatActivity {
         return result;
     }
 
-    public void openDialog() {
+    public void openDialog(String filepath, String quizlink){
         Dialog createQuizDialog = new Dialog(this);
         createQuizDialog.setContentView(R.layout.create_quiz_dialog);
         createQuizDialog.show();
+
+        file_path = (TextView) createQuizDialog.findViewById(R.id.file_path); //Dito iset Text yung file_path
+        quiz_link = (TextView) createQuizDialog.findViewById(R.id.quiz_link); //Dito iset Text yung quizlink
+        btn_dialogcancel = (Button) createQuizDialog.findViewById(R.id.btn_dialogcancel); //Pang cancel ng dialog need pa ba ito??? hahaha
+        btn_createquiz = (Button) createQuizDialog.findViewById(R.id.btn_createquiz); //Andito yung ating function para maipasok sa database
+
+        file_path.setText(filepath);
+        quiz_link.setText(quizlink);
+        //Pang Cancel ng ating Dialog
+        btn_dialogcancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        btn_createquiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Function para maipasok sa database
+                try {
+                    createQuestion();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
+
 
     // Function para maipasok ang mga questions custom arraylist objects sa database
     public void createQuestion() throws JSONException {
@@ -354,7 +392,9 @@ public class TeacherHomePage extends AppCompatActivity {
             protected Map<String,String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 //Sana gumana itooo grrr one key multiple values ang nais kasi array hayyyyyy ang hirappppp
-                params.put("question",String.valueOf(que));
+                params.put("questions",que.toString()); //Comment ko lang ito kasi hayy error siya
+
+                Log.d("JSON STRING VALUES: ", params.get("questions"));
 
                 return params;
             }
