@@ -18,13 +18,18 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -111,10 +116,6 @@ public class TeacherHomePage extends AppCompatActivity {
                 //Then yung ating hayyy yungggg activity results launcher
                excelReader.launch(myfileIntent); //Para daw hindi deprecated tulad nung nakacomment sa taas kaso tinanggal ko na ahahaha
 
-
-
-                generatelink(); //Yung para sa link ng mga ipapasok nating questions sa database
-
             }
         });
 
@@ -134,34 +135,12 @@ public class TeacherHomePage extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     //  ----------------------------- Excel Import Code -------------------------------
 //  --------------- Mga Pre Eto yung Code para sa importing @-Charlie -------------
 // ---------------- Dito yung path nung file --------------------------
-    /************** D E P R E C A T E D *****************************************
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-
-            case 10:
-                if (resultCode == RESULT_OK) {
-                   // path = data.getData().getPath(); // dito lang naka store yung file
-
-                    assert data != null;
-                    Uri uri = data.getData();
-                    File file = new File(uri.getPath());
-                    path = file.getAbsolutePath();
-
-
-
-                }
-                break;
-        }
-        *******************************************************/
     private ActivityResultLauncher<Intent> excelReader = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result-> {
@@ -248,6 +227,7 @@ public class TeacherHomePage extends AppCompatActivity {
                                 questions.add(new Questions(qlink,q,qa,qb,qc,qd,ans));
 
                             };
+
                             for(Questions que: questions){
                                 Log.i("TAG",que.getQuizlink() + " | "
                                         + que.getQuestion() + " | "
@@ -273,7 +253,6 @@ public class TeacherHomePage extends AppCompatActivity {
                             Toast.makeText(this, excelFile.getAbsolutePath(),Toast.LENGTH_LONG).show();
                         }
                     }
-                openDialog();
 
                 });
 
@@ -300,13 +279,8 @@ public class TeacherHomePage extends AppCompatActivity {
 
     }
 
-    public void openDialog() {
-        CreateQuizDialog createQuizDialog = new CreateQuizDialog();
-        createQuizDialog.show(getSupportFragmentManager(), "create quiz dialog");
-    }
-
     // Function para maipasok ang mga questions custom arraylist objects sa database
-    private void createQuestion() throws JSONException {
+    public void createQuestion() throws JSONException {
         JSONObject que = new JSONObject();
         JSONArray que_array = new JSONArray();
         JSONObject ok = new JSONObject();
@@ -334,20 +308,47 @@ public class TeacherHomePage extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_quiz, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                try{
 
+                    //Kukuhanin na natin yung response ng ating php na naencode as json
+                    JSONObject object = new JSONObject(response);
+
+                    String success = object.getString("success"); //Ito yung nasa database natin
+
+                    if(success.equals("1")){
+                        Toast.makeText(TeacherHomePage.this, object.getString("message"),Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(TeacherHomePage.this, object.getString("message"),Toast.LENGTH_SHORT).show();
+                    }
+                }
+                catch (JSONException e){
+                    Toast.makeText(TeacherHomePage.this,"Login Error",Toast.LENGTH_SHORT).show();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
-
-
+                if (error instanceof NetworkError) {
+                    Toast.makeText(TeacherHomePage.this,"Cannot connect to Internet...Please check your connection!",Toast.LENGTH_SHORT).show();
+                } else if (error instanceof ServerError) {
+                    Toast.makeText(TeacherHomePage.this,"The server could not be found. Please try again after some time!!",Toast.LENGTH_SHORT).show();
+                } else if (error instanceof AuthFailureError) {
+                    Toast.makeText(TeacherHomePage.this,"Cannot connect to Internet...Please check your connection!",Toast.LENGTH_SHORT).show();
+                } else if (error instanceof ParseError) {
+                    Toast.makeText(TeacherHomePage.this,"Parsing error! Please try again after some time!!",Toast.LENGTH_SHORT).show();
+                } else if (error instanceof TimeoutError) {
+                    Toast.makeText(TeacherHomePage.this,"Connection TimeOut! Please check your internet connection",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(TeacherHomePage.this,"Login Error!",Toast.LENGTH_SHORT).show();
+                }
             }}) //End of Error Response Listener
         {
             @Override
             protected Map<String,String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("question",String.valueOf(que)); //Sana gumana itoooo grrrr
+                //Sana gumana itooo grrr one key multiple values ang nais kasi array hayyyyyy ang hirappppp
+                params.put("question",String.valueOf(que));
 
                 return params;
             }
