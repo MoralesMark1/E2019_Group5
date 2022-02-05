@@ -3,6 +3,7 @@ package com.group5.finalproject;
 //Ito ay para sa pagretrieve ng data galing sa excel
 public class Questions {
 
+        private String quizlink;
         private String question;
         private String choiceA;
         private String choiceB;
@@ -10,7 +11,8 @@ public class Questions {
         private String choiceD;
         private String answer;
 
-        public Questions(String question,String choiceA,String choiceB,String choiceC,String choiceD,String answer){
+        public Questions(String quizlink,String question,String choiceA,String choiceB,String choiceC,String choiceD,String answer){
+            this.quizlink = quizlink;
             this.question = question;
             this.choiceA = choiceA;
             this.choiceB = choiceB;
@@ -20,6 +22,12 @@ public class Questions {
 
         }
 
+        public String getQuizlink(){
+            return quizlink;
+        }
+        public void setQuizlink(String quizlink){
+            this.quizlink = quizlink;
+        }
         public String getQuestion() {
             return question;
         }

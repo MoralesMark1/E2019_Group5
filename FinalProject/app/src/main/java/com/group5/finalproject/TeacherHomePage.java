@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.transition.Slide;
 import android.util.Log;
 import android.view.View;
@@ -15,40 +14,38 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
-import org.apache.poi.openxml4j.opc.OPCPackage;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.xmlbeans.XmlException;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
+import java.util.Map;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class TeacherHomePage extends AppCompatActivity {
@@ -68,6 +65,7 @@ public class TeacherHomePage extends AppCompatActivity {
     ArrayList<Questions> questions = new ArrayList<>();
 
     //URL ng quiz php natin kung san ilalagay ang mga yan
+    String URL_quiz = "http://e2019cc107group5.000webhostapp.com/finalproject/create_quiz.php"; //URL ng create quiz php file natin sa webhost
 
 
     @Override
@@ -203,6 +201,13 @@ public class TeacherHomePage extends AppCompatActivity {
                                 filename = filename.replace("/document/raw:","");
                                 Log.i("Readable: ", filename); //Check na natin kung readable siya
                             }
+                            else if (Build.VERSION.SDK_INT == Build.VERSION_CODES.S) {
+                                if(filename.contains("/document/primary:")){
+                                    filename = filename.replace("/document/primary:","/storage/emulated/0/");
+                                    Log.i("Readable: ", filename); //Check na natin kung readable siya
+                                };
+                            }
+
 
                             //Ipasok yung String dito sa ating file input stream which is actually pwedeng diretso file na
                             FileInputStream inputStream = new FileInputStream(filename);
@@ -216,6 +221,8 @@ public class TeacherHomePage extends AppCompatActivity {
                             // sila lahat na ipapasok sa ating custom arraylist object then pag may null value then stop siya
                             // which is obvious naman na ang null ay nandun sa dulo hayyy
                             int nrow = sheet.getLastRowNum();
+
+                            String qlink = generatelink().toString(); //Baka every for loop magkakaiba nanaman sila
 
                             for(int i = 0; i < nrow+1; i++){
                                 XSSFRow row = sheet.getRow(i);
@@ -235,11 +242,12 @@ public class TeacherHomePage extends AppCompatActivity {
                                 String ans = String.valueOf(cellans);
 
                                 //Then ipapasok natin siya sa ating custom arraylist hayyyyy buhayyyyyyy
-                                questions.add(new Questions(q,qa,qb,qc,qd,ans));
+                                questions.add(new Questions(qlink,q,qa,qb,qc,qd,ans));
 
                             };
                             for(Questions que: questions){
-                                Log.i("TAG",que.getQuestion() + " | "
+                                Log.i("TAG",que.getQuizlink() + " + "
+                                        + que.getQuestion() + " | "
                                         + que.getChoiceA() + " | " + que.getChoiceB() + " | "
                                         + que.getChoiceC() + " | " + que.getChoiceD() + " | "
                                         + que.getAnswer()
@@ -275,13 +283,66 @@ public class TeacherHomePage extends AppCompatActivity {
         // Exit Transition natin para maangas
         getWindow().setExitTransition(new Slide());
     }
-
-    private void generatelink() {
+    private String generatelink() {
         RandomString link = new RandomString();
 
         //Ang galing nito combination ng String and Integer pinagsama using random
         String result = link.generateAlphaNumeric(6);
         Log.i("Generated Link: ", result);
+
+        return result;
+
+    }
+    // Function para maipasok ang mga questions custom arraylist objects sa database
+    private void createQuestion() throws JSONException {
+        JSONObject que = new JSONObject();
+        JSONArray que_array = new JSONArray();
+        JSONObject ok = new JSONObject();
+
+        //Dito ipapasok natin ang mga data mula sa ating custom arraylist objects.
+        for(Questions quest:questions){
+            ok.accumulate("quizlink",quest.getQuizlink());
+            ok.accumulate("question",quest.getQuestion());
+            ok.accumulate("choiceA",quest.getChoiceA());
+            ok.accumulate("choiceB",quest.getChoiceB());
+            ok.accumulate("choiceC",quest.getChoiceC());
+            ok.accumulate("choiceD",quest.getChoiceD());
+            ok.accumulate("answer",quest.getAnswer());
+        }
+        //After siya mag accumulate sa ating JSON Object ipapasok na natin siya sa JSON Array
+        que_array.put(ok); //Lahat ng na accumulate na values andito
+        try {
+            que.accumulate("Questions",que_array); //Then ipasok ko ulit ang array sa ating JSON Object
+        }
+        catch (JSONException e){
+            Log.d("JSON EXCEPTION: ",e.toString()); //Print ko lang sa logcat kung may error sana walaaa hayyyy
+        }
+
+        //Then ang ating String Request ulit... Though sana gumana siya kasi JSON Object na siya pero baka gagana dahil sa String function valueOf
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_quiz, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+
+
+            }}) //End of Error Response Listener
+        {
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<>();
+                params.put("question",String.valueOf(que)); //Sana gumana itoooo grrrr
+
+                return params;
+        }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
 
     }
 }
