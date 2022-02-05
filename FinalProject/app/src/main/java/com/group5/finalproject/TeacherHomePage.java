@@ -2,6 +2,7 @@ package com.group5.finalproject;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -276,7 +277,12 @@ public class TeacherHomePage extends AppCompatActivity {
         Log.i("Generated Link: ", result);
 
         return result;
+    }
 
+    public void openDialog() {
+        Dialog createQuizDialog = new Dialog(this);
+        createQuizDialog.setContentView(R.layout.create_quiz_dialog);
+        createQuizDialog.show();
     }
 
     // Function para maipasok ang mga questions custom arraylist objects sa database
