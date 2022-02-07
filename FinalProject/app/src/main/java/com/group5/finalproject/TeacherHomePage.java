@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -34,6 +35,10 @@ import com.android.volley.Response;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -282,7 +287,7 @@ public class TeacherHomePage extends AppCompatActivity {
         RandomString link = new RandomString();
 
         //Ang galing nito combination ng String and Integer pinagsama using random
-        String result = link.generateAlphaNumeric(6);
+        String result = link.generateAlphaNumeric(6); //Baka ibahin namin yan and dagdagan siguro for more combinations
         Log.i("Generated Link: ", result);
 
         return result;
@@ -325,6 +330,7 @@ public class TeacherHomePage extends AppCompatActivity {
 
     // Function para maipasok ang mga questions custom arraylist objects sa database
     public void createQuestion() throws JSONException {
+
         JSONObject que = new JSONObject();
         JSONArray que_array = new JSONArray();
         JSONObject ok = new JSONObject();
@@ -349,21 +355,21 @@ public class TeacherHomePage extends AppCompatActivity {
         }
 
         //Then ang ating String Request ulit... Though sana gumana siya kasi JSON Object na siya pero baka gagana dahil sa String function valueOf
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_quiz, new Response.Listener<String>() {
+        JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.POST, URL_quiz,que,new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(String response) {
+            public void onResponse(JSONObject response) {
                 try{
 
                     //Kukuhanin na natin yung response ng ating php na naencode as json
-                    JSONObject object = new JSONObject(response);
+                    //JSONObject object = new JSONObject(response);
 
-                    String success = object.getString("success"); //Ito yung nasa database natin
+                    String success = response.getString("success"); //Ito yung nasa database natin
 
                     if(success.equals("1")){
-                        Toast.makeText(TeacherHomePage.this, object.getString("message"),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TeacherHomePage.this, response.getString("message"),Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        Toast.makeText(TeacherHomePage.this, object.getString("message"),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TeacherHomePage.this, response.getString("message"),Toast.LENGTH_SHORT).show();
                     }
                 }
                 catch (JSONException e){
@@ -386,21 +392,110 @@ public class TeacherHomePage extends AppCompatActivity {
                 } else {
                     Toast.makeText(TeacherHomePage.this,"Login Error!",Toast.LENGTH_SHORT).show();
                 }
-            }}) //End of Error Response Listener
-        {
+            }});//End of Error Response Listener
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(objectRequest);
+    };
+
+        /**************************************************************
+        //JSON object request kung kasi base sa postman api na ginamit ko di raw macompletely send yung nandun sa string request
+        JSONArray array = new JSONArray();
+
+        //JSON Object kada part ng quiz
+
+        //quizlink
+        JSONObject queslink = new JSONObject();
+
+        //question
+        JSONObject quest = new JSONObject();
+
+        //choiceA
+        JSONObject chA = new JSONObject();
+
+        //choiceB
+        JSONObject chB = new JSONObject();
+
+        //choiceC
+        JSONObject chC = new JSONObject();
+
+        //choiceD
+        JSONObject chD = new JSONObject();
+
+        //answer
+        JSONObject ans = new JSONObject();
+
+
+
+        //Ipasok lahat ng laman ng custom arraylist objects pero iseparate kada JSON Object
+        for(Questions que:questions){
+            queslink.accumulate("quizlink",que.getQuizlink());
+            quest.accumulate("question",que.getQuestion());
+            chA.accumulate("choiceA",que.getChoiceA());
+            chB.accumulate("choiceB",que.getChoiceB());
+            chC.accumulate("choiceC",que.getChoiceC());
+            chD.accumulate("choiceD",que.getChoiceD());
+            ans.accumulate("answer",que.getAnswer());
+        }
+
+        //Ipasok din lahat sa JSON Array
+        array.put(queslink);
+        array.put(quest);
+        array.put(chA);
+        array.put(chB);
+        array.put(chC);
+        array.put(chD);
+        array.put(ans);
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, URL_quiz, array,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+                    }}, 
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if (error instanceof NetworkError) {
+                            Toast.makeText(TeacherHomePage.this,"Cannot connect to Internet...Please check your connection!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof ServerError) {
+                            Toast.makeText(TeacherHomePage.this,"The server could not be found. Please try again after some time!!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof AuthFailureError) {
+                            Toast.makeText(TeacherHomePage.this,"Cannot connect to Internet...Please check your connection!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof ParseError) {
+                            Toast.makeText(TeacherHomePage.this,"Parsing error! Please try again after some time!!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof TimeoutError) {
+                            Toast.makeText(TeacherHomePage.this,"Connection TimeOut! Please check your internet connection",Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(TeacherHomePage.this,"Login Error!",Toast.LENGTH_SHORT).show();
+                        }
+            }
+        }) {
             @Override
-            protected Map<String,String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                //Sana gumana itooo grrr one key multiple values ang nais kasi array hayyyyyy ang hirappppp
-                params.put("questions",que.toString()); //Comment ko lang ito kasi hayy error siya
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<String, String>();
+                return headers;
+            }
 
-                Log.d("JSON STRING VALUES: ", params.get("questions"));
+        @Override
+                protected Response<JSONArray> parseNetworkResponse(NetworkResponse response){
+                String responseString;
+                JSONArray array = new JSONArray();
 
-                return params;
+                if(response!= null){
+                    try {
+                        responseString = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
+                        JSONObject obj = new JSONObject(responseString);
+                        array.put(obj);
+                    }
+                    catch(Exception e){
+
+                    }
+                }
+                //return array
+                return Response.success(array,HttpHeaderParser.parseCacheHeaders(response));
             }
         };
-
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-    }
+        requestQueue.add(jsonArrayRequest);
+        *******************************************************/
 }
