@@ -330,7 +330,7 @@ public class TeacherHomePage extends AppCompatActivity {
 
     // Function para maipasok ang mga questions custom arraylist objects sa database
     public void createQuestion() throws JSONException {
-
+    /*******************************************************
         JSONObject que = new JSONObject();
         JSONArray que_array = new JSONArray();
         JSONObject ok = new JSONObject();
@@ -396,8 +396,7 @@ public class TeacherHomePage extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(objectRequest);
     };
-
-        /**************************************************************
+     ***********************************************************/
         //JSON object request kung kasi base sa postman api na ginamit ko di raw macompletely send yung nandun sa string request
         JSONArray array = new JSONArray();
 
@@ -424,10 +423,11 @@ public class TeacherHomePage extends AppCompatActivity {
         //answer
         JSONObject ans = new JSONObject();
 
-
+        JSONObject obj = new JSONObject();
 
         //Ipasok lahat ng laman ng custom arraylist objects pero iseparate kada JSON Object
         for(Questions que:questions){
+
             queslink.accumulate("quizlink",que.getQuizlink());
             quest.accumulate("question",que.getQuestion());
             chA.accumulate("choiceA",que.getChoiceA());
@@ -435,6 +435,7 @@ public class TeacherHomePage extends AppCompatActivity {
             chC.accumulate("choiceC",que.getChoiceC());
             chD.accumulate("choiceD",que.getChoiceD());
             ans.accumulate("answer",que.getAnswer());
+
         }
 
         //Ipasok din lahat sa JSON Array
@@ -445,6 +446,8 @@ public class TeacherHomePage extends AppCompatActivity {
         array.put(chC);
         array.put(chD);
         array.put(ans);
+
+        Log.d("JSON ARRAY: ",array.toString());
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, URL_quiz, array,
                 new Response.Listener<JSONArray>() {
@@ -497,5 +500,5 @@ public class TeacherHomePage extends AppCompatActivity {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonArrayRequest);
-        *******************************************************/
+    }
 }

@@ -268,7 +268,6 @@ public class SignupTeacher extends AppCompatActivity {
                     //Ito ay para sa Error kung sakaling di makapasok ang data
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(SignupTeacher.this,"Register Error!", Toast.LENGTH_SHORT).show();
                         button_teachersignin.setVisibility(View.VISIBLE);
                         pBar.setVisibility(View.GONE);
 
