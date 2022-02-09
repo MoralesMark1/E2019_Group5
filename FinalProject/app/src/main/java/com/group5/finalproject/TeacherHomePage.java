@@ -68,11 +68,10 @@ public class TeacherHomePage extends AppCompatActivity {
     int cntr = 0;
 
     //Initialize yung ating mga components for onClickListener dito ahhh
-    ImageButton teacher_profile;
-    ImageView teacher_newquiz; //Para sa pagcreate ng new quiz excel ang bubuksan
+    ImageView teacher_newquiz, teacher_profile, btn_dialogcancel; //Para sa pagcreate ng new quiz excel ang bubuksan
     Intent myfileIntent;
     TextView file_path,quiz_link;
-    Button btn_createquiz, btn_dialogcancel; //Yung mga buttons sa ating create dialog something
+    Button btn_createquiz; //Yung mga buttons sa ating create dialog something
 
     String path; // Dito mai-istore yung file na napili ng user
 
@@ -97,7 +96,7 @@ public class TeacherHomePage extends AppCompatActivity {
 
 
         //sessionManager = new SessionManager(this);
-        teacher_profile = (ImageButton) findViewById(R.id.image_profileteacher);
+        teacher_profile = (ImageView) findViewById(R.id.image_profileteacher);
         teacher_newquiz = (ImageView) findViewById(R.id.teacher_newquiz);
 
         List<String> items = new LinkedList<>();
@@ -300,23 +299,23 @@ public class TeacherHomePage extends AppCompatActivity {
 
         file_path = (TextView) createQuizDialog.findViewById(R.id.file_path); //Dito iset Text yung file_path
         quiz_link = (TextView) createQuizDialog.findViewById(R.id.quiz_link); //Dito iset Text yung quizlink
-        btn_dialogcancel = (Button) createQuizDialog.findViewById(R.id.btn_dialogcancel); //Pang cancel ng dialog need pa ba ito??? hahaha
+        btn_dialogcancel = (ImageView) createQuizDialog.findViewById(R.id.btn_dialogcancel); //Pang cancel ng dialog need pa ba ito??? hahaha
         btn_createquiz = (Button) createQuizDialog.findViewById(R.id.btn_createquiz); //Andito yung ating function para maipasok sa database
 
         file_path.setText(filepath);
         quiz_link.setText(quizlink);
         //Pang Cancel ng ating Dialog
+
         btn_dialogcancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                createQuizDialog.dismiss();
             }
         });
 
         btn_createquiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 //Function para maipasok sa database
                 try {
                     createQuestion();
