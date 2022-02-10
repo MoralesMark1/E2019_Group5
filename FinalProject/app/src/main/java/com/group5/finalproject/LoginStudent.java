@@ -58,7 +58,7 @@ public class LoginStudent extends AppCompatActivity {
 
     Quiview quiview = new Quiview(); //Yung Quiview Class na andito student and teachers data
 
-    String URL_studentlogin= "http://e2019cc107group5.000webhostapp.com/finalproject/student_login.php"; //URL ng database natin sa webhost
+    final String URL_studentlogin= "http://e2019cc107group5.000webhostapp.com/finalproject/student_login.php"; //URL ng database natin sa webhost
 
     SessionManager sessionManager;
 
