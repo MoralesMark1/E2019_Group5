@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.transition.Slide;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
@@ -100,5 +102,11 @@ public class StudentHomePage extends AppCompatActivity {
         joinDialog.show(getSupportFragmentManager(), "join dialog");
     }
 
+    @SuppressLint("NonConstantResourceId")
+    public boolean onMenuItemClick(MenuItem item) {
+        Toast.makeText(this, "Selected Item: " +item.getTitle(),
+                Toast.LENGTH_SHORT).show();
+        return true;
+    }
 
 }

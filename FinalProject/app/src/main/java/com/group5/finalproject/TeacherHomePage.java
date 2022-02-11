@@ -1,5 +1,6 @@
 package com.group5.finalproject;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.app.Dialog;
@@ -9,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.transition.Slide;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -290,6 +292,13 @@ public class TeacherHomePage extends AppCompatActivity {
         Log.i("Generated Link: ", result);
 
         return result;
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    public boolean onMenuItemClick(MenuItem item) {
+        Toast.makeText(this, "Selected Item: " +item.getTitle(),
+                Toast.LENGTH_SHORT).show();
+        return true;
     }
 
     public void openDialog(String filepath, String quizlink){
