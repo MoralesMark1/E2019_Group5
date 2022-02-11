@@ -1,8 +1,17 @@
 package com.group5.finalproject;
 
+import java.util.ArrayList;
+
 //Ito ay para sa pagretrieve ng data galing sa excel
 public class Questions {
 
+    ArrayList<QuestionsItem> questitem;
+
+    public Questions(ArrayList<QuestionsItem> questitem){
+        this.questitem = questitem; //Para kada JSON Object iisang name per index ng ating arraylist
+    }
+
+    public static class QuestionsItem {
         private String quizlink;
         private String question;
         private String choiceA;
@@ -11,7 +20,8 @@ public class Questions {
         private String choiceD;
         private String answer;
 
-        public Questions(String quizlink,String question,String choiceA,String choiceB,String choiceC,String choiceD,String answer){
+
+        public QuestionsItem(String quizlink, String question, String choiceA, String choiceB, String choiceC, String choiceD, String answer) {
             this.quizlink = quizlink;
             this.question = question;
             this.choiceA = choiceA;
@@ -22,12 +32,14 @@ public class Questions {
 
         }
 
-        public String getQuizlink(){
+        public String getQuizlink() {
             return quizlink;
         }
-        public void setQuizlink(String quizlink){
+
+        public void setQuizlink(String quizlink) {
             this.quizlink = quizlink;
         }
+
         public String getQuestion() {
             return question;
         }
@@ -76,6 +88,7 @@ public class Questions {
             this.answer = answer;
         }
     }
+}
 
 
 
