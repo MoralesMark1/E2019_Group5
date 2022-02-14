@@ -242,14 +242,15 @@ public class TeacherHomePage extends AppCompatActivity {
                                 questions.add(new Questions.QuestionsItem(qlink,q,qa,qb,qc,qd,ans));
                             };
 
-                            Questions question = new Questions(questions); //Yung arraylist natin na natapos nang maiadd ang mga items galing sa ating excel file :) :) :)
+                            //Questions question = new Questions(questions); //Yung arraylist natin na natapos nang maiadd ang mga items galing sa ating excel file :) :) :)
 
                             //Then ang ating GSON para iconvert ang question sa ano sa JSON na gusto ko
-                            JsonElement json = new Gson().toJsonTree(question).getAsJsonObject();
+                            //String json = new Gson().toJson(question);
 
                             openDialog(filename,qlink); //Ipass ko lang dito para maipasok dun sa textview
 
-                            Log.d("JSON QUIZ: ",json.toString());
+                            //Log.d("JSON QUIZ: ",json);
+
                         }
                         catch (FileNotFoundException e){
                             e.printStackTrace();
@@ -306,8 +307,8 @@ public class TeacherHomePage extends AppCompatActivity {
 
         file_path.setText(filepath);
         quiz_link.setText(quizlink);
-        //Pang Cancel ng ating Dialog
 
+        //Pang Cancel ng ating Dialog
         btn_dialogcancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -331,6 +332,64 @@ public class TeacherHomePage extends AppCompatActivity {
 
     // Function para maipasok ang mga questions custom arraylist objects sa database
     public void createQuestion() throws JSONException {
+        JSONObject obj = new JSONObject();
+        JSONArray passer = new JSONArray();
+
+        //Susubukan ko siya ipasok sa passer json object per iteration ng index sana gumanaaaa
+        for(Questions.QuestionsItem questi: questions){
+
+            //Ang plano is kada index ng custom objects arraylist ipapasok sila sa object then ipapasok sa isa pang json object
+            obj.put("quizlink",questi.getQuizlink());
+            obj.put("question",questi.getQuestion());
+            obj.put("choiceA",questi.getChoiceA());
+            obj.put("choiceB",questi.getChoiceB());
+            obj.put("choiceC",questi.getChoiceC());
+            obj.put("choiceD",questi.getChoiceD());
+
+            //Yung json object kung san sila ipapasok
+            passer.put(obj);
+        }
+        Log.d("PASSER OBJECT: ",passer.toString());
+
+        JsonArrayRequest arrayRequest = new JsonArrayRequest(Request.Method.POST, URL_quiz, passer,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }){
+                @Override
+                public Map<String,String> getHeaders() throws AuthFailureError{
+                    Map<String,String> headers = new HashMap<String,String>();
+
+                    return headers;
+                }
+                @Override
+                protected Response<JSONArray> parseNetworkResponse(NetworkResponse response){
+                    String responseString;
+                    JSONArray array = new JSONArray();
+                    if(response!=null){
+                        try{
+                            responseString = new String(response.data,HttpHeaderParser.parseCharset(response.headers));
+                            JSONObject obj = new JSONObject(responseString);
+                            array.put(obj);
+                        }
+                        catch(Exception e){
+
+                        }
+                    }
+                    return Response.success(array,HttpHeaderParser.parseCacheHeaders(response));
+                }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(arrayRequest);
 
     }
 }
