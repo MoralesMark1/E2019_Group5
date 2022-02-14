@@ -295,6 +295,8 @@ public class TeacherHomePage extends AppCompatActivity {
     public void openDialog(String filepath, String quizlink){
         Dialog createQuizDialog = new Dialog(this);
         createQuizDialog.setContentView(R.layout.create_quiz_dialog);
+        createQuizDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        createQuizDialog.setCanceledOnTouchOutside(false); // para hnd mawala yung dialog kapag na click sa sa labas ng dialog
         createQuizDialog.show();
 
         file_path = (TextView) createQuizDialog.findViewById(R.id.file_path); //Dito iset Text yung file_path
