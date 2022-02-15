@@ -242,14 +242,7 @@ public class TeacherHomePage extends AppCompatActivity {
                                 questions.add(new Questions.QuestionsItem(qlink,q,qa,qb,qc,qd,ans));
                             };
 
-                            //Questions question = new Questions(questions); //Yung arraylist natin na natapos nang maiadd ang mga items galing sa ating excel file :) :) :)
-
-                            //Then ang ating GSON para iconvert ang question sa ano sa JSON na gusto ko
-                            //String json = new Gson().toJson(question);
-
                             openDialog(filename,qlink); //Ipass ko lang dito para maipasok dun sa textview
-
-                            //Log.d("JSON QUIZ: ",json);
 
                         }
                         catch (FileNotFoundException e){
@@ -330,64 +323,51 @@ public class TeacherHomePage extends AppCompatActivity {
 
     // Function para maipasok ang mga questions custom arraylist objects sa database
     public void createQuestion() throws JSONException {
-        JSONObject obj = new JSONObject();
-        JSONArray passer = new JSONArray();
 
-        //Susubukan ko siya ipasok sa passer json object per iteration ng index sana gumanaaaa
-        for(Questions.QuestionsItem questi: questions){
+        Questions question = new Questions(questions);
 
-            //Ang plano is kada index ng custom objects arraylist ipapasok sila sa object then ipapasok sa isa pang json object
-            obj.put("quizlink",questi.getQuizlink());
-            obj.put("question",questi.getQuestion());
-            obj.put("choiceA",questi.getChoiceA());
-            obj.put("choiceB",questi.getChoiceB());
-            obj.put("choiceC",questi.getChoiceC());
-            obj.put("choiceD",questi.getChoiceD());
+        String json = new Gson().toJson(question);
 
-            //Yung json object kung san sila ipapasok
-            passer.put(obj);
-        }
-        Log.d("PASSER OBJECT: ",passer.toString());
+        Log.d("JSON QUIZ: ",json);
 
-        JsonArrayRequest arrayRequest = new JsonArrayRequest(Request.Method.POST, URL_quiz, passer,
-                new Response.Listener<JSONArray>() {
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                URL_quiz, new JSONObject(json),
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(JSONObject response) {
+
+                        try {
+                            String success = response.getString("success");
+
+                            if(success.equals("1")){
+                                Toast.makeText(TeacherHomePage.this,response.toString(),Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                Toast.makeText(TeacherHomePage.this,response.toString(),Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            Toast.makeText(TeacherHomePage.this,e.toString(),Toast.LENGTH_SHORT).show();
+                        }
 
                     }
                 },
                 new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
 
-                    }
-                }){
-                @Override
-                public Map<String,String> getHeaders() throws AuthFailureError{
-                    Map<String,String> headers = new HashMap<String,String>();
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(TeacherHomePage.this,error.toString(),Toast.LENGTH_SHORT).show();
+            }
+        }) {
 
-                    return headers;
-                }
-                @Override
-                protected Response<JSONArray> parseNetworkResponse(NetworkResponse response){
-                    String responseString;
-                    JSONArray array = new JSONArray();
-                    if(response!=null){
-                        try{
-                            responseString = new String(response.data,HttpHeaderParser.parseCharset(response.headers));
-                            JSONObject obj = new JSONObject(responseString);
-                            array.put(obj);
-                        }
-                        catch(Exception e){
-
-                        }
-                    }
-                    return Response.success(array,HttpHeaderParser.parseCacheHeaders(response));
-                }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json; charset=utf-8");
+                return headers;
+            }
         };
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        queue.add(arrayRequest);
-
+        queue.add(jsonObjReq);
     }
 }
