@@ -45,6 +45,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -315,6 +316,7 @@ public class TeacherHomePage extends AppCompatActivity implements RecyclerViewIn
                 //Function para maipasok sa database
                 try {
                     createQuestion();
+                    createQuizDialog.dismiss();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -328,49 +330,81 @@ public class TeacherHomePage extends AppCompatActivity implements RecyclerViewIn
 
         Questions question = new Questions(questions);
 
-        String json = new Gson().toJson(question);
+        JsonObject json = new Gson().toJsonTree(question).getAsJsonObject();
+        //JsonObject json = new JsonObject(questions);
+        Log.d("JSON QUIZ: ",json.toString());
 
-        Log.d("JSON QUIZ: ",json);
-
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                URL_quiz, new JSONObject(json),
-                new Response.Listener<JSONObject>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_quiz,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONObject response) {
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
 
-                        try {
-                            String success = response.getString("success");
+                            /**********************************************
+                             *  So ayun na nga gusto ko lang sabihin na nakakaumay mag debug ahahahahhahaha
+                             *  Kasi naman ganitooooo soooo naipasok ko na ang quiz data sa ating pinakamamahal na database
+                             *
+                             *  Ohh yeahhh ahahha hooray bruhh ahahahhahaha inabot ako ng ilang weeks para lang dun
+                             *
+                             *  Successful ko siyang nadebug sa php side ahahahahha
+                             *
+                             *  So by implementing the GSON library sa ating custom object nagawa ko siyang
+                             *  iconvert sa isang magandang json object then by using string request gumawa ako ng
+                             *  map ng isang key with multiple json object
+                             *
+                             *  By doing this, madali ko siyang maaaccess sa ating php by using the file_get_content
+                             *  para makuha to make sure na ang raw data ay makukuha ng buo and
+                             *  $_POST function ng php since may key siya sa ating params hashmap na nasa ilalim
+                             *
+                             *  Then by using foreach loop every index ng object natin na naconvert sa isang
+                             *  associative using json_decode ay maipapasok na siya sa ating database table
+                             *******************************************/
 
                             if(success.equals("1")){
-                                Toast.makeText(TeacherHomePage.this,response.toString(),Toast.LENGTH_SHORT).show();
+                                //Successful Insertion ohh yeahhh ahahhahhahaha whoooooo hoorayy kainiss
+                                Toast.makeText(TeacherHomePage.this,jsonObject.getString("message"),Toast.LENGTH_LONG).show();
+
                             }
                             else{
-                                Toast.makeText(TeacherHomePage.this,response.toString(),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(TeacherHomePage.this,jsonObject.getString("message"),Toast.LENGTH_LONG).show();
                             }
-                        } catch (JSONException e) {
-                            Toast.makeText(TeacherHomePage.this,e.toString(),Toast.LENGTH_SHORT).show();
                         }
-
+                        catch(JSONException e){
+                                Toast.makeText(TeacherHomePage.this,"Error Inserting into database",Toast.LENGTH_LONG).show();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
-
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if (error instanceof NetworkError) {
+                            Toast.makeText(TeacherHomePage.this,"Cannot connect to Internet...Please check your connection!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof ServerError) {
+                            Toast.makeText(TeacherHomePage.this,"The server could not be found. Please try again after some time!!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof AuthFailureError) {
+                            Toast.makeText(TeacherHomePage.this,"Cannot connect to Internet...Please check your connection!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof ParseError) {
+                            Toast.makeText(TeacherHomePage.this,"Parsing error! Please try again after some time!!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof TimeoutError) {
+                            Toast.makeText(TeacherHomePage.this,"Connection TimeOut! Please check your internet connection",Toast.LENGTH_SHORT).show();
+                        } else{
+                            Toast.makeText(TeacherHomePage.this,"Login Error!",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }){
             @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(TeacherHomePage.this,error.toString(),Toast.LENGTH_SHORT).show();
-            }
-        }) {
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json; charset=utf-8");
-                return headers;
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String,String> params = new HashMap<>();
+                params.put("quizzes",json.toString()); //Ang key natin for $_POST ay "quizzes"
+                Log.d("PARAMS: ",params.get("quizzes"));
+                return params;
             }
         };
-
         RequestQueue queue = Volley.newRequestQueue(this);
-        queue.add(jsonObjReq);
+        queue.add(stringRequest); //Pasok natin sa ating queue para gumana siya
+
     }
 
 
@@ -379,5 +413,6 @@ public class TeacherHomePage extends AppCompatActivity implements RecyclerViewIn
     public void onItemClick(int position) {
         Intent intent = new Intent(TeacherHomePage.this,QuizUI.class);
         startActivity(intent);
+        finish();
     }
 }
