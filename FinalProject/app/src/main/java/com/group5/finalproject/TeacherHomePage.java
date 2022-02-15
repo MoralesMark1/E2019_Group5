@@ -66,7 +66,7 @@ import java.util.List;
 import java.util.Map;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
-public class TeacherHomePage extends AppCompatActivity {
+public class TeacherHomePage extends AppCompatActivity implements RecyclerViewInterface {
 
     String[] data = {"Mobile Programming", "Micro-controller", "Software Engineering"};
     int cntr = 0;
@@ -109,7 +109,7 @@ public class TeacherHomePage extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recycleView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        ClassesAdapter adapter = new ClassesAdapter(items);
+        ClassesAdapter adapter = new ClassesAdapter(items, this);
         recyclerView.setAdapter(adapter);
 
         teacher_newquiz.setOnClickListener(new View.OnClickListener() {
@@ -391,5 +391,13 @@ public class TeacherHomePage extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(arrayRequest);
 
+    }
+
+
+// methods para sa intent to quiz ng recycleView
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(TeacherHomePage.this,QuizUI.class);
+        startActivity(intent);
     }
 }

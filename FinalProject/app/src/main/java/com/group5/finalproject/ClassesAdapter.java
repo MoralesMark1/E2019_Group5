@@ -14,10 +14,13 @@ import java.util.List;
 
 public class ClassesAdapter extends RecyclerView.Adapter <ClassesAdapter.ClassesVH> {
 
+    private final RecyclerViewInterface recyclerViewInterface;
+
     List<String> items;
 
-    public ClassesAdapter(List<String> items) {
+    public ClassesAdapter(List<String> items, RecyclerViewInterface recyclerViewInterface) {
         this.items = items;
+        this.recyclerViewInterface = recyclerViewInterface;
     }
 
     @NonNull
@@ -25,7 +28,7 @@ public class ClassesAdapter extends RecyclerView.Adapter <ClassesAdapter.Classes
     public ClassesVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.classes, parent, false);
-        return new ClassesVH(view).linkAdapter(this);
+        return new ClassesVH(view, recyclerViewInterface).linkAdapter(this);
     }
 
     @Override
@@ -40,22 +43,34 @@ public class ClassesAdapter extends RecyclerView.Adapter <ClassesAdapter.Classes
 
 
 
-    class ClassesVH extends RecyclerView.ViewHolder implements PopupMenu.OnMenuItemClickListener {
+    public static class ClassesVH extends RecyclerView.ViewHolder implements PopupMenu.OnMenuItemClickListener {
 
         TextView textView;
         ImageView imageView_more;
         private ClassesAdapter adapter;
 
-        public ClassesVH(@NonNull View itemView) {
+        public ClassesVH(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
 
             textView = itemView.findViewById(R.id.textView);
             imageView_more = itemView.findViewById(R.id.imageView_more);
 
-
             itemView.findViewById(R.id.imageView_more).setOnClickListener(view -> {
                 showPopupMenu(imageView_more);
+            });
 
+            itemView.setOnClickListener(new View.OnClickListener() { // ito yung onClickListener para sa mga bawat item ng recycleview
+                @Override
+                public void onClick(View v) {
+                    if (recyclerViewInterface != null){
+                        int pos = getAdapterPosition();
+
+                        if (pos != RecyclerView.NO_POSITION){
+                            recyclerViewInterface.onItemClick(pos);
+                        }
+
+                    }
+                }
             });
         }
 
