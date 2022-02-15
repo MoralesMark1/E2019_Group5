@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,16 +14,20 @@ import android.transition.Slide;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+
 import java.util.LinkedList;
 import java.util.List;
 
-public class StudentHomePage extends AppCompatActivity {
+public class StudentHomePage extends AppCompatActivity implements RecyclerViewInterface{
 
-    ImageView student_profile, join_classes;
+    ImageView student_profile, join_classes, btn_dialogcancel;
+    Button btn_joinquiz; // Button para sa join quiz ng dialog
 
     SessionManager sessionManager;
 
@@ -37,6 +42,8 @@ public class StudentHomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         layouts();
         setContentView(R.layout.activity_student_home_page);
+
+
 
         sessionManager = new SessionManager(this);
 
@@ -73,14 +80,8 @@ public class StudentHomePage extends AppCompatActivity {
 
 
 //-------- sample code para sa classes ------------------------------------------------------------
-        List<String> items = new LinkedList<>();
-        items.add("Code here");
 
-        RecyclerView recyclerView = findViewById(R.id.recycleView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        ClassesAdapter adapter = new ClassesAdapter(items);
-        recyclerView.setAdapter(adapter);
 
 
 //----- end of classes ----------------------------------------------------------------------------
@@ -98,8 +99,45 @@ public class StudentHomePage extends AppCompatActivity {
 
     // May bugs pa! 
     public void openDialog() {
-        JoinDialog joinDialog = new JoinDialog();
-        joinDialog.show(getSupportFragmentManager(), "join dialog");
+        Dialog joinDialog = new Dialog(this);
+        joinDialog.setContentView(R.layout.layout_dialog_join);
+        joinDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        joinDialog.setCanceledOnTouchOutside(false); // para hnd mawala yung dialog kapag na click sa sa labas ng dialog
+        joinDialog.show();
+
+        List<String> items = new LinkedList<>();
+
+        RecyclerView recyclerView = findViewById(R.id.recycleView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        ClassesAdapter adapter = new ClassesAdapter(items, this);
+        recyclerView.setAdapter(adapter);
+
+        btn_dialogcancel = (ImageView) joinDialog.findViewById(R.id.btn_dialogcancel);
+        btn_joinquiz = (Button) joinDialog.findViewById(R.id.btn_join);
+
+        btn_dialogcancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                joinDialog.dismiss(); // pag click ng close
+            }
+        });
+
+
+        btn_joinquiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // function here for joining new quiz
+                items.add(data[cntr]);
+                cntr++;
+                adapter.notifyItemInserted(items.size()-1);
+                joinDialog.closeOptionsMenu();
+
+
+            }
+        });
+
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -109,4 +147,10 @@ public class StudentHomePage extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(StudentHomePage.this,QuizUI.class);
+        startActivity(intent);
+
+    }
 }
