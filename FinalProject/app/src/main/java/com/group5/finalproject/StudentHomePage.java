@@ -17,6 +17,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -28,6 +29,8 @@ public class StudentHomePage extends AppCompatActivity implements RecyclerViewIn
 
     ImageView student_profile, join_classes, btn_dialogcancel;
     Button btn_joinquiz; // Button para sa join quiz ng dialog
+
+    TextView et_joinLink;
 
     SessionManager sessionManager;
 
@@ -113,6 +116,7 @@ public class StudentHomePage extends AppCompatActivity implements RecyclerViewIn
         ClassesAdapter adapter = new ClassesAdapter(items, this);
         recyclerView.setAdapter(adapter);
 
+        et_joinLink = (TextView)  joinDialog.findViewById(R.id.et_joinLink);
         btn_dialogcancel = (ImageView) joinDialog.findViewById(R.id.btn_dialogcancel);
         btn_joinquiz = (Button) joinDialog.findViewById(R.id.btn_join);
 
@@ -132,7 +136,7 @@ public class StudentHomePage extends AppCompatActivity implements RecyclerViewIn
                 items.add(data[cntr]);
                 cntr++;
                 adapter.notifyItemInserted(items.size()-1);
-                joinDialog.closeOptionsMenu();
+                joinDialog.dismiss();
 
 
             }
