@@ -10,7 +10,6 @@ public class Questions {
     public Questions(ArrayList<QuestionsItem> questitem){
         this.questitem = questitem; //Para kada JSON Object iisang name per index ng ating arraylist
     }
-
     public static class QuestionsItem {
         private String quizlink;
         private String question;
