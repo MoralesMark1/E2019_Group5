@@ -19,10 +19,20 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONException;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class StudentHomePage extends AppCompatActivity implements RecyclerViewInterface{
 
@@ -30,6 +40,9 @@ public class StudentHomePage extends AppCompatActivity implements RecyclerViewIn
     Button btn_joinquiz; // Button para sa join quiz ng dialog
 
     SessionManager sessionManager;
+
+    //URL of the join link
+    String URL_joinquiz = "http://e2019cc107group5.000webhostapp.com/finalproject/join_quiz.php"; //URL ng create quiz php file natin sa webhost
 
     // Sample code palang to dun sa classes -------------------------------------------------------
     String []data = {"Mobile Programming", "Micro-controller", "Software Engineering"};
@@ -60,9 +73,11 @@ public class StudentHomePage extends AppCompatActivity implements RecyclerViewIn
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         // Activity transition dito hehehe
                         startActivity(student_profile, ActivityOptions.makeSceneTransitionAnimation(StudentHomePage.this).toBundle());
+                        finish();
                     } else {
                         // Edi walang transition
                         startActivity(student_profile);
+                        finish();
                     }
             }
         });
@@ -123,21 +138,27 @@ public class StudentHomePage extends AppCompatActivity implements RecyclerViewIn
             }
         });
 
-
         btn_joinquiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 // function here for joining new quiz
-                items.add(data[cntr]);
+                /*items.add(data[cntr]);
                 cntr++;
                 adapter.notifyItemInserted(items.size()-1);
-                joinDialog.closeOptionsMenu();
+                joinDialog.closeOptionsMenu();*/
 
 
+                //Gagamit ako ng JSON object and array inside ng string request
+                try{
+                    joinquiz();
+                    joinDialog.dismiss();
+                }
+                catch(Exception e){
+
+                }
             }
         });
-
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -152,5 +173,30 @@ public class StudentHomePage extends AppCompatActivity implements RecyclerViewIn
         Intent intent = new Intent(StudentHomePage.this,QuizUI.class);
         startActivity(intent);
 
+    }
+
+    private void joinquiz() throws JSONException{
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_joinquiz,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(StudentHomePage.this,response,Toast.LENGTH_LONG).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(StudentHomePage.this,error.toString(),Toast.LENGTH_LONG).show();
+                    }
+                }){
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String,String> params = new HashMap<>();
+                params.put("joinlink","NlWbW2");
+                return params;
+            }
+        };
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(stringRequest);
     }
 }

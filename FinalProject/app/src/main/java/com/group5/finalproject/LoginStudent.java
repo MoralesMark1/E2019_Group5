@@ -209,12 +209,10 @@ public class LoginStudent extends AppCompatActivity {
                                     //Kung ang build version daw ay more than lollipop "android 5.0" edi goods sa transition sabi sa docs ahh
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                                         // Activity transition dito hehehe
-
                                         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(LoginStudent.this).toBundle());
                                         finish(); //Iwas balik sa activity hehehee
                                     } else {
                                         // Edi walang transition
-
                                         startActivity(intent);
                                         finish(); //Para ngaa iwas balikkk sa activity na itooo
                                     }

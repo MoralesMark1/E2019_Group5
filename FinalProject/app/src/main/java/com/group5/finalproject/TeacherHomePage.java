@@ -145,9 +145,11 @@ public class TeacherHomePage extends AppCompatActivity implements RecyclerViewIn
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     // Activity transition dito hehehe
                     startActivity(teacher_profile, ActivityOptions.makeSceneTransitionAnimation(TeacherHomePage.this).toBundle());
+                    finish();
                 } else {
                     // Edi walang transition
                     startActivity(teacher_profile);
+                    finish();
                 }
             }
         });

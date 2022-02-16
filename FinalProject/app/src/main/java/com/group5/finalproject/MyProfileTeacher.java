@@ -56,9 +56,11 @@ public class MyProfileTeacher extends AppCompatActivity {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     // Activity transition dito hehehe
                     startActivity(back, ActivityOptions.makeSceneTransitionAnimation(MyProfileTeacher.this).toBundle());
+                    finish();
                 } else {
                     // Edi walang transition
                     startActivity(back);
+                    finish();
                 }
             }
         });
@@ -67,16 +69,16 @@ public class MyProfileTeacher extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //Set natina ng login sa false then clear lahat ng laman ng shared preference them commit natin ang changes
-                sessionManager.setLogin(false);
-                sessionManager.editor.clear();
-                sessionManager.editor.commit();
-
                 Intent logout = new Intent(MyProfileTeacher.this, LoginTeacher.class);
 
                 //Kung ang build version daw ay more than lollipop "android 5.0" edi goods sa transition sabi sa docs ahh
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     // Activity transition dito hehehe
+
+                    //Set natina ng login sa false then clear lahat ng laman ng shared preference them commit natin ang changes
+                    sessionManager.setLogin(false);
+                    sessionManager.editor.clear();
+                    sessionManager.editor.commit();
 
                     // Closing all the Activities
                     logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -85,9 +87,13 @@ public class MyProfileTeacher extends AppCompatActivity {
                     logout.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                     startActivity(logout, ActivityOptions.makeSceneTransitionAnimation(MyProfileTeacher.this).toBundle());
-                    finish(); //Iwas balik sa activity hehehee
+                    finish();
                 } else {
                     // Edi walang transition
+                    //Set natina ng login sa false then clear lahat ng laman ng shared preference them commit natin ang changes
+                    sessionManager.setLogin(false);
+                    sessionManager.editor.clear();
+                    sessionManager.editor.commit();
 
                     // Closing all the Activities
                     logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -96,7 +102,7 @@ public class MyProfileTeacher extends AppCompatActivity {
                     logout.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                     startActivity(logout);
-                    finish(); //PAra ngaa iwas balikkk sa activity na itooo
+                    finish();
                 }
             }
         });
@@ -111,6 +117,10 @@ public class MyProfileTeacher extends AppCompatActivity {
 
         // Exit Transition natin para maangas
         getWindow().setExitTransition(new Slide());
+    }
+
+    private void killActivity(){
+        finish();
     }
 
 }
