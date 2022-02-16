@@ -3,6 +3,7 @@ package com.group5.finalproject;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,7 +22,7 @@ public class QuizUI extends AppCompatActivity {
     private TextView question;
 
     private Timer quizTimer;
-    private int totalTimeInMins = 30;
+    private int totalTimeInMins = 10;
     private int second = 0;
 
     private AppCompatButton option1, option2, option3, option4;
@@ -30,6 +32,9 @@ public class QuizUI extends AppCompatActivity {
 
     private String selectedOptionbyUser ="";
     private int currentQuestionPosition = 0;
+
+    TextView correctAnswer;
+    AppCompatButton done;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,7 @@ public class QuizUI extends AppCompatActivity {
         startTimer(timer);
 
         questions.setText((currentQuestionPosition+1)+"/"+questionsList.size());
+        Collections.shuffle(questionsList);
         question.setText(questionsList.get(0).getQuestion());
         option1.setText(questionsList.get(0).getOption1());
         option2.setText(questionsList.get(0).getOption2());
@@ -196,7 +202,7 @@ public class QuizUI extends AppCompatActivity {
         currentQuestionPosition++;
 
         if ((currentQuestionPosition+1) == questionsList.size()){
-            btn_next.setText("Submit Quiz");
+            btn_next.setText("Submit and Finish");
         }
         if(currentQuestionPosition < questionsList.size()){
 
@@ -215,6 +221,7 @@ public class QuizUI extends AppCompatActivity {
             option4.setTextColor(Color.BLACK);
 
             questions.setText((currentQuestionPosition+1)+"/"+questionsList.size());
+            Collections.shuffle(questionsList);
             question.setText(questionsList.get(currentQuestionPosition).getQuestion());
             option1.setText(questionsList.get(currentQuestionPosition).getOption1());
             option2.setText(questionsList.get(currentQuestionPosition).getOption2());
@@ -222,14 +229,35 @@ public class QuizUI extends AppCompatActivity {
             option4.setText(questionsList.get(currentQuestionPosition).getOption4());
         }
         else {
-            Intent  intent = new Intent(QuizUI.this, QuizResults.class);
-            intent.putExtra("correct", getCorrectAnswers());
-            intent.putExtra("incorrect", getInCorrectAnswers());
-
-            startActivity(intent);
-
-            finish();
+            openDialog(getCorrectAnswers());
         }
+    }
+
+    public void openDialog(int getCorrectAnswers) {
+        Dialog resultDialog = new Dialog(this);
+        resultDialog.setContentView(R.layout.activity_quiz_results);
+        resultDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        resultDialog.setCanceledOnTouchOutside(false); // para hnd mawala yung dialog kapag na click sa sa labas ng dialog
+        resultDialog.show();
+
+        correctAnswer = (TextView) resultDialog.findViewById(R.id.tv_correct_answers);
+        correctAnswer.setText(String.valueOf(getCorrectAnswers)+"/"+questionsList.size());
+
+        done = (AppCompatButton) resultDialog.findViewById(R.id.btn_done);
+
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent  intent = new Intent(QuizUI.this, StudentHomePage.class);
+                //intent.putExtra("correct", getCorrectAnswers());
+                //intent.putExtra("incorrect", getInCorrectAnswers());
+                startActivity(intent);
+                finish();
+                resultDialog.dismiss(); // pag click ng close
+            }
+        });
+
+
     }
 
     private void startTimer(TextView timerTextView){
@@ -249,12 +277,7 @@ public class QuizUI extends AppCompatActivity {
 
                     Toast.makeText(QuizUI.this, "Time Over",Toast.LENGTH_SHORT).show();
 
-                    Intent intent = new Intent(QuizUI.this,QuizResults.class);
-                    intent.putExtra("correct", getCorrectAnswers());
-                    intent.putExtra("incorrect", getInCorrectAnswers());
-                    startActivity(intent);
-
-                    finish();
+                    openDialog(getCorrectAnswers());
                 }
                 else{
                     second--;

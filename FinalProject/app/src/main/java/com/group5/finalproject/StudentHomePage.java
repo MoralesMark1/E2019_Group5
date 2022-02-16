@@ -138,7 +138,6 @@ public class StudentHomePage extends AppCompatActivity implements RecyclerViewIn
                 adapter.notifyItemInserted(items.size()-1);
                 joinDialog.dismiss();
 
-
             }
         });
 
