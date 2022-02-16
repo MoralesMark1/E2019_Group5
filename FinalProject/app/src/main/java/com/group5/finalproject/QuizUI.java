@@ -8,12 +8,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -36,12 +36,16 @@ public class QuizUI extends AppCompatActivity {
     TextView correctAnswer;
     AppCompatButton done;
 
+    private ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_ui2);
 
         final TextView timer = findViewById(R.id.timer);
+
+        progressBar = findViewById(R.id.progressBar);
 
         questions = findViewById(R.id.questions);
         question = findViewById(R.id.question);
@@ -57,8 +61,10 @@ public class QuizUI extends AppCompatActivity {
 
         startTimer(timer);
 
+
         questions.setText((currentQuestionPosition+1)+"/"+questionsList.size());
         Collections.shuffle(questionsList);
+
         question.setText(questionsList.get(0).getQuestion());
         option1.setText(questionsList.get(0).getOption1());
         option2.setText(questionsList.get(0).getOption2());
@@ -83,7 +89,6 @@ public class QuizUI extends AppCompatActivity {
 
                     option1.setBackgroundResource(R.drawable.option_selected_bg);
                     option1.setTextColor(Color.WHITE);
-
 
                     //revealAnswer();
 
@@ -112,7 +117,6 @@ public class QuizUI extends AppCompatActivity {
 
                     option2.setBackgroundResource(R.drawable.option_selected_bg);
                     option2.setTextColor(Color.WHITE);
-
 
                     //revealAnswer();
 
@@ -185,10 +189,16 @@ public class QuizUI extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
+
                 if(selectedOptionbyUser.isEmpty()){
                     Toast.makeText(QuizUI.this, "Select your Answer!",Toast.LENGTH_SHORT).show();
                 }
                 else {
+
+                    progressBar.setProgress(currentQuestionPosition+1);
+                    progressBar.setMax(questionsList.size());
+
                     changeNextQuestion();
                 }
 
@@ -221,7 +231,6 @@ public class QuizUI extends AppCompatActivity {
             option4.setTextColor(Color.BLACK);
 
             questions.setText((currentQuestionPosition+1)+"/"+questionsList.size());
-            Collections.shuffle(questionsList);
             question.setText(questionsList.get(currentQuestionPosition).getQuestion());
             option1.setText(questionsList.get(currentQuestionPosition).getOption1());
             option2.setText(questionsList.get(currentQuestionPosition).getOption2());
@@ -249,14 +258,11 @@ public class QuizUI extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent  intent = new Intent(QuizUI.this, StudentHomePage.class);
-                //intent.putExtra("correct", getCorrectAnswers());
-                //intent.putExtra("incorrect", getInCorrectAnswers());
                 startActivity(intent);
                 finish();
                 resultDialog.dismiss(); // pag click ng close
             }
         });
-
 
     }
 
@@ -266,7 +272,6 @@ public class QuizUI extends AppCompatActivity {
         quizTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-
                 if(second == 0){
                     totalTimeInMins--;
                     second =59;

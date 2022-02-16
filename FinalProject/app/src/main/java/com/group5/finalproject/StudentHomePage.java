@@ -56,7 +56,7 @@ public class StudentHomePage extends AppCompatActivity implements RecyclerViewIn
     String URL_joinquiz = "http://e2019cc107group5.000webhostapp.com/finalproject/join_quiz.php"; //URL ng join quiz php file natin sa webhost
 
     // Sample code palang to dun sa classes -------------------------------------------------------
-    String []data = {"Mobile Programming", "Micro-controller", "Software Engineering"};
+    String []data = {"Tanong"};
     int cntr = 0;
 
     // --------------------------------------------------------------------------------------------
@@ -103,13 +103,6 @@ public class StudentHomePage extends AppCompatActivity implements RecyclerViewIn
 //*--------end of Custom Dialog --------------------------------------------------------------------
 
 
-//-------- sample code para sa classes ------------------------------------------------------------
-
-
-
-
-//----- end of classes ----------------------------------------------------------------------------
-
     }
     private void layouts(){
 
@@ -152,11 +145,13 @@ public class StudentHomePage extends AppCompatActivity implements RecyclerViewIn
             @Override
             public void onClick(View v) {
 
+
+
                 // function here for joining new quiz
-                items.add(data[cntr]);
+                items.add(data[cntr%3]);
                 cntr++;
                 adapter.notifyItemInserted(items.size()-1);
-                joinDialog.closeOptionsMenu();
+                joinDialog.dismiss();
 
                 //Gagamit ako ng JSON object and array inside ng string request
                 try{

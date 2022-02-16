@@ -11,4 +11,7 @@
     <color name = "blue1">#0072FF</color>
     <color name = "item">#9000A8</color>
     <color name = "green">#00FF47</color>
+
+    <color name = "background">#FF9800</color>
+
 </resources>

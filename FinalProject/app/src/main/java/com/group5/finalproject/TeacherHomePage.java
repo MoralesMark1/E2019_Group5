@@ -69,7 +69,7 @@ import java.util.Map;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class TeacherHomePage extends AppCompatActivity implements RecyclerViewInterface {
 
-    String[] data = {"Mobile Programming", "Micro-controller", "Software Engineering"};
+    String[] data = {"Questions"};
     int cntr = 0;
 
     //Initialize yung ating mga components for onClickListener dito ahhh
@@ -105,7 +105,7 @@ public class TeacherHomePage extends AppCompatActivity implements RecyclerViewIn
         teacher_newquiz = (ImageView) findViewById(R.id.teacher_newquiz);
 
         List<String> items = new LinkedList<>();
-        items.add("Code here");
+        items.add("Questions");
 
         RecyclerView recyclerView = findViewById(R.id.recycleView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -406,14 +406,12 @@ public class TeacherHomePage extends AppCompatActivity implements RecyclerViewIn
         };
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(stringRequest); //Pasok natin sa ating queue para gumana siya
-
     }
-
 
 // methods para sa intent to quiz ng recycleView
     @Override
     public void onItemClick(int position) {
-        Intent intent = new Intent(TeacherHomePage.this,QuizUI.class);
+        Intent intent = new Intent(TeacherHomePage.this,TeacherQuizUI.class);
         startActivity(intent);
         finish();
     }

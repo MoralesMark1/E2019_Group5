@@ -19,6 +19,9 @@
         android:theme="@style/Theme.FinalProject"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".TeacherQuizUI"
+            android:exported="false" />
+        <activity
             android:name=".QuizUI"
             android:exported="false" />
         <activity
