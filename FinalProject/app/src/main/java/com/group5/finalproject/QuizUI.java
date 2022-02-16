@@ -65,8 +65,11 @@ public class QuizUI extends AppCompatActivity {
                 selectedOptionbyUser = "";
 
                 option2.setBackgroundResource(R.drawable.ic_choices_btn);
+                option2.setTextColor(Color.BLACK);
                 option3.setBackgroundResource(R.drawable.ic_choices_btn);
+                option3.setTextColor(Color.BLACK);
                 option4.setBackgroundResource(R.drawable.ic_choices_btn);
+                option4.setTextColor(Color.BLACK);
 
                 if(selectedOptionbyUser.isEmpty()){
 
@@ -91,8 +94,11 @@ public class QuizUI extends AppCompatActivity {
                 selectedOptionbyUser = "";
 
                 option1.setBackgroundResource(R.drawable.ic_choices_btn);
+                option1.setTextColor(Color.BLACK);
                 option3.setBackgroundResource(R.drawable.ic_choices_btn);
+                option3.setTextColor(Color.BLACK);
                 option4.setBackgroundResource(R.drawable.ic_choices_btn);
+                option4.setTextColor(Color.BLACK);
 
                 if(selectedOptionbyUser.isEmpty()){
 
@@ -117,8 +123,11 @@ public class QuizUI extends AppCompatActivity {
                 selectedOptionbyUser = "";
 
                 option2.setBackgroundResource(R.drawable.ic_choices_btn);
+                option2.setTextColor(Color.BLACK);
                 option1.setBackgroundResource(R.drawable.ic_choices_btn);
+                option1.setTextColor(Color.BLACK);
                 option4.setBackgroundResource(R.drawable.ic_choices_btn);
+                option4.setTextColor(Color.BLACK);
 
                 if(selectedOptionbyUser.isEmpty()){
 
@@ -143,8 +152,11 @@ public class QuizUI extends AppCompatActivity {
                 selectedOptionbyUser = "";
 
                 option2.setBackgroundResource(R.drawable.ic_choices_btn);
+                option2.setTextColor(Color.BLACK);
                 option3.setBackgroundResource(R.drawable.ic_choices_btn);
+                option3.setTextColor(Color.BLACK);
                 option1.setBackgroundResource(R.drawable.ic_choices_btn);
+                option1.setTextColor(Color.BLACK);
 
                 if(selectedOptionbyUser.isEmpty()){
 
