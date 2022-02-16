@@ -6,9 +6,9 @@ import java.util.List;
 public class QuestionsBank {
 
 
-    private static List<QuestionsList> SampleQuestion() {
+    public static ArrayList<QuestionsList> SampleQuestion() {
 
-        final List<QuestionsList> questionsListList = new ArrayList<>();
+         ArrayList<QuestionsList> questionsListList = new ArrayList<>();
 
         final QuestionsList question1 = new QuestionsList("What is the most common PL", "Java","Python", "Html", "Php", "Java", "");
         final QuestionsList question2 = new QuestionsList("How many star in Our Flag", "4","6", "8", "3", "3", "");
@@ -36,7 +36,7 @@ public class QuestionsBank {
         return questionsListList;
     }
 
-    public static List<QuestionsList> getQuestions(){
+    public static ArrayList<QuestionsList> getQuestions(){
         return SampleQuestion();
     }
 }

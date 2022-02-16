@@ -54,9 +54,11 @@ public class MyProfileStudent extends AppCompatActivity {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     // Activity transition dito hehehe
                     startActivity(back, ActivityOptions.makeSceneTransitionAnimation(MyProfileStudent.this).toBundle());
+                    finish();
                 } else {
                     // Edi walang transition
                     startActivity(back);
+                    finish();
                 }
             }
         });
@@ -83,7 +85,7 @@ public class MyProfileStudent extends AppCompatActivity {
                     logout.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                     startActivity(logout, ActivityOptions.makeSceneTransitionAnimation(MyProfileStudent.this).toBundle());
-                    finish(); //Iwas balik sa activity hehehee
+                    finish(); //Iwas balik sa activity hehehe
                 } else {
                     // Edi walang transition
 
@@ -93,8 +95,8 @@ public class MyProfileStudent extends AppCompatActivity {
                     // Add new Flag to start new Activity
                     logout.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                    startActivity(logout);
                     finish(); //PAra ngaa iwas balikkk sa activity na itooo
+                    startActivity(logout);
                 }
             }
         });

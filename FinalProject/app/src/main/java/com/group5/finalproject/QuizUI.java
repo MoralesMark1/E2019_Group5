@@ -28,7 +28,7 @@ public class QuizUI extends AppCompatActivity {
     private AppCompatButton option1, option2, option3, option4;
     private AppCompatButton btn_next;
 
-    private List<QuestionsList> questionsList;
+    private ArrayList<QuestionsList> questionsList;
 
     private String selectedOptionbyUser ="";
     private int currentQuestionPosition = 0;
