@@ -22,9 +22,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -181,38 +185,54 @@ public class StudentHomePage extends AppCompatActivity implements RecyclerViewIn
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Log.d("PHP RESPONSE: ",response);
                         try {
-
-                            JSONArray array = new JSONArray(response);
+                            Toast.makeText(StudentHomePage.this,response,Toast.LENGTH_LONG).show();
+                            JSONObject obj = new JSONObject(response); //Ipasok ang response here
+                            Log.d("OBJECT: ",obj.toString());
+                            JSONArray array = obj.getJSONArray("quizzes"); //Quizzes array dun sa php
+                            String success = obj.getString("success"); // dun sa php
 
                             //traversing through all the object
-                            for (int i = 0; i < array.length(); i++) {
+                            if(success.equals("1")){
+                                Toast.makeText(StudentHomePage.this,obj.getString("message"),Toast.LENGTH_LONG).show();
+                                for (int i = 0; i < array.length(); i++) {
 
-                                //getting quiz object from json array
-                                JSONObject quiz = array.getJSONObject(i);
+                                    //getting quiz object from json array
+                                    JSONObject quiz = array.getJSONObject(i);
 
-                                String question = String.valueOf(quiz.get("quiz_questions"));
-                                String choice_A = String.valueOf(quiz.get("choice_a"));
-                                String choice_B = String.valueOf(quiz.get("choice_b"));
-                                String choice_C = String.valueOf(quiz.get("choice_c"));
-                                String choice_D = String.valueOf(quiz.get("choice_d"));
-                                String answer = String.valueOf(quiz.get("answer"));
-                                Log.d("HAHAHA: ", question);
-                                Log.d("HEHEHE: ", answer);
-                                //Lagay ang quiz sa custom objects natin
+                                    String question = quiz.getString("quiz_questions");
+                                    String choice_A = quiz.getString("choice_a");
+                                    String choice_B = quiz.getString("choice_b");
+                                    String choice_C = quiz.getString("choice_c");
+                                    String choice_D = quiz.getString("choice_d");
+                                    String answer = quiz.getString("answer");
 
-                                questions.add(new Questions.QuestionsItem(
-                                        "",
-                                        question,
-                                        choice_A,
-                                        choice_B,
-                                        choice_C,
-                                        choice_D,
-                                        answer
-                                ));
+                                    //Lagay ang quiz sa custom objects natin
+                                    questions.add(new Questions.QuestionsItem(
+                                            "",
+                                            question,
+                                            choice_A,
+                                            choice_B,
+                                            choice_C,
+                                            choice_D,
+                                            answer
+                                    ));
+                                }
+
+                                for(Questions.QuestionsItem que:questions){
+                                    Log.d("QUESTIONS: ",que.getQuestion());
+                                    Log.d("CHOICE A: ",que.getChoiceA());
+                                    Log.d("CHOICE B: ",que.getChoiceB());
+                                    Log.d("CHOICE C: ",que.getChoiceC());
+                                    Log.d("CHOICE D: ",que.getChoiceD());
+                                    Log.d("ANSWER: ",que.getAnswer());
+                                }
+                                Log.d("response: ", response);
                             }
-                            Log.d("QUEST: ", questions.toString());
-                            Log.d("response: ", response);
+                            else{
+                                Toast.makeText(StudentHomePage.this,"No such quizzes",Toast.LENGTH_LONG).show();
+                            }
                         }
                         catch (JSONException e){
                             Toast.makeText(StudentHomePage.this,e.toString(),Toast.LENGTH_LONG).show();
@@ -222,7 +242,19 @@ public class StudentHomePage extends AppCompatActivity implements RecyclerViewIn
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(StudentHomePage.this,error.toString(),Toast.LENGTH_LONG).show();
+                        if (error instanceof NetworkError) {
+                            Toast.makeText(StudentHomePage.this,"Cannot connect to Internet...Please check your connection!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof ServerError) {
+                            Toast.makeText(StudentHomePage.this,"The server could not be found. Please try again after some time!!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof AuthFailureError) {
+                            Toast.makeText(StudentHomePage.this,"Cannot connect to Internet...Please check your connection!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof ParseError) {
+                            Toast.makeText(StudentHomePage.this,"Parsing error! Please try again after some time!!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof TimeoutError) {
+                            Toast.makeText(StudentHomePage.this,"Connection TimeOut! Please check your internet connection",Toast.LENGTH_SHORT).show();
+                        } else{
+                            Toast.makeText(StudentHomePage.this,"Login Error!",Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }){
             @Override
@@ -234,6 +266,6 @@ public class StudentHomePage extends AppCompatActivity implements RecyclerViewIn
         };
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(stringRequest);
-        //"My6XnD"
+        //FCql42
     }
 }
