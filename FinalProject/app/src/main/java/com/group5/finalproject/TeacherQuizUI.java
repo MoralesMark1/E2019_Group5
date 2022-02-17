@@ -78,7 +78,6 @@ public class TeacherQuizUI extends AppCompatActivity {
                 progressBar.setProgress(currentQuestionPosition);
                 progressBar.setMax(questionsList.size());
 
-
                 // function to go to the next question
                     changeNextQuestion();
             }

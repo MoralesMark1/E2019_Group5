@@ -89,9 +89,6 @@ public class ClassesAdapter extends RecyclerView.Adapter <ClassesAdapter.Classes
 
         public boolean onMenuItemClick(MenuItem item) {
             switch (item.getItemId()){
-                case R.id.item_edit:
-                    return true;
-
                 case R.id.item_delete:
                     adapter.items.remove(getAdapterPosition());
                     adapter.notifyItemRemoved(getAdapterPosition());

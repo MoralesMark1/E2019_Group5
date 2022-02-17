@@ -63,7 +63,7 @@ public class StudentHomePage extends AppCompatActivity implements RecyclerViewIn
     String URL_joinquiz = "http://e2019cc107group5.000webhostapp.com/finalproject/join_quiz.php"; //URL ng join quiz php file natin sa webhost
 
     // Sample code palang to dun sa classes -------------------------------------------------------
-    String []data = {"Tanong"};
+    String []data = {"Questions"};
     int cntr = 0;
 
     // --------------------------------------------------------------------------------------------
@@ -137,6 +137,7 @@ public class StudentHomePage extends AppCompatActivity implements RecyclerViewIn
         ClassesAdapter adapter = new ClassesAdapter(items, this);
         recyclerView.setAdapter(adapter);
 
+
         et_joinLink = (TextView)  joinDialog.findViewById(R.id.et_joinLink);
         btn_dialogcancel = (ImageView) joinDialog.findViewById(R.id.btn_dialogcancel);
         btn_joinquiz = (Button) joinDialog.findViewById(R.id.btn_join);
@@ -152,8 +153,14 @@ public class StudentHomePage extends AppCompatActivity implements RecyclerViewIn
             @Override
             public void onClick(View v) {
 
-                //Kapag empty ang quiz link edit text dun sa dialog iclose ko siya and enter quiz link sasabihin
-                if(TextUtils.isEmpty(et_joinLink.getText().toString().trim())){
+                // function here for joining new quiz
+                items.add("Questions");
+                adapter.notifyItemInserted(items.size()-1);
+                joinDialog.dismiss();
+
+                //Gagamit ako ng JSON object and array inside ng string request
+                try{
+                    joinquiz();
                     joinDialog.dismiss();
                     Toast.makeText(StudentHomePage.this,"Enter Quiz Link",Toast.LENGTH_LONG).show();
                 }
@@ -186,7 +193,6 @@ public class StudentHomePage extends AppCompatActivity implements RecyclerViewIn
     public void onItemClick(int position) {
         Intent intent = new Intent(StudentHomePage.this,QuizUI.class);
         startActivity(intent);
-
     }
 
     private void joinquiz() throws JSONException{
