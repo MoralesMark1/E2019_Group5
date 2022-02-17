@@ -10,6 +10,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.transition.Slide;
 import android.util.Log;
 import android.view.MenuItem;
@@ -42,6 +43,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class StudentHomePage extends AppCompatActivity implements RecyclerViewInterface{
@@ -55,6 +57,7 @@ public class StudentHomePage extends AppCompatActivity implements RecyclerViewIn
 
     //Custom Arraylist Question Objects
     ArrayList<Questions.QuestionsItem> questions = new ArrayList<>();
+    ArrayList<QuestionsList> questi = new ArrayList<>();
 
     //URL of the join link
     String URL_joinquiz = "http://e2019cc107group5.000webhostapp.com/finalproject/join_quiz.php"; //URL ng join quiz php file natin sa webhost
@@ -156,12 +159,23 @@ public class StudentHomePage extends AppCompatActivity implements RecyclerViewIn
                 joinDialog.dismiss();
 
                 //Gagamit ako ng JSON object and array inside ng string request
-                try{
-                    joinquiz();
+                if(TextUtils.isEmpty(et_joinLink.getText().toString().trim())){
                     joinDialog.dismiss();
+                    Toast.makeText(StudentHomePage.this,"Enter Quiz Link",Toast.LENGTH_LONG).show();
                 }
-                catch(Exception e){
-                    Toast.makeText(StudentHomePage.this,e.toString(),Toast.LENGTH_LONG).show();
+                else{
+                    //Gagamit ako ng JSON object and array inside ng string request
+                    try{
+                        // function here for joining new quiz
+                        items.add(data[cntr%3]);
+                        cntr++;
+                        adapter.notifyItemInserted(items.size()-1);
+                        joinquiz();
+                        joinDialog.dismiss();
+                    }
+                    catch(Exception e){
+                        Toast.makeText(StudentHomePage.this,e.toString(),Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
@@ -181,18 +195,18 @@ public class StudentHomePage extends AppCompatActivity implements RecyclerViewIn
     }
 
     private void joinquiz() throws JSONException{
-        StringRequest stringRequest = new StringRequest(Request.Method.DEPRECATED_GET_OR_POST, URL_joinquiz,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_joinquiz,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         Log.d("PHP RESPONSE: ",response);
                         try {
+                            
                             Toast.makeText(StudentHomePage.this,response,Toast.LENGTH_LONG).show();
                             JSONObject obj = new JSONObject(response); //Ipasok ang response here
                             Log.d("OBJECT: ",obj.toString());
                             JSONArray array = obj.getJSONArray("quizzes"); //Quizzes array dun sa php
                             String success = obj.getString("success"); // dun sa php
-
                             //traversing through all the object
                             if(success.equals("1")){
                                 Toast.makeText(StudentHomePage.this,obj.getString("message"),Toast.LENGTH_LONG).show();
@@ -228,10 +242,9 @@ public class StudentHomePage extends AppCompatActivity implements RecyclerViewIn
                                     Log.d("CHOICE D: ",que.getChoiceD());
                                     Log.d("ANSWER: ",que.getAnswer());
                                 }
-                                Log.d("response: ", response);
                             }
                             else{
-                                Toast.makeText(StudentHomePage.this,"No such quizzes",Toast.LENGTH_LONG).show();
+                                Toast.makeText(StudentHomePage.this,obj.getString("message"),Toast.LENGTH_LONG).show();
                             }
                         }
                         catch (JSONException e){

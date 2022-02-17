@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -30,7 +31,6 @@ public class QuizUI extends AppCompatActivity {
 
     private ArrayList<QuestionsList> questionsList;
 
-    //PREEE ITO YUNG CUSTOM OBJECT KO KUNG SAN NILAGAY YUNG MGA RESPONSE GALING SA STRING REQUEST AHAHHAHAHAHHAHA
     private ArrayList<Questions.QuestionsItem> questlist;
 
     private String selectedOptionbyUser ="";
@@ -66,6 +66,8 @@ public class QuizUI extends AppCompatActivity {
 
         questions.setText((currentQuestionPosition+1)+"/"+questionsList.size());
         Collections.shuffle(questionsList);
+
+        Log.d("QUIZZES: ", String.valueOf(QuestionsBank.getQuestions()));
 
         question.setText(questionsList.get(0).getQuestion());
         option1.setText(questionsList.get(0).getOption1());
