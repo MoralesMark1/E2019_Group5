@@ -154,8 +154,6 @@ public class StudentHomePage extends AppCompatActivity implements RecyclerViewIn
             public void onClick(View v) {
 
                 // function here for joining new quiz
-                items.add("Questions");
-                adapter.notifyItemInserted(items.size()-1);
                 joinDialog.dismiss();
 
                 //Gagamit ako ng JSON object and array inside ng string request

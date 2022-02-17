@@ -15,7 +15,7 @@ public class QuestionsBank {
 
         ArrayList<Questions.QuestionsItem> que = new ArrayList<>(homepage.questions);
 
-        /*final QuestionsList question1 = new QuestionsList("What is the most commonly used Programming Language", "Java","Python", "Html", "PHP", "Java", "");
+        final QuestionsList question1 = new QuestionsList("What is the most commonly used Programming Language", "Java","Python", "Html", "PHP", "Java", "");
         final QuestionsList question2 = new QuestionsList("This language use to style an HTML document", "JSON","CSS", "JavaScript", "PHP", "CSS", "");
         final QuestionsList question3 = new QuestionsList("It is recursive acronym for PHP", "Preprocessor Hypertext","Hypertext Preprocessor", "Hypertext Processor", "Text Processor", "Hypertext Preprocessor", "");
         final QuestionsList question4 = new QuestionsList("Python was created in year", "February 20, 1991","January 25, 1991", "February 20, 1992", "February 25, 1991", "February 20, 1991", "");
@@ -25,9 +25,9 @@ public class QuestionsBank {
         final QuestionsList question8 = new QuestionsList("Known as the scripting language for Web pages", "Java","JavaScript", "Html", "PHP", "JavaScript", "");
         final QuestionsList question9 = new QuestionsList("HTML is stands for ______text markup language", "High","Hi", "Hyper", "Hello", "Hyper", "");
         final QuestionsList question10 = new QuestionsList("XML stands for _____ markup language", "executable","extensible", "extended", "extension", "extensible", "");
-*/
+
         // ipasok sa questionlist yung mga quiz item
-        /*questionsList.add(question1);
+        questionsList.add(question1);
         questionsList.add(question2);
         questionsList.add(question3);
         questionsList.add(question4);
@@ -37,7 +37,7 @@ public class QuestionsBank {
         questionsList.add(question8);
         questionsList.add(question9);
         questionsList.add(question10);
-        */
+
 
         for(Questions.QuestionsItem q:que){
             questionsList.add(new QuestionsList(
