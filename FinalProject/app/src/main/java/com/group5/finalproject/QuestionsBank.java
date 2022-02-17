@@ -11,9 +11,9 @@ public class QuestionsBank {
 
         ArrayList<QuestionsList> questionsList = new ArrayList<>();
 
-        StudentHomePage homepage = new StudentHomePage();
+        //StudentHomePage homepage = new StudentHomePage();
 
-        ArrayList<Questions.QuestionsItem> que = new ArrayList<>(homepage.questions);
+        //ArrayList<Questions.QuestionsItem> que = new ArrayList<>(homepage.questions);
 
         final QuestionsList question1 = new QuestionsList("What is the most commonly used Programming Language", "Java","Python", "Html", "PHP", "Java", "");
         final QuestionsList question2 = new QuestionsList("This language use to style an HTML document", "JSON","CSS", "JavaScript", "PHP", "CSS", "");
@@ -39,7 +39,7 @@ public class QuestionsBank {
         questionsList.add(question10);
 
 
-        for(Questions.QuestionsItem q:que){
+       /* for(Questions.QuestionsItem q:que){
             questionsList.add(new QuestionsList(
                     q.getQuestion(),
                     q.getChoiceA(),
@@ -49,7 +49,7 @@ public class QuestionsBank {
                     q.getAnswer(),
                     ""
             ));
-        }
+        }*/
         return questionsList;
     }
 
