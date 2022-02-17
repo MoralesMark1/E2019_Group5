@@ -22,9 +22,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -239,7 +243,19 @@ public class StudentHomePage extends AppCompatActivity implements RecyclerViewIn
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(StudentHomePage.this,error.toString(),Toast.LENGTH_LONG).show();
+                        if (error instanceof NetworkError) {
+                            Toast.makeText(StudentHomePage.this,"Cannot connect to Internet...Please check your connection!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof ServerError) {
+                            Toast.makeText(StudentHomePage.this,"The server could not be found. Please try again after some time!!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof AuthFailureError) {
+                            Toast.makeText(StudentHomePage.this,"Cannot connect to Internet...Please check your connection!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof ParseError) {
+                            Toast.makeText(StudentHomePage.this,"Parsing error! Please try again after some time!!",Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof TimeoutError) {
+                            Toast.makeText(StudentHomePage.this,"Connection TimeOut! Please check your internet connection",Toast.LENGTH_SHORT).show();
+                        } else{
+                            Toast.makeText(StudentHomePage.this,"Login Error!",Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }){
             @Override
