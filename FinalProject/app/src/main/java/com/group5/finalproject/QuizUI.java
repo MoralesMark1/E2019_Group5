@@ -30,6 +30,9 @@ public class QuizUI extends AppCompatActivity {
 
     private ArrayList<QuestionsList> questionsList;
 
+    //PREEE ITO YUNG CUSTOM OBJECT KO KUNG SAN NILAGAY YUNG MGA RESPONSE GALING SA STRING REQUEST AHAHHAHAHAHHAHA
+    private ArrayList<Questions.QuestionsItem> questlist;
+
     private String selectedOptionbyUser ="";
     private int currentQuestionPosition = 0;
 
@@ -60,7 +63,6 @@ public class QuizUI extends AppCompatActivity {
         questionsList = QuestionsBank.getQuestions();
 
         startTimer(timer);
-
 
         questions.setText((currentQuestionPosition+1)+"/"+questionsList.size());
         Collections.shuffle(questionsList);

@@ -19,6 +19,11 @@ public class Questions {
         private String choiceD;
         private String answer;
 
+        @Override
+        public String toString() {
+            return getQuestion() + ", " + getChoiceA() + ", " + getChoiceB() + ", " + getChoiceC() + ", " + getChoiceD() + ", " + getAnswer();
+        }
+
 
         public QuestionsItem(String quizlink, String question, String choiceA, String choiceB, String choiceC, String choiceD, String answer) {
             this.quizlink = quizlink;
