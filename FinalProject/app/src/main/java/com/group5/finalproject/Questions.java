@@ -10,6 +10,7 @@ public class Questions {
     public Questions(ArrayList<QuestionsItem> questitem){
         this.questitem = questitem; //Para kada JSON Object iisang name per index ng ating arraylist
     }
+
     public static class QuestionsItem {
         private String quizlink;
         private String question;
@@ -24,7 +25,6 @@ public class Questions {
             return getQuestion() + ", " + getChoiceA() + ", " + getChoiceB() + ", " + getChoiceC() + ", " + getChoiceD() + ", " + getAnswer();
         }
 
-
         public QuestionsItem(String quizlink, String question, String choiceA, String choiceB, String choiceC, String choiceD, String answer) {
             this.quizlink = quizlink;
             this.question = question;
@@ -33,8 +33,9 @@ public class Questions {
             this.choiceC = choiceC;
             this.choiceD = choiceD;
             this.answer = answer;
-
         }
+
+
 
         public String getQuizlink() {
             return quizlink;

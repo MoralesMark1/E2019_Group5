@@ -8,7 +8,7 @@ public class QuestionsBank {
 
     public static ArrayList<QuestionsList> SampleQuestion() {
 
-         ArrayList<QuestionsList> questionsList = new ArrayList<>();
+        ArrayList<QuestionsList> questionsList = new ArrayList<>();
 
         final QuestionsList question1 = new QuestionsList("What is the most commonly used Programming Language", "Java","Python", "Html", "PHP", "Java", "");
         final QuestionsList question2 = new QuestionsList("This language use to style an HTML document", "JSON","CSS", "JavaScript", "PHP", "CSS", "");
@@ -36,7 +36,11 @@ public class QuestionsBank {
         return questionsList;
     }
 
+
+
+
     public static ArrayList<QuestionsList> getQuestions(){
         return SampleQuestion();
     }
+
 }

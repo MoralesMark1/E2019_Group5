@@ -235,7 +235,7 @@ public class StudentHomePage extends AppCompatActivity implements RecyclerViewIn
                             }
                         }
                         catch (JSONException e){
-                            Toast.makeText(StudentHomePage.this,e.toString(),Toast.LENGTH_LONG).show();
+                            //Toast.makeText(StudentHomePage.this,e.toString(),Toast.LENGTH_LONG).show();
                         }
                     }
                 },

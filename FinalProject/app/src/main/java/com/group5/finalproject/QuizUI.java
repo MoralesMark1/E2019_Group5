@@ -148,7 +148,6 @@ public class QuizUI extends AppCompatActivity {
                     option3.setBackgroundResource(R.drawable.option_selected_bg);
                     option3.setTextColor(Color.WHITE);
 
-
                     //revealAnswer();
 
                     questionsList.get(currentQuestionPosition).setUserSelectedAnswer((selectedOptionbyUser));
