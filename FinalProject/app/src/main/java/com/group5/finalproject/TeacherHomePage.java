@@ -203,6 +203,9 @@ public class TeacherHomePage extends AppCompatActivity implements RecyclerViewIn
                                 filename = filename.replace("/document/2616","/storage/emulated/0/");
                                 Log.i("Readable: ", filename); //Check na natin kung readable siya
                             }
+                            else if(filename.contains("/document/raw:/storage/6563-3792/")){
+                                filename = filename.replace("/document/raw:","");
+                            }
 
                              else if (Build.VERSION.SDK_INT == Build.VERSION_CODES.R) {
                                 if(filename.contains("/document/primary:")){
@@ -210,7 +213,6 @@ public class TeacherHomePage extends AppCompatActivity implements RecyclerViewIn
                                     Log.i("Readable: ", filename); //Check na natin kung readable siya
                                 }
                             }
-
 
                             //Ipasok yung String dito sa ating file input stream which is actually pwedeng diretso file na
                             FileInputStream inputStream = new FileInputStream(filename);
