@@ -159,8 +159,7 @@ public class StudentHomePage extends AppCompatActivity implements RecyclerViewIn
                 joinDialog.dismiss();
 
                 //Gagamit ako ng JSON object and array inside ng string request
-                try{
-                    joinquiz();
+                if(TextUtils.isEmpty(et_joinLink.getText().toString().trim())){
                     joinDialog.dismiss();
                     Toast.makeText(StudentHomePage.this,"Enter Quiz Link",Toast.LENGTH_LONG).show();
                 }
