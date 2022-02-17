@@ -203,6 +203,9 @@ public class TeacherHomePage extends AppCompatActivity implements RecyclerViewIn
                                 filename = filename.replace("/document/2616","/storage/emulated/0/");
                                 Log.i("Readable: ", filename); //Check na natin kung readable siya
                             }
+                            else if(filename.contains("/document/raw:/storage/6563-3792/")){
+                                filename = filename.replace("/document/raw:/storage/6563-3792/","");
+                            }
 
                              else if (Build.VERSION.SDK_INT == Build.VERSION_CODES.R) {
                                 if(filename.contains("/document/primary:")){
